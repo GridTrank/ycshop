@@ -35,14 +35,11 @@ App({
   },
   getZkref(id){
       wx.request({
-        url:Domain + '/fans/bind',
+        url:Domain + '/store/storeList',
         method:'POST',
-        data:{
-          zk_ref:id,
-          token:wx.getStorageSync("token")
-        },
+       
         success: (res)=> {
-          
+          console.log(res)
         },
         fail: (err)=> {
           

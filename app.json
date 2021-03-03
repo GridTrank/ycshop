@@ -49,7 +49,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "超值必赚",
+        "text": "商城",
         "iconPath": "images/icon/icon-home.png",
         "selectedIconPath": "images/icon/icon-home-active.png"
       },
@@ -71,21 +71,6 @@
     "request": 10000,
     "downloadFile": 10000
   },
-  "subpackages": [
-    {
-      "root": "TV",
-      "name": "TV",
-      "pages": [
-        "pages/index"
-      ],
-      "plugins": {
-        "live-player-plugin": {
-          "version": "latest",
-          "provider": "wx2b03c6e691cd7370"
-        }
-      }
-    }
-  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

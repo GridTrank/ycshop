@@ -140,46 +140,37 @@ Page({
   },
   // 领取新人优惠劵
   getNewCoupon() {
-    var _ = this;
-    if (_.data.isGetNew) {
-      wx.showToast({
-        title: '您已领取过该劵，不可重复领取',
-        icon: 'none'
-      })
-      return;
-    }
+  
     http.request({
       
-      url: '/activity/receive_coupon',
-      data: {
-        receive_type: 1,
-      },
-      isCode: true,
+      // url: '/activity/receive_coupon',
+      url: 'store/storeList',
       success(res) {
-        if (res.data.code == 200) {
-          _.setData({
-            isGetNew: true,
-            isNew: false,
-          })
-          wx.setStorageSync('newPopup', true)
-          wx.showToast({
-            title: '优惠劵领取成功',
-            icon: 'none'
-          })
-        } else if (res.data.code == 120006) {
-          _.setData({
-            isGetNew: true,
-          })
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
+        console.log(res)
+        // if (res.data.code == 200) {
+        //   _.setData({
+        //     isGetNew: true,
+        //     isNew: false,
+        //   })
+        //   wx.setStorageSync('newPopup', true)
+        //   wx.showToast({
+        //     title: '优惠劵领取成功',
+        //     icon: 'none'
+        //   })
+        // } else if (res.data.code == 120006) {
+        //   _.setData({
+        //     isGetNew: true,
+        //   })
+        //   wx.showToast({
+        //     title: res.data.msg,
+        //     icon: 'none'
+        //   })
+        // } else {
+        //   wx.showToast({
+        //     title: res.data.msg,
+        //     icon: 'none'
+        //   })
+        // }
 
       }
     })
@@ -203,16 +194,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (!!options.share) {
-      wx.navigateTo({
-        url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?home_page=${options.home_page}&room_id=${options.room_id}`
-      })
-    }
-    this.setData({
-      globalSystemInfo: getApp().globalData.globalSystemInfo
-    })
+    this.getNewCoupon()
+    // if (!!options.share) {
+    //   wx.navigateTo({
+    //     url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?home_page=${options.home_page}&room_id=${options.room_id}`
+    //   })
+    // }
+    // this.setData({
+    //   globalSystemInfo: getApp().globalData.globalSystemInfo
+    // })
 
-    this.getData(this.data.block, this.data.cur);
+    // this.getData(this.data.block, this.data.cur);
   },
 
   watckAll() {

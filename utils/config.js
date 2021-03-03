@@ -20,8 +20,8 @@ const config = {
   "test": {
     "env": env,
     // 域名配置
-    "Domain": 'http://t-youxuan.miniso.cn/openapi',
-    // "Domain": 'http://192.168.6.25:8084/openapi',
+    // "Domain": 'http://t-youxuan.miniso.cn/openapi',
+    "Domain": 'http://127.0.0.1:3000',
     //系统配置
     "sign": {
       "identity": '28Vebp',
