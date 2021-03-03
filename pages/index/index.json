@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "名创优品",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "requestPage": "/component/requestPage/index",
+    "tip": "/component/tip/tip",
+    "brand": "/component/brand/brand",
+    "viewSpecial": "/component/viewSpecial/viewSpecial",
+    "product": "/component/product/product",
+    "MySwiper": "/component/swiper/swiper",
+    "anomaly": "/component/anomaly/anomaly",
+    "goodStandard": "/component/goodStandard/goodStandard",
+    "activityCoupon": "/component/activityCoupon/activityCoupon",
+    "specialIndex": "/component/specialIndex/specialIndex"
+  }
+}

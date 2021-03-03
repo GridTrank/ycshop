@@ -1,0 +1,9 @@
+page {
+    height: 100%;
+}
+.ms-container-comment {
+    height: 100%;
+}
+.commentScroll {
+    height: calc(100% - 76rpx);
+}

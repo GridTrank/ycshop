@@ -1,0 +1,87 @@
+/* pages/inviteFriend/index.wxss */
+page{
+  height: 100%;
+}
+.ms-friend-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background:linear-gradient(135deg,rgba(236,252,254,1) 0%,rgba(254,233,243,1) 100%);
+  justify-content: space-between;
+}
+.ms-friend-container .pic-warp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  
+}
+.ms-friend-container .pic-warp .pic{
+  border-radius: 18rpx;
+  width: 70%;
+  position: relative;
+  overflow: hidden;
+}
+.ms-friend-container .pic image{
+  width: 100%;
+}
+.ms-friend-container .pic .avatar {
+  width: 50rpx;
+  position: absolute;
+  bottom: 125rpx;
+  left: 37rpx;
+  border-radius: 50%;
+}
+.ms-friend-container .pic .name{
+  position: absolute;
+  bottom: 135rpx;
+  left: 100rpx;
+  font-weight: 600;
+  font-size: 24rpx;
+}
+.ms-friend-container .pic .code{
+  width: 140rpx;
+  position: absolute;
+  bottom: 25rpx;
+  right: 30rpx;
+}
+.ms-friend-container .tool{
+  margin: 30rpx;
+  margin-top: 0;
+  background: #fff;
+  border-radius: 30rpx;
+  padding: 20rpx;
+  flex-shrink: 0;
+}
+.btn-warp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-warp .btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220rpx;
+  height: 64rpx;
+  background: #FF9900;
+  font-size: 28rpx;
+  color: #fff;
+  border-radius: 100rpx;
+  padding: 0;
+  margin: 0;
+}
+.btn-warp .btn.wx{
+  background: #00C801;
+  margin-right: 42rpx;
+}
+.ms-friend-container .tool .btn image{
+  width: 32rpx;
+  margin-right: 10rpx;
+}
+.ms-friend-container .tool .tip{
+  color: #999999;
+  font-size: 22rpx;
+  margin: 20rpx 0 10rpx;
+}

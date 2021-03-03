@@ -1,0 +1,19 @@
+<scroll-view scrollY class="ms-container-withdrawRecord" bindscrolltolower="getData">
+	<view class="withdraw-list" wx:if="{{withdrawList.length}}">
+		 <navigator hover-class="none"navigator-hover="none"  url="/pages/withdrawDetail/index?id={{item.withdraw_id}}" class="item" wx:for="{{withdrawList}}" wx:key="index">
+			<view class="info-warp">
+				<view class="name">余额提现</view>
+				<view class="money">￥{{item.withdraw_amount}}</view>
+			</view>
+			<view class="date-warp">
+				<view class="date">{{item.create_time}}</view>
+				<view class="state {{state[item.withdraw_status].class}}">{{item.withdraw_status_text}}</view>
+			</view>
+		</navigator>
+		
+	</view>
+  <view class="no-record" wx:else>
+			<image src='http://s2.hgcang.com/bsimg/ec/public/images/1c/bf/1cbff52c71cff6a72aa90f61ce45c85f.png' mode="widthFix"></image>
+			<text>暂无提现记录~</text>
+		</view>
+</scroll-view>

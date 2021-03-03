@@ -1,0 +1,39 @@
+<view class="ms-container-material">
+	<view class="container">
+		<view class="material-wrap price">
+
+			<view class="title"><image src="https://s1.miniso.cn/bsimg/ec/public/images/c5/63/c5639721304b1a3e1a255e0ea70ba6eb.png" mode="widthFix"></image> 预估佣金奖励金额:<text>￥{{detail.brokerage_money}}</text></view>
+
+		</view>
+		<view class="material-wrap" wx:if="{{detail.recommend_text.length}}">
+			<view class="title">商品推荐分享语</view>
+			<view class="writing">
+			<view wx:for="{{detail.recommend_text}}" wx:key="index">
+				{{item}}
+			</view>
+				
+			</view>
+			<view class="copy-warp">
+				<view class="copy" bindtap="copy">复制文案</view>
+			</view>
+		</view>
+		<view class="material-wrap" wx:if="{{detail.share_image.length}}">
+			<view class="title">选择图片生成海报</view>
+			<scroll-view scroll-x class="scroll-veiwItem" scroll-with-animation="true">
+				<view class="poster-wrap">
+					<view class="poster-box"  wx:for="{{detail.share_image}}" wx:key="index">
+						<image class="icon" bindtap="selectPic" data-index="{{index}}" src="{{previewImage == item ?'https://s1.miniso.cn/bsimg/ec/public/images/77/33/7733d7436558daa77b4e0945215153d0.png' : 'https://s1.miniso.cn/bsimg/ec/public/images/07/d0/07d0b484347842bbb281ae639a05277d.png' }}" mode="widthFix"/>
+						<image class="poster-img"  bindtap="previewImage" data-index="{{index}}" src="{{item}}" mode="widthFix"/>
+					</view>
+					
+				</view>
+			</scroll-view>
+			<view class="save">点击图片可保存到相册 ↑</view>
+		</view>
+	</view>
+	<view class="material-foot" bindtap="toggleShare">
+		生成海报
+	</view>
+	
+</view>
+	<canvas-share bindclose="toggleShare" detail="{{detail}}" custom="{{previewImage}}" zkCoupon="{{zkCoupon}}"   userInfo="{{userInfo}}" visible="{{visible}}" />

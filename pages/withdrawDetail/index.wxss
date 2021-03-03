@@ -1,0 +1,85 @@
+page {
+  height: 100%;
+  background: #f4f4f4;
+  overflow: hidden;
+}
+.ms-container-withdraw {
+  background-color: #fff;
+}
+.withdraw-form {
+  height: 100%;
+  position: relative;
+  padding: 0 30rpx;
+}
+.withdraw-form .withdraw-detail {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 60rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+.withdraw-form .withdraw-money {
+  background-color: #fff;
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 314rpx;
+}
+
+.withdraw-form .withdraw-money .name {
+  display: flex;
+  align-items: center;
+  color: #4d4d4d;
+  font-size: 32rpx;
+}
+
+.withdraw-form .withdraw-money .icon{
+  width: 44rpx;
+}
+
+.withdraw-form .withdraw-money .money{
+  font-size: 106rpx;
+}
+
+.withdraw-form .withdraw-cell {
+  background-color: #fff;
+  padding: 30rpx 50rpx;
+  border-top: 1px solid #DCDCDC;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 28rpx;
+}
+.withdraw-form .withdraw-cell .item {
+  display: flex;
+  margin: 5rpx 0;
+}
+.withdraw-form .withdraw-cell .item .name{
+ width: 140rpx;
+ color: #666666;
+}
+
+.withdraw-form .withdraw-cell .item .dec {
+  color: #999999;
+  font-size: 22rpx;
+}
+
+.withdraw-form .withdraw-cell .item .state.red{
+  color: #E23232;
+}
+.withdraw-form .withdraw-cell .item .info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.withdraw-form .withdraw-cell .item .info.flex-row {
+  flex-direction: row;
+  align-items: center;
+}
+.withdraw-form .withdraw-cell .item .icon {
+  width: 30rpx;
+  margin-left: 20rpx;
+}

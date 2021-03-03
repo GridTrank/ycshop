@@ -1,0 +1,100 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/interests/index",
+    "pages/income/index",
+    "pages/cart/index",
+    "pages/copywriting/index",
+    "pages/order/index",
+    "pages/user/index",
+    "pages/help/index",
+    "pages/load/index",
+    "pages/vip/index",
+    "pages/account/index",
+    "pages/withdraw/index",
+    "pages/withdrawRecord/index",
+    "pages/withdrawDetail/index",
+    "pages/web/index",
+    "pages/buyGift/index",
+    "pages/activity/index",
+    "pages/orderConfirm/index",
+    "pages/search/index",
+    "pages/special/index",
+    "pages/channel/index",
+    "pages/payBox/index",
+    "pages/giftList/index",
+    "pages/resCoupon/index",
+    "pages/coupon/index",
+    "pages/cumulativeOrder/index",
+    "pages/copyThat/index",
+    "pages/evaluate/index",
+    "pages/logistics/index",
+    "pages/detail/index",
+    "pages/address/index",
+    "pages/orderDetail/index",
+    "pages/longText/index",
+    "pages/comment/index",
+    "pages/myPower/index",
+    "pages/invite/index",
+    "pages/material/index",
+    "pages/welfare/index",
+    "pages/userFans/index",
+    "pages/inviteFriend/index"
+  ],
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#d9232e",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "超值必赚",
+        "iconPath": "images/icon/icon-home.png",
+        "selectedIconPath": "images/icon/icon-home-active.png"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物车",
+        "iconPath": "images/icon/icon-cart.png",
+        "selectedIconPath": "images/icon/icon-cart-active.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "个人中心",
+        "iconPath": "images/icon/icon-user.png",
+        "selectedIconPath": "images/icon/icon-user-active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "subpackages": [
+    {
+      "root": "TV",
+      "name": "TV",
+      "pages": [
+        "pages/index"
+      ],
+      "plugins": {
+        "live-player-plugin": {
+          "version": "latest",
+          "provider": "wx2b03c6e691cd7370"
+        }
+      }
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wx2a212470bade49bf"
+  ]
+}

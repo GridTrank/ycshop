@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#E23232",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "canvas-share": "/component/canvas-share/index"
+  }
+}

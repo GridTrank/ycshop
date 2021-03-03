@@ -1,0 +1,50 @@
+  <wxs module="tool">
+  	var matching = function(url) {
+  		var arr = url.split('/');
+  		var switchTab = ['index', 'cart', 'user'];
+  		if (switchTab.indexOf(arr[2]) >= 0) {
+  			return 'switchTab'
+  		} else {
+  			return 'navigate'
+  		}
+  	}
+
+  	module.exports = {
+  		matching: matching,
+  	}
+  </wxs>
+  <swiper class='ms-brand' indicator-dots="true" autoplay="true" interval="4000" indicator-color="#E72722">
+  	<swiper-item class='listItem' wx:for="{{brand}}" wx:if="{{index%2 == 0}}" wx:key="index">
+  		<block>
+  			<view class='item' wx:for="{{brand}}" wx:for-item='list' wx:for-index="j" wx:key="j" wx:if="{{j-index <= 1 && j-index >= 0 }}">
+  				<block wx:if="{{list.type == 'out'}}">
+  					<!-- 小程序类型 -->
+  					 <navigator hover-class="none"class="slide-image navigator"   open-type="navigate" path="{{list.linkUrl}}" target="miniProgram" app-id="{{list.xcx_app_id}}" version="trial" wx:if="{{list.xcx_app_id}}">
+  					</navigator>
+  					 <navigator hover-class="none"class="navigator"  url="{{list.linkUrl}}" wx:else open-type="{{tool.matching(list.linkUrl)}}">
+  					</navigator>
+  				</block>
+  				<!-- 产品类型 -->
+  				 <navigator hover-class="none"class="navigator"   url="/pages/detail/index?id={{list.id}}" wx:elif="{{list.type == 'product'}}">
+  				</navigator>
+  				<!-- 活动类型 -->
+  				 <navigator hover-class="none"class="navigator"   url="/pages/activity/index?id={{list.id}}" wx:elif="{{list.type == 'activity'}}">
+  				</navigator>
+  				<!-- 网页类型 -->
+  				 <navigator hover-class="none"class="navigator"   url="/pages/web/index?url={{list.linkUrl}}" wx:elif="{{list.type == 'url'}}">
+  				</navigator>
+  				<view class='text'>
+  					<view class='name' wx:if="{{list.name}}">{{list.name}}</view>
+  					<view class='price' wx:if="{{list.min_price != '0'}}">
+  						<view class="money">{{list.min_price}}</view>元起
+  					</view>
+  					<view class='tag' wx:if="{{list.tag}}">
+  						<text class="item">{{list.tag}}</text>
+  					</view>
+  				</view>
+  				<image class="pic" src='{{list.imgUrl}}' mode='widthFix'></image>
+  			</view>
+  		</block>
+
+  	</swiper-item>
+  </swiper>

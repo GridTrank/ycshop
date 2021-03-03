@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "orderBtn": "/component/orderBtn/orderBtn",
+    "requestPage": "/component/requestPage/index"
+  }
+}

@@ -1,0 +1,386 @@
+/* pages/user/index.wxss */
+page {
+  background: #f4f4f4;
+
+}
+
+.user-warp {
+  height: 400rpx;
+  background: #E23232 url(https://s1.miniso.cn/bsimg/ec/public/images/34/ad/34ad0eeaa2c35db73d802b8376cea22a.jpg?x-oss-process=style/high) center;
+  background-size: 100% 100%;
+  padding: 128rpx 30rpx 0; 
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.user-warp .user-info {
+  height: 250rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-warp .user-info .user {
+  display: flex;
+  align-items: center;
+}
+
+.user-warp .user-info .photo {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.user-warp .user-info .name {
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+}
+.user-warp .user-info .name image{
+  width:32rpx ;
+  margin-left: 10rpx;
+}
+.user-warp .user-info .vip image {
+  width: 16rpx;
+}
+
+.user-warp .user-info .info {
+  display: flex;
+  flex-direction: column;
+  height: 120rpx;
+  justify-content: space-around;
+}
+
+.user-warp .user-info .info .vip {
+  height: 32rpx;
+  background: linear-gradient(270deg, rgba(10, 10, 10, 0.6) 0%, rgba(53, 53, 53, 0.6) 100%);
+  font-size: 20rpx;
+  color: #E8B16A;
+  border-radius: 8rpx;
+  padding: 0 10rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.user-warp .user-info .invite {
+  color: #FFFFFF;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.user-warp .user-info .invite .copy {
+  width: 70rpx;
+  height: 32rpx;
+  border-radius: 100rpx;
+  background: #e65b5a;
+  font-size: 20rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-left: 16rpx;
+  align-items: center;
+}
+
+.user-warp .user-info .ewm {
+  width: 68rpx;
+  height: 68rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-warp .user-info .ewm image {
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.user-warp .money-warp {
+  background: linear-gradient(to top, #505050, #1E1E1E);
+  height: 220rpx;
+  padding: 20rpx 30rpx 0;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12rpx 12rpx 0 0;
+  color: #FFEAC3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-warp .money-warp .money {
+  font-size: 54rpx;
+
+}
+.user-warp .money-warp .between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-warp .money-warp .withdraw {
+  width: 146rpx;
+  height: 52rpx;
+  box-sizing: border-box;
+  border-radius: 100rpx;
+  border:1px solid #E8B16A;
+  color: #E8B16A;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-warp .money-warp .date {
+  background: linear-gradient(to top, #F3BA4C, #EFD27C);
+  color: #875C00;
+  font-size: 24rpx;
+  height: 62rpx;
+  border-radius: 12rpx 12rpx 0 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  align-items: center;
+}
+.user-warp .money-warp .date .text {
+  flex: 2;
+}
+.user-warp .money-warp .date .arrow {
+  width: 40rpx;
+}
+.user-warp .money-warp .date text{
+  color: #E23232;
+}
+.income-now {
+  height: 160rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow:0px 1px 10rpx 0px rgba(0,0,0,0.03);
+
+}
+.income-now .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30rpx 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+.income-now .item .money {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.income-now .item .name,.income-warp .item .name{
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  height: 40rpx;
+}
+.income-now .item .name .icon,.income-warp .item .name .icon{
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 10rpx;
+}
+.income-warp {
+  display: flex;
+  background: #fff;
+  flex-wrap: wrap;
+  padding: 30rpx 0;
+  justify-content: space-between;
+}
+
+.income-warp .item {
+  display: flex;
+  justify-content: center;
+  font-size: 24rpx;
+  flex-direction: column;
+  width: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 100rpx;
+  color: #999;
+  position: relative;
+  padding-left: 68rpx;
+}
+.income-warp .item .name {
+  font-size: 24rpx;
+}
+.income-warp .item:nth-child(2n)::after {
+  display: none;
+}
+
+.income-warp .item::after {
+  position: absolute;
+  width: 1px;
+  height: 48rpx;
+  content: "";
+  right: 0rpx;
+  top: 26rpx;
+  background: #dcdcdc;
+}
+
+.income-warp .item .money {
+  font-size: 32rpx;
+  color: #333;
+}
+
+
+.order-list {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  padding-bottom: 40rpx;
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.order-list .load {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  height: 100%;
+}
+
+.order-list .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  width: 25%;
+  padding: 40rpx 0 0rpx;
+  color: #666;
+  position: relative;
+}
+
+.order-list .item .icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 16rpx;
+}
+.order-list .item .image-box{
+  position: relative;
+}
+.order-list .item .new {
+  position: absolute;
+  width: 54rpx;
+  right: -24rpx;
+  top: 0;
+}
+
+.version {
+  font-size: 20rpx;
+  height: 98rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+}
+
+.common-user-warp{
+  background: linear-gradient(to bottom, #404040, #1E1E1E);
+  padding: 50rpx 30rpx 0 60rpx;
+  height: 400rpx;
+  box-sizing: border-box;
+
+}
+.common-user-warp .user-info{
+  justify-content: flex-start;
+}
+
+.common-order-warp{
+  margin-top: -72rpx;
+  margin-bottom: 20rpx;
+}
+.common-order-warp .order-list {
+  margin-top: 0;
+}
+.common-order-warp .ms-cell {
+  border-radius: 30rpx 30rpx 0 0;
+}
+
+.common-server-warp .order-list .item .icon,.common-order-warp .order-list .item .icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+.common-server-warp .order-list{
+  margin-top: 0;
+}
+.invite-warp {
+  padding:0rpx 16rpx 16rpx;
+  margin-top: -4rpx;
+}
+.invite-warp image{
+  width: 100%;
+}
+.user-fans{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.fans-info{
+  padding: 40rpx;
+}
+.fans-my{
+  font-size:32rpx;
+  color: #333;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  width: 180rpx;
+}
+.fans-my .icon{
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 10rpx;
+}
+.fans-num{
+  color: #999;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+}
+.potential-fans,.faithful-fans{
+  margin-right: 50rpx;
+  position: relative;
+}
+.potential-fans::after{
+  content: "";
+  width: 2rpx;
+  height: 48rpx;
+  background-color: #dcdcdc;
+  position: absolute;
+  bottom:-4rpx ;
+  right: -25rpx;
+
+}
+.fans-n{
+  font-size: 32rpx;
+  color: #333;
+  margin-left: 16rpx;
+}
+.fans-add{
+  width: 180rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  background:linear-gradient(90deg,rgba(252,86,69,1) 0%,rgba(255,58,79,1) 100%);
+  border-radius: 34rpx  0rpx 0px 34rpx ;
+  color: #fff;
+  font-size: 28rpx;
+}

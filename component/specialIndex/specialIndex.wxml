@@ -1,0 +1,44 @@
+<wxs module="foo">
+	var formatDate = function(time) {
+		if (time == "") return false;
+		var now = getDate(time * 1000);
+		var h = now.getHours(),
+			m = now.getMinutes(),
+			s = now.getSeconds();
+
+		return (h < 10 ? '0' + h : h) + ":" + (m < 10 ? '0' + m : m);
+	}
+
+	module.exports = {
+		formatDate: formatDate
+	}
+</wxs>
+<view class="ms-special">
+
+	<view class="ms-boxHd line flex-row ">
+		<view class="ms-boxHd flex-row ">
+			<view class="title name">
+				<view>{{special.name}}</view>
+				<view class="time">
+					<view class="t">{{timeObj.h}}</view>
+					<view>:</view>
+					<view class="t">{{timeObj.m}}</view>
+					<view>:</view>
+					<view class="t">{{timeObj.s}}</view>
+				</view>
+			</view>
+			<view class="b" wx:if="{{special.next_begin_time}}">下一场 {{foo.formatDate(special.next_begin_time)}} 开始
+			</view>
+		</view>
+
+	</view>
+	<scroll-view scrollX class="scroll-veiwItem" scroll-with-animation="true">
+		<product product="{{special.promotion_goods}}" type='slideSpecial' userInfo="{{userInfo}}"></product>
+	</scroll-view>
+
+	<view class="btn-warp">
+		<view class="btn" bindtap='specialUrl'>更多秒杀商品
+			<image class="image" src="/images/icon/icon-btn-right.png" mode='widthFix'></image>
+		</view>
+	</view>
+</view>

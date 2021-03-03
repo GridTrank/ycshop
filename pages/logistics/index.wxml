@@ -1,0 +1,25 @@
+<!-- index.wxml -->
+<requestPage id="requestPage" bindrefresh='getData'>
+	<view class="ms-container ms-container-logistics">
+		<view class="logisticsInfo" wx:if="{{logistics.delivery[0].logi_no}}">
+			<view>物流公司：{{logistics.delivery[0].logi_name}}</view>
+			<view>物流单号：{{logistics.delivery[0].logi_no}}
+				<view bindtap="copy" class="copy">
+					<image src='../../images/icon/icon-copy.png' mode='widthFix'></image>
+				</view>
+			</view>
+		</view>
+		<view class="logistics-warp">
+
+			<view wx:for="{{logistics.logi}}" wx:key="index" class="ms-logisticsItem {{index == 0 && !state ? 'active' : ''}}">
+				<view class="line"><text></text></view>
+				<view class="content">
+					<view class="title">{{item.AcceptStation}}</view>
+					<view class="date">{{item.AcceptTime}}</view>
+				</view>
+			</view>
+
+		</view>
+
+	</view>
+</requestPage>

@@ -1,0 +1,55 @@
+<wxs module="tool">
+	var substring = function(val) {
+		if(!val) return;
+		return val.toString().substring(val.length-4,val.length)
+	}
+	module.exports = {
+		substring: substring,
+	}
+</wxs>
+<view class='ms-container-withdraw'>
+	<view class="withdraw-form" wx:if="{{isWithdraw}}">
+		<view class="withdraw-money">
+			<view class="name">
+				<text>可提现金额（元）</text>
+				<image mode="widthFix" bindtap="withdraw" src="https://miniso-images.oss-cn-shenzhen.aliyuncs.com/bsimg/ec/public/images/b6/9f/b69f0874a2b14d3ac5975ba55d116809.png" class="icon"></image>
+			</view>
+			<view class="money">{{withdrawInfo.balance}}</view>
+		</view>
+		<view class="withdraw-info">
+			<view class="item">
+				<view class="name">收款账户</view>
+				<view class="info">
+					<view class="barnd">{{withdrawInfo.bank_name}}({{tool.substring(withdrawInfo.bank_card_no)}})</view>
+					<view class="account">{{withdrawInfo.real_name}}</view>
+				</view>
+			</view>
+			<view class="item">
+				<view class="name">提现金额</view>
+				<view class="info">
+					<view class="barnd">
+						<input type="digit" value="{{withdraw_amount}}" bindinput="amountInput" placeholder="最低提现金额1元" placeholder-style="color:#AAAAAA"></input>
+						<text class="all" bindtap="allWithdraw">全部提现</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="btn-warp">
+			<button bindtap="applyWithdraw" class="{{withdraw_amount < 1 || withdraw_amount == '' ? 'disabled' :''}}">提交申请</button>
+		</view>
+		<view class="withdraw-detail">
+			 <navigator hover-class="none"url="/pages/withdrawRecord/index"  >提现明细</navigator>
+		</view>
+	</view>
+	<view class="withdraw-result" wx:else>
+		<view class="withdraw-info">
+			<image mode="widthFix" src="https://s1.miniso.cn/bsimg/ec/public/images/82/e9/82e9e51543a736b0201c6444874012b8.png" class="icon"></image>
+			<view class="title">提现申请提交成功</view>
+			<view class="dec">系统将在5个工作日内完成提现审核，审核通过后提现金额将转入您的收款银行卡内，请注意查收。</view>
+		</view>
+		<view class="btn-warp">
+			 <navigator hover-class="none"class="btn red" open-type="redirect" url="/pages/withdrawRecord/index">查看提现记录</navigator>
+			 <navigator hover-class="none"class="btn line" url="/pages/index/index" open-type="switchTab">返回首页</navigator>
+		</view>
+	</view>
+</view>

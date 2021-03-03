@@ -1,0 +1,103 @@
+page{
+  background: #f4f4f4;
+}
+.vip-cart{
+  height:350rpx;
+  background:linear-gradient(180deg,rgba(30,30,30,1) 0%,rgba(80,80,80,1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.vip-cart .cart {
+  width:690rpx;
+  height:320rpx;
+  background:linear-gradient(90deg,rgba(87,97,120,1) 0%,rgba(153,166,188,1) 100%);
+  border-radius:25rpx 25rpx 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.vip-cart .cart.v2{
+  background:linear-gradient(90deg,rgba(113,137,168,1) 0%,rgba(170,192,220,1) 100%);
+}
+.vip-cart .cart.v3{
+  background:linear-gradient(90deg,rgba(186,136,66,1) 0%,rgba(245,212,172,1) 100%);
+}
+.vip-cart .cart.v4{
+  background:linear-gradient(90deg,rgba(138,141,184,1) 0%,rgba(195,203,247,1) 100%);
+}
+.vip-cart .cart.v5{
+  background:linear-gradient(90deg,rgba(149,131,201,1) 0%,rgba(188,190,247,1) 100%);
+}
+.vip-cart .cart.v6{
+  background:linear-gradient(90deg,rgba(255,129,20,1) 0%,rgba(255,191,74,1) 100%);
+}
+.vip-cart .cart .dec{
+  font-size:24rpx;
+  color:#fff;
+  opacity: 0.6;
+}
+.vip-cart .cart .name{
+
+  font-size:48rpx;
+  font-weight:bold;
+  color:#fff;
+  line-height: 100rpx;
+}
+
+.vip-cart .cart .target{
+
+  font-size:28rpx;
+  color:#F2F2F2;
+}
+
+.schedule-warp {
+  background: #fff;
+  height:193rpx;
+  padding: 10rpx 30rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.schedule-warp .title{
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.schedule-warp .name{
+  font-size: 28rpx;
+}
+
+.schedule-warp .schedule{
+  height: 20rpx;
+  background: #FCEDEE;
+  border-radius: 100rpx;
+  position: relative;
+  margin: 20rpx 0;
+}
+.schedule-warp .schedule .line{
+  height: 20rpx;
+  background:linear-gradient(to left,rgba(255,98,87,1) 0%,rgba(236,26,26,1) 100%);
+  border-radius:100rpx;
+}
+.schedule-warp .finish {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 24rpx;
+}
+
+.grade-info {
+  margin-top: 20rpx;
+  background: #fff;
+  padding-bottom: 40rpx;
+}
+
+
+.grade-info .p{
+  padding:0 30rpx;
+  color: #666666;
+  font-size: 26rpx;
+  line-height: 40rpx;
+}

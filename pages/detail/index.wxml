@@ -1,0 +1,465 @@
+<!-- index.wxml -->
+
+
+<wxs module="tool">
+	var partition = function(val) {
+		if (!val) return [0];
+		var arr = val.toString().split('.');
+		return arr;
+	};
+	var couponStatus=function(receive,speed){
+		if(speed==1){
+			return '已领完'
+		}else{
+			if(receive==1){
+				return '已领取'
+			}else{
+				return '马上领券'
+			}
+		}
+	}
+	module.exports = {
+		partition: partition,
+		couponStatus: couponStatus
+	}
+</wxs>
+<requestPage id="requestPage" bindrefresh='onShow' bindinitUserInfo="initUserInfo">
+	<view class="ms-container ms-container-detail {{open ? 'overflow':''}}">
+		<header title="{{title}}" fixed="{{true}}" isHeader="{{isHeader}}"></header>
+		<view class='bg'>
+			<!-- 幻灯开始 -->
+			<view class="swiper-warp">
+				<MySwiper swiper="{{swiper}}" page="detail" main_slide="{{main_slide}}"></MySwiper>
+			</view>
+
+			<!-- 幻灯结束 -->
+			<!-- 预售 -->
+			<view class="presell-info" wx:if="{{selectedProduct.goods.product_id  ? selectedProduct.goods.is_prepare  : detail.prepare_list }}">
+				<view class="info">
+					<view class="h2">全款预售</view>
+					<view class="p">{{detail.prepare_list.brief}}</view>
+				</view>
+				<view class="downTime {{detail.prepare_list.prepare_status >= 2 ? 'end' : ''}}">
+					<block wx:if="{{detail.prepare_list.prepare_status <= 1}}">
+						<!-- 进行中 -->
+						<view class="time">
+							<view class="day" wx:if="{{timeArr.dd > 0}}">
+								<text>{{timeArr.dd}}</text>天</view>
+							<text class="item">{{timeArr.hh}}</text> :
+							<text class="item">{{timeArr.mm}}</text> :
+							<text class="item">{{timeArr.ss}}</text>
+						</view>
+						<view class="text">后{{detail.prepare_list.prepare_status == 0 ?"开始": "结束"}}预售</view>
+					</block>
+					<block wx:elif="{{detail.prepare_list.prepare_status == 2 }}">
+						<!-- 活动结束 -->
+						活动已结束
+					</block>
+					<block wx:else>
+						<!-- 活动售罄 -->
+						商品已售罄
+					</block>
+				</view>
+			</view>
+			<!-- 限时购 -->
+			<view bindtap='toSpecial' class="specail-info presell-info" wx:elif="{{selectedProduct.goods.product_id  ? selectedProduct.goods.special_id  : detail.special_id }}">
+				<view class="info">
+					<view class="h2">{{detail.special_name ? detail.special_name:'限时抢购'}}</view>
+				</view>
+				<view class="time-warp">
+					<view class="timeInfo">
+						<!-- 进行中 -->
+						<view class="time">
+							距结束 {{timeArr.dd > 0 ? (timeArr.dd*24+timeArr.hh) : timeArr.hh }}：{{timeArr.mm}} ： {{timeArr.ss}}
+
+						</view>
+						<view class="store">
+							<view class="passage">
+								<view style="width:{{selectedProduct.goods.product_id ? selectedProduct.goods.remain_percent : detail.remain_percent}}%"></view>
+							</view>
+							<view class="">仅剩{{selectedProduct.goods.product_id ? selectedProduct.goods.stock : detail.special_store}}件</view>
+						</view>
+					</view>
+					<image src='../../images/icon/icon-btn-right-white.png' mode='widthFix'></image>
+				</view>
+			</view>
+			<view class="cpns_tag" wx:elif="{{detail.cpns_tag}}">
+				<image src="{{detail.cpns_tag}}" mode='widthFix'></image>
+			</view>
+			<!-- 商品信息 -->
+			<view class="commission-info" wx:if="{{userInfo.is_zhuanke && detail.brokerage_ratio}}">
+				<view class="commission">佣金率 {{detail.brokerage_ratio}}</view>
+				<view class='money' bindtap="brokerageInfo">预计佣金 ¥{{detail.brokerage_money}}</view>
+				<image mode="widthFix" bindtap="brokerageInfo" src='https://s1.miniso.cn/bsimg/ec/public/images/55/6f/556fae9bbf8fbe33208992d6973afe88.png' class="icon"></image>
+			</view>
+			<view class="ms-indexFloor">
+				<view class="ms-productDetail">
+
+					<!-- 价格 -->
+					<view class="price numFamily">
+						<view class="money">
+							<text class="symbol">{{selectedProduct.goods.product_id ? (selectedProduct.goods.is_prepare ? '预售价：':'' )  : (detail.prepare_list ?  '预售价：':'')}}¥</text>
+							<block wx:if="{{!selectedProduct.goods.product_id}}">
+								<!-- 未选中规格时 -->
+								<block wx:if="{{detail.min_price == detail.max_price}}">
+									<text>{{tool.partition(detail.min_price)[0]}}</text>
+									<text class="symbol small" wx:if="{{tool.partition(detail.min_price)[1]}}">.{{tool.partition(detail.min_price)[1]}}</text>
+								</block>
+								<block wx:else>
+									<text>{{tool.partition(detail.min_price)[0]}}</text>
+									<text class="symbol small" wx:if="{{tool.partition(detail.min_price)[1]}}">.{{tool.partition(detail.min_price)[1]}}</text>~<text>{{tool.partition(detail.max_price)[0]}}</text>
+									<text class="symbol small" wx:if="{{tool.partition(detail.max_price)[1]}}">.{{tool.partition(detail.max_price)[1]}}</text>
+								</block>
+								<text class="symbol min" wx:if="{{ detail.prepare_list && detail.prepare_list.order_num != 0 &&  detail.prepare_list.prepare_status}}">（已订购{{detail.prepare_list.order_num}}件）</text>
+							</block>
+							<block wx:else>
+								<text>{{tool.partition(selectedProduct.goods.price)[0]}}</text>
+								<text class="symbol small" wx:if="{{tool.partition(selectedProduct.goods.price)[1]}}">.{{tool.partition(selectedProduct.goods.price)[1]}}</text>
+								<text class="symbol" wx:if="{{ detail.prepare_list.prepare_status && (selectedProduct.goods.product_id  ? selectedProduct.goods.is_prepare :  detail.prepare_list)}}">
+                    <block wx:if="{{selectedProduct.goods.order_num}}">（已订购{{selectedProduct.goods.order_num}}件）</block>
+                  </text>
+								<view class="del {{selectedProduct.goods.product_id  ? (selectedProduct.goods.is_prepare ? 'block':'') : ( detail.prepare_list? 'block':'')}}" wx:if="{{selectedProduct.goods.del_price}}">
+									<text class="symbol">{{selectedProduct.goods.product_id ? (selectedProduct.goods.is_prepare ? '原价':'' )  : (detail.prepare_list ?  '原价':'')}}¥</text> {{selectedProduct.goods.del_price}}
+								</view>
+							</block>
+						</view>
+						<image mode="widthFix" src="https://s1.miniso.cn/bsimg/ec/public/images/96/cd/96cd4d033cbefd2443468b62b1327a90.png" class="share" bindtap="togglePopup" data-type='share'> </image>
+					</view>
+					<view wx:if="{{detail.umin_price && !detail.prepare_list }}">
+						<text wx:if="{{!selectedProduct.goods.mprice}}" class="couponPrice">{{userInfo.lv_price_name}} <text class="symbol">¥</text>{{detail.umin_price}}</text>
+						<text wx:else class="couponPrice">{{userInfo.lv_price_name}} <text class="symbol">¥</text>{{selectedProduct.goods.mprice}}</text>
+					</view>
+					<text class="name">{{detail.product_name}}</text>
+					<view class="brief">{{detail.brief}}</view>
+					
+					<!-- 优惠券 -->
+					<view class="zk-coupon" wx:if="{{userInfo.is_zhuanke && userInfo.is_bind_mobile && showCoupon}}">
+						<view class="zk-coupon-info">
+							<view class="zk-info-tit">{{zkCoupon.coupon.cpns_name}}</view>
+							<view class="zk-info-date">{{zkCoupon.coupon.from_time}}-{{zkCoupon.coupon.to_time}}</view>
+						</view>
+						<view class="zk-coupon-use {{zkCoupon.couponState.is_receive==1 || zkCoupon.coupon_speed==1 ? 'useStatus': ''}}" >
+							<image class="division" src="https://s1.miniso.cn/bsimg/ec/public/images/18/d0/18d0a2155c5e230fd6f5b1ab1d59273a.png"></image>
+							<view class="zk-coupon-status" bindtap="useCoupon" data-receive="{{zkCoupon.couponState.is_receive}}" data-speed="{{zkCoupon.coupon_speed}}">
+								{{tool.couponStatus(zkCoupon.couponState.is_receive,zkCoupon.coupon_speed)}}
+							</view>
+						</view>
+					</view>
+
+				</view>
+			</view>
+			<view class="ms-indexFloor">
+				<!-- 优惠跟促销 -->
+				<view class="ms-couponWarp">
+					<view class="ms-cell" wx:if="{{detail.coupons.length}}" data-type="coupon" bindtap="togglePopup">
+
+						<navigator hover-class="none" url="/pages/load/index" class="getPhoneNumber" wx:if="{{!userInfo.is_bind_mobile}}"></navigator>
+						<text class="title boldFamily">领券</text>
+						<view class="coupon-warp">
+							<view class="coupon" wx:for="{{detail.coupons}}" wx:key="index">
+								<text class="coupon-left"></text>
+								<text class="coupon-center">{{item.cpns_name}}</text>
+								<text class="coupon-left coupon-right"></text>
+							</view>
+
+						</view>
+						<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+					</view>
+					<view class="promotion-cell" data-type="promotion" wx:if="{{detail.rules.length}}" bindtap="togglePopup">
+						<navigator hover-class="none" url="/pages/load/index" class="getPhoneNumber" wx:if="{{!userInfo.is_bind_mobile}}"></navigator>
+						<text class="title boldFamily">促销</text>
+						<view>
+							<view class="dec">
+								<text class="ms-tag">{{detail.rules[0].rule_tag}}</text>{{detail.rules[0].rule_name}}</view>
+							<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 商品规格 -->
+			<view class="ms-indexFloor">
+
+				<view class="ms-productDetail pl20">
+					<view class="serviceEntry">
+						<view class="chooseSpecWarp">
+							<view class="ms-jsChooseSpec" id="ms-jsChooseSpec" bindtap="toggleSelect">
+								<view class="boldFamily">规格选择</view>
+								<view class="selectedSpec">
+
+									<view class="spec_info" wx:if="{{selected}}">已选择：
+										<block wx:for="{{selected}}" wx:key='index'>{{item.spec_value}}
+											<text>、</text>
+										</block>
+									</view>
+									<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+								</view>
+							</view>
+						</view>
+
+						<view class="chooseNum">
+							<view class="title boldFamily">购买数量</view>
+							<view class="select_num">
+								<button bindtap="editNum" class="minus" disabled="{{selectedProduct.num <= 1}}" data-type="minus">-</button>
+								<input bindinput="editNum" bindblur="blurNum" type="number" data-type="edit" value="{{selectedProduct.num }}" />
+								<button bindtap="editNum" disabled="{{selectedProduct.num >= selectedProduct.goods.stock || selectedProduct.num == 99}}" data-type="add" class="add">+</button>
+							</view>
+						</view>
+
+						<navigator hover-class="none" url="../longText/index?type={{detail.service_support_type}}" class="ms-jsChooseService">
+							<view class="l boldFamily">服务：</view>
+							<view class="m">
+								<view class="">
+									<text wx:if="{{detail.service_support_type == 1}}">30天无忧退货</text>
+									<text wx:else>不支持无理由退换货</text>
+									<text>2个工作日退款</text>
+								</view>
+								<view>
+									<text>全场单品包邮</text>
+									<text>名创优品自营</text>
+								</view>
+							</view>
+							<view class="icon">
+								<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+							</view>
+						</navigator>
+					</view>
+				</view>
+			</view>
+
+			<!-- 用户评论展示 -->
+			<view class="ms-indexFloor ms-comment">
+				<view class="count ">
+					<text class="boldFamily">用户评价({{commentItem.count_all}})</text>
+					<navigator hover-class="none" url="../comment/index?id={{detail.goods_id}}">
+						查看全部
+						<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+					</navigator>
+				</view>
+				<comment comment="{{commentItem.items}}" num="1"></comment>
+			</view>
+
+			<!-- 大家在看推荐 -->
+			<view class="ms-recommend">
+				<view class="ms-detal-tab">
+					<view bindtap="tabHandle" data-index="{{index}}" class="item {{viewTab == index ? 'active' : ''}}" wx:for="{{['猜你喜欢','本周热销']}}" wx:key="index"><text>{{item}}</text></view>
+				</view>
+				<swiper duration="{{400}}" current="{{likeCurrent}}" bindanimationfinish="animationfinish" class="view-swiper" indicator-dots="true">
+					<swiper-item wx:for="{{viewTab ? saleView : likeView}}" class='swiper-item' wx:if="{{i%6 == 0}}" wx:for-index="i" wx:for-item="list" wx:key="unique">
+						<product product="{{viewTab ? saleView : likeView}}" page="detail" userInfo="{{userInfo}}" type='swiper' num="5" group="{{i}}"></product>
+					</swiper-item>
+				</swiper>
+			</view>
+			<!-- 商品参数详情 -->
+			<view class="ms-productDetail specList ms-indexFloor">
+				<view class="spec">
+					<view class="title boldFamily">商品参数</view>
+					<!-- 遍历 item 开始 -->
+					<block wx:for="{{detail.goods_params}}" wx:key="index">
+						<block wx:for="{{item}}" wx:key="i" wx:for-item="parame" wx:for-index="i">
+							<view class="con">
+								<text class="name">{{parame.params_name}}</text>
+								<text class="dec">{{parame.params_value}}</text>
+							</view>
+						</block>
+					</block>
+				</view>
+				<view class="pic-warp">
+
+					<navigator hover-class="none" wx:if="{{detail.intro_top.linkUrl}}" open-type="{{detail.intro_top.is_nav ? 'switchTab' : 'navigate'}}" url="{{detail.intro_top.linkUrl}}">
+						<image src="{{detail.intro_top.imgUrl}}" mode="widthFix" />
+					</navigator>
+					<image src="{{detail.intro_top.imgUrl}}" mode="widthFix" wx:else />
+
+					<block wx:for="{{detail.intro}}" wx:key="index">
+						<image src="{{item}}" mode="widthFix" />
+					</block>
+
+				</view>
+			</view>
+			<!-- 售后说明 -->
+			<view class="ms-afterSale">
+				<view class="title boldFamily">售后说明</view>
+				<view class="problem">
+					<view class="item">
+						<text class="question">关于快递：</text> 本店委托“韵达快递”“申通快递”“邮政小包”等进行商品配送，系统将根据订单地址选择合适快递，不支持指定快递。
+					</view>
+					<view class="item">
+						<text class="question">关于订单：</text> 本店大促期间不支持修改收货地址及商品属性，其他时间请您寻求在线人工客服协助处理。
+					</view>
+					<view class="item">
+						<text class="question">关于运费：</text> 全场订单享受单品无门槛包邮（新疆、西藏、青海等偏远地区不参与包邮，以确认订单页面实际运费为准），超重收取续重运费8元/公斤（港澳台地区暂不支持发货）。
+					</view>
+					<view class="item">
+						<text class="question">关于发货：</text> 本店订单支付成功后48小时内发货，预售商品以实际预售发货时间为准。
+					</view>
+					<view class="item">
+						<text class="question">关于发票：</text> 本店默认开具电子增值税普通发票，麻烦您在订单确认收货后，联系在线人工客服登记开票信息，我们将会在7个工作日内完成开具并发送到您登记的电子邮箱。
+					</view>
+					<view class="item">
+						<text class="question">关于包装：</text> 本店商品不断在更新迭代中，不同批次的部分商品可能会存在新旧包装交替发货，这种情况是不属于商品问题。
+					</view>
+					<view class="item">
+						<text class="question">关于色差：</text> 本店商品图片均为100%实物拍摄，但由于光线、角度和显示器对比度不同，会有些许色差存在。
+					</view>
+				</view>
+			</view>
+
+
+
+			<goodStandard bind:updataGoodStandard="updataGoodStandard" bind:togglePopup="togglePopup" id="goodStandard" detail="{{detail}}" page="detail" userInfo="{{userInfo}}"></goodStandard>
+
+			<view style="height : 128rpx"></view>
+
+			<!-- 加入购物车 -->
+			<form report-submit='true' class="ms-detailBtnGroup">
+				<view class="content">
+					<navigator hover-class="none" open-type="switchTab" url="/pages/index/index" class="item icon">
+						<image src="https://s1.miniso.cn/bsimg/ec/public/images/6b/c9/6bc9c7f0e432d3c518cb18aea395aef8.png" class="ms-icon cart" />
+					</navigator>
+					<view class="item icon" bindtap="toafterSale">
+						<image src="https://s1.miniso.cn/bsimg/ec/public/images/97/81/978147eb76271debea1cbe3782400b77.png" class="ms-icon" />
+					</view>
+
+					<navigator hover-class="none" url="/pages/cart/index" open-type="switchTab" class="item icon">
+						<image src="https://s1.miniso.cn/bsimg/ec/public/images/04/ad/04ad44bbf8764cc03a30b9167b2e049d.png" class="ms-icon cart" />
+						<text class="cart_num" wx:if="{{detail.cart_num}}">{{detail.cart_num > 99 ? "99+" : detail.cart_num}}</text>
+					</navigator>
+
+					<block wx:if='{{ !detail.is_marketable || !selectedProduct.goods.marketable}}'>
+						<view class="btn-warp">
+							<view class="btn gray item">
+								商品已下架
+							</view>
+						</view>
+					</block>
+					<block wx:else>
+
+						<view class="btn-warp item" wx:if="{{detail.is_in_stock && ( !selectedProduct.state || selectedProduct.goods.stock > 0) }}">
+							<block wx:if="{{userInfo.is_zhuanke}}">
+								<!-- 推手按钮权限最大 -->
+
+								<button class="btn left" bindtap="toggleSelect">
+									<text>自购省</text>
+								</button>
+
+								<button class="btn red right" bindtap="togglePopup" data-type='share'>
+									<text>分享赚</text>
+								</button>
+							</block>
+							<block wx:elif="{{ selectedProduct.goods.product_id  ?  (selectedProduct.goods.is_prepare ? detail.prepare_list.prepare_status == 1 : true) : (detail.prepare_list ? detail.prepare_list.prepare_status == 1 : true)}}">
+								<!-- 预售 -->
+
+								<button class="btn left " data-type="{{!userInfo.is_bind_mobile ? 'pointer' :''}}" bindtap="toggleSelect">
+									<navigator hover-class="none" wx:if="{{!userInfo.is_bind_mobile}}" url="/pages/load/index" class="load">
+
+									</navigator>
+
+									<text>{{selectedProduct.goods.product_id ? (selectedProduct.goods.is_prepare  ? '全款预定' :'立即购买'):(detail.prepare_list ? '全款预定' :'立即购买')}}</text>
+								</button>
+
+								<button class="btn red right" bindtap="toggleSelect">
+									<text>加入购物车</text>
+								</button>
+
+							</block>
+							<block wx:elif="{{detail.prepare_list.prepare_status !=1 && (selectedProduct.goods.product_id  ? selectedProduct.goods.is_prepare  : detail.prepare_list )}}">
+								<!-- 非下架非售完情况下 -->
+								<!-- 预售按钮 -->
+								<block wx:if="{{detail.prepare_list.prepare_status == 0}}">
+									<!-- 未开始 -->
+									<block wx:if="{{detail.prepare_list.remind}}">
+										<navigator hover-class="none" url="/pages/load/index" class="btn red item" wx:if="{{!userInfo.is_bind_mobile}}"><text>开售提醒</text></navigator>
+										<view class="btn red item" bindtap='saleRemind' wx:else>
+											<text>开售提醒</text>
+										</view>
+
+									</block>
+
+									<view class="btn line item" bindtap='presellNotStart' wx:else>
+										<text>预售未开始</text>
+									</view>
+								</block>
+								<!-- 未开始 -->
+								<view class="btn line gray item" wx:if="{{detail.prepare_list.prepare_status == 2}}">
+									<text>预售结束</text>
+								</view>
+								<view class="btn line gray item" wx:if="{{detail.prepare_list.prepare_status == 3}}">
+									<text>商品已售完</text>
+								</view>
+							</block>
+
+						</view>
+						<view class="btn-warp" wx:else>
+							<view class="btn gray item">
+								商品已售完
+							</view>
+						</view>
+
+
+					</block>
+
+
+				</view>
+			</form>
+
+			<!-- 优惠劵跟促销窗 -->
+			<view class="ms-mask" wx:if="{{isPopup}}" bindtap="togglePopup"></view>
+			<view class="promotionPopup {{type}} {{isPopup ? 'show' : ''}}">
+				<view wx:if="{{type == 'promotion'}}">
+					<view class="title">促销活动
+						<image src="../../images/icon/icon-close-gray.png" class="ms-icon" bindtap="togglePopup" />
+					</view>
+					<view class="promotion-list">
+						<block wx:for="{{detail.rules}}" wx:key="index">
+							<navigator hover-class="none" class="promotion-item" url="/pages/cumulativeOrder/index?id={{item.rule_id}}&is_detailRouter=true&product_id={{detail.product_id}}">
+								<text class="ms-tag">{{item.rule_tag}}</text> {{item.rule_name}}
+								<image src="../../images/icon/icon-btn-right.png" class="ms-icon" />
+							</navigator>
+
+						</block>
+
+					</view>
+				</view>
+				<view wx:if="{{type == 'coupon'}}">
+					<view class="title">可领取优惠券
+						<image src="../../images/icon/icon-close-gray.png" class="ms-icon" bindtap="togglePopup" />
+					</view>
+
+					<scroll-view scroll-y style="height: 600rpx" class='content' wx:if="{{!selectItem.length}}" wx:key="unique">
+						<couponList couponList="{{detail.coupons}}" userInfo="{{userInfo}}" bind:getCoupon="getCoupon" pageName='detail'></couponList>
+					</scroll-view>
+
+				</view>
+				<view wx:elif="{{type == 'share'}}">
+					<view class="title">分享到
+						<image src="../../images/icon/icon-close-gray.png" class="ms-icon" bindtap="togglePopup" />
+					</view>
+					<view class='share-warp'>
+						<view class='item'>
+							<button open-type="share">
+								<image src='https://s1.miniso.cn/bsimg/ec/public/images/97/52/9752cd861d38360e1aa7e5ab9923a494.png' mode='widthFix'></image>
+							</button>
+							<text>微信好友</text>
+						</view>
+						<view class='item'>
+							<navigator class="load" hover-class="none" url="/pages/load/index" wx:if="{{!userInfo.is_bind_mobile}}"></navigator>
+							<view bindtap="shareImage">
+								<image src='https://s1.miniso.cn/bsimg/ec/public/images/89/2e/892e18b1bceffa37b60b876d090e60f3.png' mode='widthFix'></image>
+								<text>朋友圈海报</text>
+							</view>
+						</view>
+						<view class='item' wx:if="{{userInfo.is_zhuanke && userInfo.is_bind_mobile && detail.share_material}}">
+							<navigator hover-class="none" url="/pages/material/index?id={{detail.product_id}}">
+								<image  src='https://s1.miniso.cn/bsimg/ec/public/images/1c/0e/1c0ed380d1ffde89358290d4ea81c788.png' mode='widthFix'></image>
+								<text>推广素材</text>
+							</navigator>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<tip></tip>
+	<!--生成海报 -->
+	<canvas-share bindclose="shareClose" detail="{{detail}}" userInfo="{{userInfo}}" zkCoupon="{{zkCoupon}}"  visible="{{visible}}" />
+</requestPage>

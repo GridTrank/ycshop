@@ -1,0 +1,109 @@
+<!-- giftList.wxml -->
+<wxs module="tool">
+    var indexOf = function(arr,id) {
+      return arr.indexOf(id);
+    }
+   
+  
+    module.exports = {
+      indexOf: indexOf,
+    }
+  </wxs>
+<requestPage id="requestPage" bindrefresh='getData'>
+  <view class="ms-container ms-container-giftList fixed">
+    <view class='bg'>
+      <!-- 头部信息 开始 -->
+      <view class='topMain'>
+          <!-- 购物车提示 开始 -->
+          <view class="ms-tipDown ms-middle">
+
+            <view class="content" >
+            <text><block wx:if="{{rule_info.addbuy_limit}}">最多可选择{{rule_info.addbuy_limit}}件商品，</block>已选择{{productIdArr.length}}件商品</text>
+            </view>
+
+          </view>
+          <!-- 购物车提示 结束 -->
+
+          <!-- 顶部信息 开始 -->
+          <view class="ms-cartActiveBrief ms-middle">
+
+            <view class="content" >
+                <text>{{rule_info.rule_name}}</text>
+            </view>
+
+          </view>
+          <!-- 顶部信息 结束 -->
+      </view>
+      <!-- 头部信息 结束  -->
+
+      <!-- 增品列表 开始 -->
+      <view class='list'>
+
+          <!-- <wxs module="cart">
+            var actions = function(obj, id) {
+              var bool = obj.indexOf(id) < 0 ? false : true;
+              return bool;
+            }
+            module.exports = {
+              actions: actions
+            };
+          </wxs> -->
+
+          <view class='ms-shoppingList' wx:if="{{gift_list.length > 0}}">
+            <view class='item {{isOpen&&openId==item.obj_identity ? "active" : ""}}' 
+                  data-id='{{item.obj_identity}}' 
+                  wx:for="{{gift_list}}" 
+                  wx:key="i" >
+              <view class='content'>
+                <image 
+                  wx:if="{{item.goods_store > 0}}"
+                  class="ms-jsRadio {{is_satisfy =='1' ? '' : 'disabled'}} {{(productIdArr.length >= rule_info.addbuy_limit && tool.indexOf(productIdArr,item.product_id) ==-1) && rule_info.addbuy_limit ? 'disabled' : '' }}" 
+                  bindtap="seletActive" 
+                  data-index='{{index}}'
+                  data-id="{{item.product_id}}"
+                  src='{{tool.indexOf(productIdArr,item.product_id) !=-1  ? "../../images/icon/icon-around-active.png" :"../../images/icon/icon-around.png"}}' /> 
+                  <text class="txt-gray" wx:else>已售罄</text>
+                <view class='info'>
+
+                  <view class='pic'>
+                      <image src='{{item.goods_img}}'></image>
+                  </view>
+
+                  <view class='desc'>
+
+                    <view class='name'>
+                        {{item.goods_name}}
+                    </view>
+
+                    <view class='brief'>{{item.goods_spec}}</view>
+
+                    <view class='descBottom'>
+                      <text class='price'>¥{{item.goods_price}}</text>
+                    </view>
+
+                    <label class='num'>x<text>{{item.goods_number}}</text></label>
+
+                  </view>
+
+                </view>
+                
+              </view>
+
+              <view class='line'></view>
+
+            </view>
+
+          </view>
+      </view>
+      <!-- 增品列表 结束 -->
+
+
+    <view class="ms-coupon-button ms-middle">
+      <view class="content" bindtap='subBug' >
+          <text class="ms-button red-line">完成</text>
+      </view>
+    </view>
+    
+    </view>
+  </view>
+</requestPage>

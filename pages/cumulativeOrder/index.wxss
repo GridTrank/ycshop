@@ -1,0 +1,488 @@
+/* cumulativeOrder.wxss */
+
+
+/* 头部开始 */
+
+.ms-container-cumulativeOrder {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+}
+.cumulativeOrder-header {
+    
+    box-sizing: border-box;
+    position: relative;
+    background: #fff;
+    display: flex;
+
+}
+.cumulativeOrder-header.ios{
+    display: flex;
+    justify-content: center;
+}
+.cumulativeOrder-header.coupon{
+    justify-content: flex-start;
+}
+.cumulativeOrder-header .con{
+    height: 100%;
+    flex: 1;
+    height: 72rpx;
+    margin: 4px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cumulativeOrder-header .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cumulativeOrder-header .center .title{
+    font-size: 32rpx;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    width: 300rpx;
+    
+}
+
+.cumulativeOrder-header .back {
+    position: absolute;
+    top:0px;
+    box-sizing: border-box;
+    left: 0rpx;
+    width: 88rpx;
+    height: 88rpx;
+}
+.cumulativeOrder-header .back image {
+    width: 75rpx;
+    height: 75rpx;
+}
+.cumulativeOrder-header.coupon .con{
+    display: flex;
+}
+.cumulativeOrder-search {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    
+}
+.cumulativeOrder-search input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 60rpx 0 70rpx;
+    font-size: 28rpx;
+    background: #F3F4F6;
+    border-radius: 100rpx;
+}
+.cumulativeOrder-search .search {
+    width: 30rpx;
+    height: 30rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 50%;
+    margin-top: -15rpx;
+    
+}.cumulativeOrder-search .clear {
+    width: 30rpx;
+    height: 30rpx;
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    margin-top: -15rpx;
+    
+}
+.ms-orderListHeight {
+    height: 80rpx;
+}
+.ms-boxHd {
+    height: 88rpx;
+    border-bottom: 1px solid #EDEDED;
+    margin-bottom: 20rpx;
+    display: flex;
+    padding: 0 30rpx;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28rpx;
+}
+.ms-boxHd image{
+    width: 48rpx;
+}
+.ms-header {
+
+    border-bottom: 1px solid #efefef;
+}
+
+.item-nav {
+    box-sizing: border-box;
+    height: 80rpx;
+    display: flex;
+    background: #fff;
+    width: 100%;
+}
+.ms-container-cumulativeOrder.coupon .ms-header .title{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 107px 0 88rpx;
+}
+.ms-header .item-nav .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.ms-header .item-nav .item text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 28rpx;
+}
+
+.ms-header .item-nav .item .active {
+    color: #E72722;
+}
+
+.ms-header .item-nav .item image {
+    height: 30rpx;
+    width: 30rpx;
+    margin-left: 8rpx;
+}
+
+.ms-header .tags {
+    display: block;
+    background: #fff;
+    border-bottom: 1px solid #efefef;
+    position: absolute;
+    left: 0;
+    top: 215rpx;
+    width: 100%;
+    padding-bottom: 30rpx;
+    z-index: 100;
+    zoom: 1;
+}
+.ms-container-cumulativeOrder.coupon .ms-header .tags {
+    top: 215rpx;
+}
+.ms-header .tags text {
+    border: 1px solid #efefef;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 30rpx 0 0 45rpx;
+    padding: 7.5rpx 18.75rpx;
+    display: inline-block;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.ms-header .tags text.active {
+    border-color: #E72722;
+    color: #E72722;
+}
+
+
+/* 凑单区 Floor 开始 */
+
+.ms-indexFloor {
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ms-indexFloor .addToCart::after {
+    border: none;
+}
+
+.ms-viewBox .item {
+    padding-bottom: 60rpx;
+    position: relative;
+}
+
+
+/* 底部 加入购物车 */
+
+.ms-bottonAddToCart {
+    width: 100%;
+    background-color: #fafafa;
+}
+
+.ms-fixed-bottom {
+    z-index: 100;
+}
+
+.ms-bottonAddToCart .content {
+    display: flex;
+}
+
+.ms-row {
+    margin: 0 auto;
+}
+
+.ms-bottonAddToCart .content .info {
+    box-sizing: border-box;
+    padding: 0 18.75rpx;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    border-top: 1px solid #efefef;
+}
+
+.ms-bottonAddToCart .content .info .symbol {
+    font-size: 20rpx;
+    margin-right: 6rpx;
+    font-weight: 600;
+}
+
+.ms-bottonAddToCart .content .info view {
+    font-size: 28rpx;
+    color: #7f7f7f;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ms-bottonAddToCart .content .info view:last-child {
+    font-size: 24rpx;
+}
+
+.ms-bottonAddToCart .content .info view text {
+    color: #E72722;
+}
+
+.ms-bottonAddToCart .content .info view text.price {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+
+.ms-bottonAddToCart .content .btn {
+    width: 240rpx;
+}
+
+.ms-bottonAddToCart .content .btn text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 105rpx;
+    color: #fff;
+    background-color: #E72722;
+    font-size: 28rpx;
+}
+
+
+/* 规格选择 */
+
+.ms-detailSpecBg {
+    top: 0;
+    height: 100%;
+    background: #000;
+    opacity: 0.6;
+    z-index: 101;
+}
+
+.ms-detailSpec,
+.ms-detailSpecBg {
+    position: fixed;
+    left: 0;
+    width: 100%;
+}
+
+.ms-detailSpec.show {
+    transform: translate3d(0, 0, 0);
+    top: 20%;
+}
+
+.ms-detailSpec {
+    background-color: #fff;
+    bottom: 0;
+    z-index: 102;
+    transition: -webkit-transform 0.2s cubic-bezier(0, 0, 0.25, 1);
+    transform: translate3d(0, 100%, 0);
+}
+
+.show {
+    display: block;
+}
+
+.ms-detailSpec .content {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
+
+.ms-detailSpec .content .ms-jsDetailSpecClose {
+    display: inline-block;
+    position: absolute;
+    top: 15rpx;
+    right: 15rpx;
+}
+
+.ms-detailSpec .content .ms-jsDetailSpecClose image {
+    height: 37.5rpx;
+    width: 37.5rpx;
+}
+
+.ms-detailSpec .content .product {
+    box-sizing: border-box;
+    padding: 37.5rpx 18.75rpx 30rpx;
+    display: flex;
+    overflow: hidden;
+}
+
+.ms-detailSpec .content .product .pic {
+    background-color: #f4f4f4;
+    height: 180rpx;
+    width: 180rpx;
+    position: relative;
+    margin-right: 18.75rpx;
+}
+
+.ms-detailSpec .content .product .pic image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3D(-50%, -50%, 0);
+    width: 100%;
+    height: 100%;
+}
+
+.ms-detailSpec .content .product .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column-reverse;
+}
+
+.ms-detailSpec .content .product .info view:first-child {
+    color: #333;
+}
+
+.ms-detailSpec .content .product .info view {
+    font-size: 28rpx;
+    color: #E72722;
+}
+
+.ms-detailSpec .content .args {
+    box-sizing: border-box;
+    padding: 18.75rpx;
+}
+
+.ms-detailSpec .content .args .h4 {
+    font-size: 28rpx;
+}
+
+.ms-detailSpec .content .args .item .none {
+    background-color: #efefef;
+    border-color: #efefef;
+    color: #7f7f7f;
+}
+
+.ms-detailSpec .content .args .item .active {
+    background-color: #fff;
+    border-color: #E72722;
+    color: #E72722;
+}
+
+.ms-detailSpec .content .args .item text {
+    display: inline-block;
+    font-size: 24rpx;
+    padding: 15rpx 30rpx;
+    border: 1px solid #b2b2b2;
+    margin: 18.75rpx 18.75rpx 0 0;
+    color: #7f7f7f;
+}
+
+.ms-detailSpec .content .args .item .count {
+    width: 357rpx;
+    margin-top: 18.75rpx;
+}
+
+.ms-detailSpec .content .args .item .count .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rpx;
+    width: 75rpx;
+    background: 0 0;
+    border: 1px solid #efefef;
+    float: left;
+    font-size: 28rpx;
+}
+
+.ms-detailSpec .content .args .item .count .intext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #efefef;
+    border-right: none;
+    border-left: none;
+    float: left;
+    height: 60rpx;
+    font-size: 28rpx;
+    width: 105rpx;
+}
+
+.ms-detailSpec .content .ms-btnBox {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18.75rpx;
+}
+
+.ms-button.red {
+    background-color: #E72722;
+    color: #fff;
+    border: 1px solid #E72722;
+}
+
+.ms-button {
+    border: 1px solid #cbcbcb;
+    display: flex;
+    height: 90rpx;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+}
+
+
+/**立即购买隐藏**/
+
+.goBuy {
+    display: none !important;
+}
+
+.goCart {
+    border-radius: 200rpx !important;
+}
+
+.goTop{
+    width: 88rpx;
+    height: 88rpx;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    right: 30rpx;
+    bottom: 140rpx;
+    box-shadow: 0px 1px 15rpx 0px rgba(0, 0, 0, 0.1);
+}
+.goTop image{
+    width: 40rpx;
+}

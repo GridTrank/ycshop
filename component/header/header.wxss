@@ -1,0 +1,52 @@
+.ms-header{
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition:all 0.5s;
+}
+.ms-header.fixed{
+  position: fixed;
+}
+
+.ms-header.load{
+  background: transparent;
+}
+.ms-header .icon{
+  position: absolute;
+  width: 88rpx;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.ms-header .icon .image{
+  width: 88rpx;
+}
+.ms-header .title{
+  width: 300rpx;
+  height: 100%;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  transition:all 0.5s;
+}
+
+.ms-header.none{
+  background: transparent!important;
+}
+.ms-header.none .title{
+  display: none;
+}

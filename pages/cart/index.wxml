@@ -1,0 +1,363 @@
+<!-- spCart.wxml -->
+<view class="ms-container ms-container-spCart">
+	<view class='bg'>
+		<view class='bg-main'>
+
+
+			<!-- 顶部信息 开始 -->
+			<view class="ms-topTip">
+				<view class="view">名创优品自营</view>
+				<view class="view">30天无忧退货</view>
+				<view class="view">全场包邮</view>
+			</view>
+			<!-- 顶部信息 结束 -->
+
+			<!-- 活动说明 开始 -->
+			<view class="ms-cartActiveBrief {{gift_list.length > 0 ? '' : 'bottomHei'}}" wx:if="{{favourable_warn.length > 0}}">
+
+				<view class="item" wx:for="{{favourable_warn}}" wx:key="i" wx:if="{{item.show_in_cart}}" wx:for-index="num" data-id='{{item.rule_id}}'>
+
+					 <navigator hover-class="none"url="{{ '/pages/cumulativeOrder/index?id='+item.rule_id }}"   class='navi'>
+						<text class="t">{{item.rule_tag}}</text>
+						<view class="b">
+							<text class='{{item.show_gift_btn >= 1 ? "txt" : ""}}'>{{item.rule_name}}</text>
+							<image class="image" src="../../images/icon/icon-btn-right.png" />
+						</view>
+					</navigator>
+
+					<view class="btn" wx:if="{{item.show_gift_btn == 1}}">
+						 <navigator hover-class="none"url="/pages/giftList/index?rule_id={{item.rule_id}}"   class='navi'>
+							<text class="text">查看赠品</text>
+						</navigator>
+					</view>
+
+					<view class="btn" wx:if="{{item.show_gift_btn == 2}}">
+						 <navigator hover-class="none"url="/pages/buyGift/index?rule_id={{item.rule_id}}&selectedNum={{abgoods_list.length}}&is_satisfy={{item.is_satisfy}}"   class='navi'>
+							<text class="text">{{abgoods_list.length && item.is_satisfy? '更换商品' : '查看商品'}}</text>
+						</navigator>
+					</view>
+
+				</view>
+			</view>
+			<!-- 活动说明 结束 -->
+
+			<!-- 购物车赠品列表 开始 -->
+
+			<view class='ms-shoppingList {{gift_list.length > 0 ? "bottomHei" : ""}}' wx:if="{{gift_list.length > 0}}">
+				<view class='item timeout}}' wx:for="{{gift_list}}" wx:for-index="num" wx:key="i">
+					<view class='content'>
+						<image class='ms-jsRadio image' src='../../images/icon/icon-around-active.png' />
+
+						<view class='info'>
+							<view class='pic'>
+								<image src='{{item.goods_img}}' class="image"></image>
+							</view>
+							<view class='desc'>
+								<view class='name'>
+									<view class='redCu'>【赠品】</view>{{item.goods_name}}
+								</view>
+								<view class='brief'>{{item.goods_spec}}</view>
+								<view class='descBottom'>
+									<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+								</view>
+								<label class='num label'>x
+									<text>{{item.goods_number}}</text>
+								</label>
+							</view>
+						</view>
+					</view>
+					<!-- <view class='line'></view> -->
+				</view>
+			</view>
+			<!-- 购物车赠品列表 结束 -->
+			<!-- 购物车换购列表 开始 -->
+
+			<view class='ms-shoppingList {{abgoods_list.length > 0 ? "bottomHei" : ""}}' wx:if="{{abgoods_list.length > 0}}">
+				<view class='item timeout}}' wx:for="{{abgoods_list }}" wx:for-index="num" wx:key="i">
+					<view class='content'>
+						<view class='info'>
+							<view class='pic'>
+								<image src='{{item.goods_img}}' class="image"></image>
+							</view>
+							<view class='desc'>
+								<view class='name'>
+									<view class='redCu'>【换购】</view>
+									{{item.goods_name}}
+								</view>
+								<view class='brief'>{{item.goods_spec}}</view>
+								<view class='descBottom'>
+									<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+								</view>
+								<label class='num label'>x
+									<text>{{item.goods_number}}</text>
+								</label>
+							</view>
+						</view>
+					</view>
+					<!-- <view class='line'></view> -->
+				</view>
+			</view>
+			<!-- 购物车换购列表 结束 -->
+			<!-- 购物车列表 开始 -->
+			<view class='list'>
+				<view class='ms-shoppingList bottomHei' wx:if="{{cart_list.length > 0}}">
+					<view class='item {{isOpen&&openId==item.obj_identity ? "active" : ""}}' bindtouchend='drawEnd' bindtouchstart='drawStart' data-id='{{item.obj_identity}}' wx:for="{{cart_list}}" wx:key="i" wx:for-index="num">
+
+						<view class='content'>
+
+							<image class='ms-jsRadio' bindtap='seletActive' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' src='{{item.goods_selected == 1 ? "../../images/icon/icon-around-active.png" :"../../images/icon/icon-around.png"}}' />
+
+							<view class='info'>
+
+								<view class='pic'>
+									 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}"   class="navigator">
+										<image src='{{item.goods_img}}' class="image"></image>
+									</navigator>
+								</view>
+
+								<view class='desc'>
+									<view class='name'>
+										 <navigator hover-class="none"class="navigator" url="/pages/detail/index?id={{item.product_id}}"  >
+											{{item.goods_name}}
+										</navigator>
+									</view>
+									<view class='brief'>{{item.goods_spec}}</view>
+									<view class='descBottom'>
+										<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+										<view class='count'>
+											<text class='{{item.goods_number == 1 ? "none" : ""}} text' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>-</text>
+											<input class='number' type='number' bindblur='cout' value='{{item.goods_number}}' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}'></input>
+											<text class='{{item.goods_number == item.goods_store || item.goods_number >= 99 ? "none" : ""}} text' data-add='add' data-num='{{item.goods_number}}' data-name="{{item.goods_name}}" data-price="{{item.goods_price}}" data-id='{{item.obj_identity}}' data-gid="{{item.goods_id}}"
+                                                data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>+</text>
+										</view>
+									</view>
+									<!-- <label class='num'>x<text>{{item.goods_number}}</text></label> -->
+								</view>
+
+							</view>
+
+						</view>
+
+						<view class="zIndexButton" bindtap='del' data-index='{{num}}' data-items="cart_list" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>
+
+							<view class="view">
+								<label class="ms-jsDelCarItem label" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>删除</label>
+							</view>
+
+						</view>
+
+						<view class='line'></view>
+
+					</view>
+
+				</view>
+				<!-- 购物车列表 结束 -->
+				<!-- 购物车预售列表 -->
+				<view class='ms-shoppingList ' wx:if="{{prepare_list.length > 0}}">
+					<view class="presellList bottomHei" wx:for="{{prepare_list}}" wx:for-item="list" wx:key="index">
+						<view class='hd'>
+							<text class='txt'>预售商品-{{index+1}}</text>
+							<text class="yellow">{{list.delivery_time}}</text>
+						</view>
+						<view class='item {{isOpen&&openId==item.obj_identity ? "active" : ""}}' bindtouchend='drawEnd' bindtouchstart='drawStart' data-id='{{item.obj_identity}}' wx:for="{{list.items}}" wx:key="i" wx:for-index="num">
+
+							<view class='content'>
+
+								<image class='ms-jsRadio' bindtap='seletActive' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' src='{{item.goods_selected == 1 ? "../../images/icon/icon-around-active.png" :"../../images/icon/icon-around.png"}}' />
+
+								<view class='info'>
+
+									<view class='pic'>
+										 <navigator hover-class="none"class="navigator" url="/pages/detail/index?id={{item.product_id}}"  >
+											<image class="image" src='{{item.goods_img}}'></image>
+											<view class="downTime">{{dataTime[list.prepare_id]}}</view>
+										</navigator>
+									</view>
+
+									<view class='desc'>
+										<view class='name'>
+											 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}"  >
+												{{item.goods_name}}
+											</navigator>
+										</view>
+										<view class='brief'>{{item.goods_spec}}</view>
+										<view class='descBottom'>
+											<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+											<view class='count'>
+												<text class='{{item.goods_number == 1 ? "none" : ""}} text' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>-</text>
+												<input class='number' type='number' bindblur='cout' value='{{item.goods_number}}' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}'></input>
+												<text class='{{item.goods_number == item.goods_store || item.goods_number >= 99 ? "none" : ""}} text' data-add='add' data-num='{{item.goods_number}}' data-name="{{item.goods_name}}" data-price="{{item.goods_price}}" data-id='{{item.obj_identity}}' data-gid="{{item.goods_id}}"
+                                                    data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>+</text>
+											</view>
+										</view>
+										<!-- <label class='num'>x<text>{{item.goods_number}}</text></label> -->
+									</view>
+
+								</view>
+
+							</view>
+
+							<view class="zIndexButton" bindtap='del' data-index='{{num}}' data-items="cart_list" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>
+
+								<view class="view">
+									<label class="ms-jsDelCarItem label" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>删除</label>
+								</view>
+
+							</view>
+
+							<view class='line'></view>
+
+						</view>
+					</view>
+
+				</view>
+				<!-- 购物车已失效列表 开始 -->
+				<view class='ms-shoppingList bottomHei' wx:if="{{unavailable.length > 0}}">
+					<view class='hd'>
+						<text class='txt'>已失效产品</text>
+					</view>
+
+					<view class='item timeout {{isOpen&&openId==item.obj_identity ? "active" : ""}}' wx:for="{{unavailable}}" wx:for-index="num" wx:key="i" bindtouchend='drawEnd' bindtouchstart='drawStart' data-id='{{item.obj_identity}}'>
+
+						<view class='content'>
+							<text class="txt-gray">{{item.is_prepare ?'失效': (!item.goods_marketable ? '下架' :'无货')}}</text>
+							<view class='info'>
+								<view class='pic'>
+									 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}"   class="navigator">
+										<image src='{{item.goods_img}}' class="image"></image>
+										<!-- <view class="downTime end" wx:if="{{item.is_prepare}}">预售结束</view> -->
+									</navigator>
+								</view>
+								<view class='desc'>
+									<view class='name'>
+										 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}"   class="navigator">
+											{{item.goods_name}}
+										</navigator>
+									</view>
+									<view class='brief'>{{item.goods_spec}}</view>
+									<view class='descBottom'>
+										<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+									</view>
+									<!-- <label class='num'>x<text>{{item.goods_number}}</text></label> -->
+								</view>
+							</view>
+						</view>
+						<view class="zIndexButton" bindtap='del' data-index='{{num}}' data-items="unavailable" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>
+
+							<view class="view">
+								<label class="ms-jsDelCarItem label" data-id='{{item.obj_identity}}' data-num='{{item.goods_number}}' catchtap='deleting'>删除</label>
+							</view>
+						</view>
+						<view class='line'></view>
+					</view>
+				</view>
+				<!-- 购物车已失效列表 结束 -->
+			</view>
+
+
+			<!-- 暂无购物车 开始 -->
+
+			<view wx:if="{{cart_list.length == 0 && unavailable.length == 0 && !prepare_list.length}}" class='noData'>
+				<noData noData="{{sNoData}}"></noData>
+			</view>
+			<!-- 暂无购物车 结束 -->
+		</view>
+
+		<block wx:if="{{cart_list.length > 0 || prepare_list.length>0}}">
+			<!-- 购物车操作 开始 -->
+			<form report-submit='true' class='ms-bottomHandle ms-middle ms-shoppingBottom'>
+				<view class='content'>
+					<view class="count start view" data-isall='1' data-allsta='{{is_all}}' bindtap='seletActive'>
+						<image class="ms-jsAllChose" src='{{is_all == 1 ? "../../images/icon/icon-around-active.png" : "../../images/icon/icon-around.png"}}'></image>已选(
+						<text id="count" class="text">{{cart_number > 99 ? "99+" : cart_number}}</text>)
+					</view>
+
+					<view class='price view' style="flex:2">
+						<view class=' view price-warp'>
+							<view class="view money">
+								<text class="symbol">¥</text>
+								<text class="price">{{cart_total}}</text>
+							</view>
+							<view class="view coupon" bindtap='couponTip'>
+
+								<!-- <view>
+									总额:
+									<text class="symbol gray6">¥</text>{{subtotal}}
+								</view> -->
+								<view class="tip">
+									已优惠
+									<text class="symbol gray6"> ¥</text>{{discount_amount}}
+									<image class="image" src="../../images/icon/icon-tip.png" mode='widthFix'></image>
+								</view>
+
+
+							</view>
+						</view>
+					</view>
+
+					 <navigator hover-class="none"  url="/pages/load/index" class="btn view {{cart_total>0 ? 'red' : 'gray'}}" wx:if="{{!userInfo.is_bind_mobile}}">下单</navigator>
+					<button wx:else class="btn view {{cart_total>0 ? 'red' : 'gray'}}" bindtap='order'>
+						下单
+					</button>
+
+
+				</view>
+			</form>
+			<!-- 购物车操作 结束 -->
+		</block>
+		<!-- 分单弹窗 -->
+		<view class="partOrder" wx:if="{{isPartOrder}}">
+			<view class="ms-mask"></view>
+			<view class="content">
+				<view class="title">
+					请分开结算以下商品
+				</view>
+				<radio-group class="radio-group" bindchange="radioChange">
+					<label class="label" wx:if="{{orderData.cart_list.num}}">
+						<view class="labelItem">
+							<radio class="radioItem" value="cart_list" color="#E72722" />
+							<image class="image" src="{{partOrderVal =='cart_list' ? '../../images/icon/icon-around-active.png' : '../../images/icon/icon-around.png' }}"></image>
+							其他商品
+						</view>
+						<text class="text">共{{orderData.cart_list.num}}件</text>
+					</label>
+					<label class="label" wx:for="{{orderData.prepare}}" wx:key="index">
+						<view class="labelItem">
+							<radio class="radioItem" value="{{index}}" color="#E72722" />
+							<image class="image" src="{{partOrderVal == index ? '../../images/icon/icon-around-active.png' : '../../images/icon/icon-around.png' }}"></image>预售商品-{{index}}
+						</view>
+						<text class="text">共{{item.num}}件</text>
+					</label>
+				</radio-group>
+				<view class="btn-warp">
+					<view class="btn gray" bindtap='canclePartOrder'>取消</view>
+					<view class="btn red" bindtap='enterPartOrder'>下单</view>
+				</view>
+			</view>
+		</view>
+		<view class="partOrder" wx:if="{{isCouponTip}}">
+			<view class="ms-mask"></view>
+			<view class="content">
+				<view class="title">优惠明细</view>
+				<view class="coupon-list">
+
+					<view class="item" wx:for="{{promotion_detail}}" wx:key="index">
+						<view class="name">{{item.rule_name}}</view>
+						<view class="price">-
+							<text class="symbol">¥</text>{{item.discount_amount}}</view>
+					</view>
+					<view class="item bold">
+						<view class="name">促销共优惠：</view>
+						<view class="price">-
+							<text class="symbol">¥</text>{{discount_amount}}</view>
+					</view>
+
+				</view>
+				<view class="btn-warp">
+					<view class="btn red" bindtap='couponTip'>确定</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+</view>

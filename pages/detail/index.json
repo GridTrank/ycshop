@@ -1,0 +1,14 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "requestPage": "/component/requestPage/index",
+    "tip": "/component/tip/tip",
+    "goodStandard": "/component/goodStandard/goodStandard",
+    "MySwiper": "/component/swiper/swiper",
+    "comment": "/component/comment/comment",
+    "product": "/component/product/product",
+    "couponList": "/component/couponList/couponList",
+    "canvas-share": "/component/canvas-share/index",
+    "header": "/component/header/header"
+  }
+}

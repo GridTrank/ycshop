@@ -1,0 +1,50 @@
+<wxs module="tool">
+	var substring = function(val,type) {
+		if(!val) return;
+		var star = '';
+		var length = val.length-4;
+		return val.toString().substring(length,val.length);
+	}
+	module.exports = {
+		substring: substring,
+	}
+</wxs>
+<view class='ms-container-withdraw'>
+	<view class="withdraw-form">
+		<view class="withdraw-money">
+			<view class="name">
+				<text>提现金额（元）</text>
+			</view>
+			<view class="money">{{withdrawDetail.withdraw_amount}}</view>
+		</view>
+
+		<view class="withdraw-cell">
+			<view class="item">
+				<view class="name">提现方式</view>
+				<view class="info">{{withdrawDetail.withdraw_type_text}}</view>
+			</view>
+			<view class="item">
+				<view class="name">收款账户</view>
+				<view class="info">{{withdrawDetail.bank_name}}({{tool.substring(withdrawDetail.bank_number)}})</view>
+			</view>
+		</view>
+		<view class="withdraw-cell">
+			<view class="item">
+				<view class="name">当前状态</view>
+				<view class="info">
+					<view class="state {{state[withdrawDetail.withdraw_status].class}}">{{withdrawDetail.withdraw_status_text}}</view>
+					<view class="dec" wx:if="{{withdrawDetail.remark}}">{{withdrawDetail.remark}}</view>
+				</view>
+			</view>
+			<view class="item">
+				<view class="name">申请时间</view>
+				<view class="info">{{withdrawDetail.create_time}}</view>
+			</view>
+			<view class="item">
+				<view class="name">流水单号</view>
+				<view class="info flex-row" >{{withdrawDetail.withdraw_trade_no}}<image class="icon" bindtap="copy" mode="widthFix" src='../../images/icon/icon-copy-gray.png'></image></view>
+			</view>
+		</view>
+	</view>
+
+</view>

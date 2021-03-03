@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "推广素材",
+  "usingComponents": {
+    "canvas-share": "/component/canvas-share/index"
+  }
+}

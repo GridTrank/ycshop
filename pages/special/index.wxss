@@ -1,0 +1,377 @@
+/**buying.wxss**/
+
+.ms-container-buying {
+    background-color: #fff;
+}
+
+.ms-banner image {
+    width: 100%;
+    vertical-align: top;
+}
+
+.buyNav {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+}
+
+.buyNav .item {
+    position: relative;
+    display: inline-block;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding-bottom: 20rpx;
+    z-index: 2;
+}
+
+.buyNav .item:last-child:after {
+    display: none;
+}
+
+.buyNav .item view {
+    background-color: #fbe9ea;
+    display: block;
+    padding: 16rpx 0;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.buyNav .item text {
+    display: block;
+    text-align: center;
+}
+
+.buyNav .item text.date {
+    font-size: 28rpx;
+    height: 40rpx;
+}
+
+.buyNav .item text.state {
+    font-size: 24rpx;
+    height: 34rpx;
+    color: #9a9a9a;
+}
+
+.buyNav .item view::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    height: 80%;
+    border-right: 1px solid #fbd0d1;
+}
+
+.ms-isFixed {
+    background-color: #FFF;
+    height: 126rpx;
+}
+
+.buyNav .item.cur::after {
+    position: absolute;
+    display: block;
+    content: '';
+    height: 24rpx;
+    width: 24rpx;
+    background: #E72722;
+    margin-left: -12rpx;
+    left: 50%;
+    top: 88rpx;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+.buyNav .item.cur view {
+    background-color: #E72722;
+}
+
+.buyNav .item.cur view::after {
+    display: none;
+}
+
+.buyNav .item.cur view text {
+    color: #fff;
+}
+
+.ms-buyStatus {
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 10rpx;
+}
+
+.ms-buyStatus::before {
+    content: '';
+    display: block;
+    width: 60%;
+    border-top: 1px solid #333;
+    position: absolute;
+    z-index: 1;
+}
+
+.ms-buyStatus view {
+    position: relative;
+    padding: 30rpx;
+    background-color: #fff;
+    font-size: 28rpx;
+    z-index: 2;
+}
+
+.ms-buyListItem .item {
+    box-sizing: border-box;
+    padding: 18rpx;
+    display: flex;
+    white-space: nowrap;
+    background-color: #fff;
+    margin-top: 15rpx;
+}
+
+.ms-buyListItem .item view {
+    display: inline-block;
+}
+
+.ms-buyListItem .item .pic {
+    margin-right: 18rpx;
+    position: relative;
+    width: 270rpx;
+}
+
+.ms-buyListItem .item .pic image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.ms-buyListItem .item .pic image.icon {
+    display: none;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+}
+
+.ms-buyListItem .item .pic::after {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+.ms-buyListItem .item .info {
+    box-sizing: border-box;
+    padding-top: 20rpx;
+    overflow: hidden;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    flex: 1;
+    position: relative;
+}
+
+.ms-buyListItem .item .info text,
+.ms-buyListItem .item .info navigator {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ms-buyListItem .item .info .title {
+    font-size: 32rpx;
+}
+
+.ms-buyListItem .item .info .brief {
+    margin-top: 10rpx;
+    font-size: 24rpx;
+    color: #7f7f7f;
+}
+
+.ms-buyListItem .item .info .price {
+    padding: 10rpx 0;
+}
+
+.ms-buyListItem .item .info .price view {
+    font-size: 24rpx;
+    margin-right: 20rpx;
+    color: #7f7f7f;
+}
+
+.ms-buyListItem .item .info .price view text {
+    color: #E72722;
+    font-size: 30rpx;
+}
+
+.ms-buyListItem .item .info .price view.del {
+    text-decoration: line-through;
+}
+
+.ms-buyListItem .item .info .progress {
+    width: 200rpx;
+    height: 34rpx;
+    border: 1px solid #E72722;
+    border-radius: 30rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.ms-buyListItem .item .info .bottom {
+    margin-top: 10rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.ms-buyListItem .item .info .progress view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #fbe9ea;
+}
+
+.ms-buyListItem .item .info .progress text {
+    font-size: 24rpx;
+    color: #E72722;
+    position: relative;
+    z-index: 2;
+}
+
+.ms-buyListItem .item .info .text {
+    color: #E72722;
+    font-size: 32rpx;
+}
+
+.ms-buyListItem .item .info .bottom label {
+    display: none;
+    font-size: 24rpx;
+    width: 135rpx;
+    height: 50rpx;
+    background-color: #E72722;
+    color: #FFF;
+    line-height: 50rpx;
+    text-align: center;
+}
+
+.ms-buyListItem .item.notice .info .bottom label.notice,
+.ms-buyListItem .item.over .info .bottom label.over,
+.ms-buyListItem .item.buy .info .bottom label.buy {
+    display: inline-block;
+}
+
+.ms-buyListItem .item.over .info .bottom label.buy,
+.ms-buyListItem .item.notice .info .bottom label.over {
+    display: none;
+}
+
+.ms-buyListItem .item.over .pic image.icon {
+    display: block;
+}
+
+
+/* ms-Modal */
+
+.ms-Modal,
+.ms-Modal::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+
+.ms-Modal {
+    transition: all .3s ease;
+    opacity: 0;
+}
+
+.ms-Modal::before {
+    display: block;
+    content: '';
+    z-index: 1;
+    opacity: .6;
+    background-color: #000;
+}
+
+.ms-Modal .ms-ModalBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.ms-Modal.cur {
+    opacity: 1;
+}
+
+.ms-Modal .ms-ModalBody .content {
+    border-radius: 8rpx;
+    width: 80%;
+    display: block;
+    background-color: #FFF;
+}
+
+.ms-Modal .ms-ModalBody .content .info {
+    box-sizing: border-box;
+    padding: 30rpx;
+}
+
+.ms-Modal .ms-ModalBody .content .hd {
+    font-size: 32rpx;
+    display: block;
+    text-align: center;
+}
+
+.ms-Modal .ms-ModalBody .content .txt {
+    margin: 30rpx 0;
+    display: block;
+    font-size: 28rpx;
+}
+
+.ms-Modal .ms-ModalBody .content input {
+    box-sizing: border-box;
+    padding: 10rpx 20rpx;
+    height: 80rpx;
+    border-radius: 6rpx;
+    border: 1px solid #efefef;
+    font-size: 28rpx;
+}
+
+.ms-Modal .ms-ModalBody .button {
+    border-top: 1px solid #efefef;
+    display: flex;
+    white-space: nowrap;
+    flex-direction: row;
+}
+
+.ms-Modal .ms-ModalBody .button label {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    height: 100rpx;
+}
+
+.ms-Modal .ms-ModalBody .button label:first-child {
+    border-right: 1px solid #efefef;
+}
+
+.ms-Modal .ms-ModalBody .button label.red {
+    color: #E72722;
+}

@@ -1,0 +1,91 @@
+<wxs module="tool">
+	var timer = function() {
+		return getDate().getTime();
+	};
+	var partition = function(val) {
+		var arr = val.toString().split('.');
+		return arr;
+	};
+	module.exports = {
+		timer: timer,
+		partition: partition
+	}
+</wxs>
+<view class="ms-viewBox clearfix {{type}} {{page}} {{type == 'rightRow' || type == 'mixture'? 'activityLeftRow' :''}}" style="background-color:#{{settings.background_color}}">
+	<view class="ms-viewItem productBI {{index % 2 == 0 ? 'left':'right'}}" wx:for="{{product}}" wx:if="{{type == 'swiper' ? (index-group <= num && index-group >= 0) : type == 'like' ? index % 2  == num : true }}" wx:key="index" data-pid="{{item.product_id}}" data-gid="{{item.goods_id}}" data-name="{{item.product_name}}" data-kid="{{item.cat_id}}" data-kname="{{item.cat_name}}" data-pkid="{{item.parent_id}}">
+		 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}&type={{tool.timer()}}"   class="pic navigator {{item.brief ? 'brief' :''}} {{!item.all_store ? 'mask' : ''}}">
+			<image src="{{item.image_default}}" class="photo" mode="widthFix"></image>
+			<image src="https://s1.miniso.cn/bsimg/ec/public/images/d1/11/d111f0a903bb439c1bfc52b5be64f773.png" wx:if="{{!item.all_store}}" class="sellOut" mode="widthFix"></image>
+			<view class='commission' wx:if="{{userInfo.is_zhuanke && item.brokerage_ratio}}">佣金{{item.brokerage_ratio}}</view>
+			<block wx:for="{{item.tags}}" wx:for-item="list" wx:key="unique">
+				<image src="{{list.params.tag_image}}" style='opacity:{{list.params.tag_opacity}}' class="{{list.params.pic_loc}}" wx:if="{{list.params.tag_image}}" mode="widthFix"></image>
+			</block>
+		</navigator>
+		<view class="info-warp">
+			<view class="info">
+				<view class="name-warp">
+					<text wx:if="{{type == 'list' || (type == 'activityList' && page == 'index')}}" class="brief {{item.is_prepare ? 'prepare' : ''}}">{{item.is_prepare ?'预售' : item.brief  }}</text>
+					<view class="name-info">
+
+
+						 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}&type={{tool.timer()}}"   class="title">{{item.product_name}}</navigator>
+						<block wx:if="{{item.brief && (page== 'index' ? (type != 'activityList') : true)}}">
+							<text class="dec" wx:if="{{type != 'list' && type !='threeList' && type !='slideSpecial' }}">{{item.brief}}</text>
+						</block>
+
+					</view>
+					<view class="tag" wx:if="{{type != 'swiper' && item.tags.length && (settings.show_img_tag == '1' || settings.show_img_tag === null )}}">
+						<block wx:for="{{item.tags}}" wx:for-item="list" wx:key="unique">
+							<text class="text" wx:if="{{list.params.tag_showOnIndex}}" style="background-color:{{list.tag_bgcolor}};color: {{list.tag_fgcolor}}">{{list.tag_name}}</text>
+						</block>
+					</view>
+				</view>
+				<view class="priceWarp">
+					<view class="warp">
+						<image class="image" wx:if="{{settings.goods_img_tag}}" src="{{settings.goods_img_tag}}" mode="widthFix"></image>
+						<view class="price numFamily">
+							<text class="symbol">¥</text>
+							<view class="money">
+								<text class="text">{{item.price}}</text>
+								<!-- <text class="symbol top text" wx:if="{{tool.partition(item.price)[1]}}">.{{tool.partition(item.price)[1]}}</text> -->
+							</view>
+							<text class="del text" wx:if="{{item.origin_price}}"><text class="symbol">¥</text>{{item.origin_price}}</text>
+						</view>
+					</view>
+					<!--  -->
+					<view wx:if="{{(page=='index' || page=='order' || show_type == '4' || show_type == '0') && page != 'detail'}}" class="add-cart" data-index="{{index}}" data-item="{{item}}" bindtap="toggleGoods">
+						<image mode="widthFix" class="add" src="https://s1.miniso.cn/bsimg/ec/public/images/d1/53/d153b775fd5b607ac1737ceeb39f2cfb.png"></image>
+					</view>
+				</view>
+
+				<view wx:if="{{item.mprice}}">
+					<text class="couponPrice" >{{userInfo.lv_price_name}} <text class="symbol">¥</text>{{item.mprice}}</text>
+				</view>
+
+			</view>
+			<!-- 猜你喜欢评论 -->
+			<view class="comment-warp" wx:if="{{item.comments && page == 'index'}}">
+				<image mode="widthFix" class="headimgurl" src="{{item.comments.headimgurl}}"></image>
+				<view class="comment">
+					{{item.comments.comment}}
+				</view>
+			</view>
+			<view class="cart" wx:if="{{ show_type == '15' && page=='active'}}">
+				<view class="goBuy item" bindtap="addCart" data-item="{{item}}" data-img="{{item.image_default}}" data-type="{{settings.add_cart_type}}" data-gid="{{item.goods_id}}" data-pid="{{item.product_id}}" data-name="buy"  >立即购买</view>
+
+				<view class="goCart item" data-gid="{{item.goods_id}}" data-img="{{item.image_default}}" data-pid="{{item.product_id}}" data-name="cart" data-type="{{settings.add_cart_type}}" data-item="{{item}}" bindtap="addCart">
+					<image class='image' src="../../images/icon/cart.png" mode="widthFix"></image>
+				</view>
+			</view>
+		</view>
+
+
+
+
+	</view>
+	<view class="ms-click" wx:if="{{show_type == '12' }}" bindtap="watckAll">
+		<view class="bg">
+			<text>查看全部</text>
+		</view>
+	</view>
+</view>

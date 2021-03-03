@@ -1,0 +1,131 @@
+
+.ms-commentItem  {
+  box-sizing: border-box;
+  background-color: #FFF;
+  padding: 20rpx 0 0 30rpx;
+
+}
+.ms-commentItem .line {
+  border-bottom:1px solid #efefef;
+}
+
+.ms-commentItem  .user {
+  padding-right:20rpx;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.ms-commentItem  .pic {
+  height: 80rpx;
+  width: 80rpx;
+  overflow: hidden;
+  border-radius: 100%;
+  background: #efefef;
+}
+
+.ms-commentItem .show {
+  padding-bottom: 30rpx;
+  display: flex;
+}
+
+.ms-commentItem .show view {
+  position: relative;
+  width: 150rpx;
+  height: 150rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+.ms-commentItem .show view:last-child{
+  margin-right: 0;
+}
+.ms-commentItem .show image {
+  display: block;
+  border-radius: 8rpx;
+}
+
+.ms-commentItem  image {
+  height: 100%;
+  width: 100%;
+}
+
+.ms-commentItem  .name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+.ms-commentItem .star-warp {
+  margin: 6rpx 0 0 20rpx;
+  display: flex;
+}
+.ms-commentItem .star-warp image{
+  height: auto;
+}
+.ms-commentItem .choiceness {
+  color: #caaa88;
+  border: 4rpx solid #caaa88;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+  width: 154rpx;
+  height: 64rpx;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 4rpx 6rpx;
+}
+
+.ms-commentItem .choiceness text {
+  padding: 0 4rpx;
+  color: #caaa88;
+  font-size: 28rpx;
+}
+
+.ms-commentItem .star-warp image {
+  width: 30rpx;
+  margin-right: 10rpx;
+}
+.ms-commentItem  .time {
+  color: #999;
+  font-size: 24rpx;
+}
+.ms-commentItem  .ms-icon {
+  margin-left: 8rpx;
+}
+
+.ms-commentItem  .txt {
+  padding: 20rpx 20rpx 30rpx 0;
+  font-size: 28rpx;
+  line-height: 44rpx;
+  word-wrap: break-word;
+}
+
+.ms-commentItem  .model {
+  font-size: 24rpx;
+  color: #999;
+  padding: 0 20rpx 30rpx 0;
+}
+.ms-commentItem  .model .time {
+  margin-right: 20rpx;
+}
+.ms-commentItem .service {
+  padding-right: 20rpx;
+  border-bottom: 1px solid #efefef;
+}
+
+.ms-commentItem .service .item {
+  background: #F4F4F4;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+.ms-commentItem .service .item text{
+  color: #CAAE92;
+  line-height: 40rpx;
+}

@@ -1,0 +1,91 @@
+
+<view class="ms-userFans-container">
+    <wxs module="tool">
+        var remainDay= function(num) {
+                if(num==0){
+                    return 0
+                }else{
+                    var day =Math.ceil(num/60/60/24) 
+                    if(day>1){
+                        return day;
+                    }else{
+                        return 1;
+                    }
+				    
+                }
+				
+			}
+        module.exports = {
+			remainDay: remainDay,
+		}
+    </wxs>
+    <view class="fans-top">
+        <view class="fans-tit"> 
+            <view class="fans-p"> 粉丝人数 </view>
+            <image mode="widthFix" bindtap="modal" src="https://miniso-images.oss-cn-shenzhen.aliyuncs.com/bsimg/ec/public/images/b6/9f/b69f0874a2b14d3ac5975ba55d116809.png" class="icon"></image>
+        </view>
+        <view class="fans-num">{{loyal_fans_count}}</view>
+    </view>
+
+    <view class="fans-wrap">
+        <view class="fans-tab">
+            <block wx:for="{{fansTab}}" wx:for-index="i"  wx:key="i">
+                <view class="tab-name {{i == activeTab ? 'activeTab': ''}}" data-index="{{i}}"  bindtap = "selectTab" >
+                    <text class="tab-label">{{item.label}}</text>
+                    <text wx:if="{{i==0 && potential>0 }}" class="tab-tip">{{ potential > 99 ? '99+ ': potential }}</text>
+                </view>
+             </block>
+        </view>
+        <view class="fans-detail">
+            <view class="fans-container" wx:if="{{dataList.length>0}}">
+                <block wx:for="{{dataList}}" wx:for-index="{{i}}"  wx:key="i">
+                    <view class="fans-item">
+                        <view class="fans-info">
+                            <view class="fans-imgs">
+                                <image class="info-img" src="{{ item.header_img? item.header_img: 'http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png' }}" mode="widthFix" ></image>
+                                <image wx:if="{{item.sex==1}}" class="info-sex-img" src='https://s1.miniso.cn/bsimg/ec/public/images/c0/9d/c09d9d22f79425b24f34c0b3be73a4ac.png'/>
+                                <image wx:if="{{item.sex==0}}" class="info-sex-img" src='https://s1.miniso.cn/bsimg/ec/public/images/58/ba/58baf5853a72febc60872cd369123883.png'/>
+                            </view>
+                            <view class="info-detail">
+                                <view class="info-name">{{item.nickname}}</view>
+                                <view class="info-date">{{item.follow_time}}</view>
+                            </view>
+                        </view>
+                        <view class="fans-status">
+                            <view class="status-code {{item.fans_status == 0 ? 'c6' : item.fans_status == 1? ' ' : 'c3'}} ">
+                                {{item.fans_status_text}}
+                            </view>
+                            <view class="status-day" wx:if="{{activeTab!=2}}"> 
+                                <text class='d1' wx:if="{{activeTab==0}}">剩余激活天数：</text> 
+                                <text class='d1' wx:if="{{activeTab==1}}">锁粉剩余天数：</text> 
+                                <text class='d2' >{{tool.remainDay(item.remaining_time)}}</text> 
+                                <text class="d3" >天</text> 
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <view class="no-more" wx:if="{{ (fansTotal<=20 && fansTotal>0 ) || !isShowMore }}"> 没有更多了...</view>
+            <view class="show-more" wx:if="{{fansTotal>20 && isShowMore}}" bindtap="showMore"> 
+                <text >查看更多</text>
+                <image class="more-img" src="https://s1.miniso.cn/bsimg/ec/public/images/4c/52/4c5257e83730e38f9045128b78d331c8.png" mode="widthFix"></image>  
+            </view>
+            <view class="noFans" wx:if="{{fansTotal==0}}">
+                <view class="nofans-tit" >
+                    您还没有粉丝哦，快去邀请吧~
+                </view>
+                <image class="nofans-img" src="https://s1.miniso.cn/bsimg/ec/public/images/ba/e0/bae00c0d515c8d2aee2d2d105c26a1eb.png" mode="widthFix" ></image>
+            </view>
+        </view>
+    </view>
+
+    <navigator class="share-btn" hover-class="none" url="/pages/inviteFriend/index">
+        邀请好友加入
+    </navigator> 
+        
+
+
+
+</view>
+

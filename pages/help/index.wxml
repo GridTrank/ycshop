@@ -1,0 +1,11 @@
+<view class='ms-container-help'>
+
+   <navigator hover-class="none"  wx:for="{{list}}" wx:key="index" url='/pages/web/index?type=2&id={{item.node_id}}&page_mark={{item.page_mark}}&title={{item.node_name}}' class="ms-cell border">
+    <view class="title">
+      <view>{{item.node_name}}</view>
+    </view>
+    <image class="arrow" mode="widthFix" src="../../images/icon/icon-arrow-right.png"></image>
+  </navigator>
+  
+  
+</view>

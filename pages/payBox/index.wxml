@@ -1,0 +1,45 @@
+<!-- payBox.wxml -->
+
+<view class='ms-container ms-container-payBox'>
+  <!-- {{payUser["state"]}} -->
+  <view class="ms-payBox ms-middle" wx:if="{{isLoad}}">
+    
+    <view class="content">
+      <image src="{{status.img}}" mode='widthFix'></image>
+      <text class='h4 {{status["clas"]}}'>{{status['title']}}</text>
+      <view class="txt">{{status['info']}}</view>
+      <view class="btn">
+         <navigator hover-class="none"open-type='redirect' class="ms-button small" url="/pages/orderDetail/index?id={{order_id}}&type=order">查看订单</navigator>
+        <label class='ms-button small red-line' wx:if="{{statu == 0}}" bindtap='pay'>重新付款</label>
+         <navigator hover-class="none"class="ms-button small" url="/pages/index/index" wx:if="{{statu != 0}}" open-type="switchTab">再去逛逛</navigator>
+      </view>
+    </view>
+  </view>
+
+  <view class="ms-payBox ms-middle" wx:if="{{isLoad}}">
+    <view class="content info">
+      <view class="user">
+        <text>{{name}}</text>
+        <text class='mobile'>{{mobile}}</text>
+      </view>
+
+      <view class="address">{{shipping_addr}}</view>
+      <view class="price">
+        <label for="">实付：</label>
+        <text class="red">¥</text>
+        <text class="red">{{order_total}}</text>
+      </view>
+    </view>
+     <navigator hover-class="none"open-type="navigate" url='/pages/web/index' wx:if="{{ order_total >= 69 && status['title'] == '支付成功' && nowTime <= 1564804800000 && nowTime >= 1563897600000}}">
+      <image src="https://s1.miniso.cn/bsimg/ec/public/images/ac/40/ac4004234edcdf2f9c5ffb1574c2798f.gif" mode="widthFix" style="width:100%;display:block;" ></image>
+    </navigator>
+  </view>
+
+  <view class="ms-indexFloor" style="background-color: #FFF;" wx:if="{{items.length > 0}}">
+    <view class="ms-boxHd">
+      <text>其他人也在买</text>
+    </view>
+    <product product="{{items}}" page="detail" userInfo="{{userInfo}}"></product>
+  </view>
+
+</view>

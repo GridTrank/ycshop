@@ -1,0 +1,24 @@
+<view class="ms-friend-container">
+	<view class="pic-warp">
+		<view class="pic">
+			<image class="bg" src="{{detail.poster_image || 'https://s1.miniso.cn/bsimg/ec/public/images/61/0b/610bcc5540cc9b44c0fc08d9d5e6fde0.jpg?x-oss-process=style/high'}}" mode="widthFix"></image>
+			<image class="user" src="https://s1.miniso.cn/bsimg/ec/public/images/68/f9/68f9468ef16e804b7ba3118889912fbf.jpg?x-oss-process=style/high" mode="widthFix"></image>
+      <image class="avatar" mode="widthFix" src="{{userInfo.avatarUrl || userInfo.header_img }}"></image>
+      <text class="name">{{userInfo.nickName}}</text>
+      <image class="code" mode="widthFix" src="{{detail.code.path}}"></image>
+		</view>
+	</view>
+	<view class="tool">
+		<view class="btn-warp">
+			<button open-type="share" class="btn wx">
+				<image src="https://s1.miniso.cn/bsimg/ec/public/images/96/81/9681e40d06fe2ceaf7c409245cb6eef2.png" mode="widthFix"></image>分享给好友
+			</button>
+			<view class="btn" bindtap="togglePopup">
+				<image src="https://s1.miniso.cn/bsimg/ec/public/images/b8/4c/b84c052f5423b3ec31c4a0f793b0b488.png" mode="widthFix"></image>保存海报图
+			</view>
+		</view>
+		<view class="tip">* 将图片分享给好友，好友进入商城完成注册并下单后，Ta将成为你的粉丝，粉丝下单您将获得推广奖励！</view>
+	</view>
+	<!--生成海报 -->
+</view>
+<canvas-share bindclose="togglePopup" detail="{{detail}}" type="user" userInfo="{{userInfo}}" visible="{{visible}}" />

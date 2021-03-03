@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "收入明细",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "orderList": "/component/orderList/index",
+    "header": "/component/header/header"
+  }
+}

@@ -1,0 +1,897 @@
+/* shoppingCart.wxss */
+
+.ms-container {
+  height: 100%;
+}
+
+.ms-container-spCart {
+  overflow-y: hidden;
+  height: 100%;
+}
+
+.ms-container-spCart .ms-coupon-none {
+  top: 88rpx;
+}
+
+
+/* 购物车提示 */
+
+.ms-middle {
+  width: 100%;
+}
+
+.ms-tipDown {
+  position: fixed;
+  bottom: 100rpx;
+  z-index: 12;
+}
+
+.ms-tipDown .content {
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  color: #fea354;
+  background-color: #ffe9c4;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ms-tipDown .content .image {
+  width: 36rpx;
+  height: auto;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.ms-tipDown .content .navigator {
+  display: flex;
+  align-items: center;
+}
+
+.ms-tipDown .content .text {
+  color: #ffaf68;
+  width: 650rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+}
+
+
+/* 顶部信息 */
+
+.ms-topTip {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  display: flex;
+  white-space: nowrap;
+  justify-content: space-around;
+  z-index: 12;
+}
+
+.ms-topTip .view {
+  height: 70rpx;
+  position: relative;
+  font-size: 24rpx;
+  color: #7f7f7f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ms-topTip .view::before {
+  margin-right: 8rpx;
+  display: inline-block;
+  content: '';
+  width: 6rpx;
+  height: 6rpx;
+  border: 1px solid #7f7f7f;
+  border-radius: 50%;
+}
+
+
+/* 活动说明 */
+
+.ms-cartActiveBrief,
+.ms-shoppingList {
+  background-color: #f4f4f4;
+  box-sizing: border-box;
+}
+
+.ms-cartActiveBrief .item {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  padding: 24rpx 15rpx 24rpx 95rpx;
+  position: relative;
+  border-bottom: 1px solid #efefef;
+  background-color: #fff;
+}
+
+.ms-cartActiveBrief .item .t {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 30rpx;
+  width: 60rpx;
+  color: #fff;
+  background-color: #E2B260;
+  font-size: 20rpx;
+  position: absolute;
+  left: 15rpx;
+  border-radius: 4rpx;
+}
+
+.ms-cartActiveBrief .item .b {
+  box-sizing: border-box;
+  padding-right: 100rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+  white-space: normal;
+  color: #7f7f7f;
+  position: relative;
+}
+
+.ms-cartActiveBrief .item .image {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -16rpx;
+  display: block;
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.ms-cartActiveBrief .item .label {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  padding-left: 20rpx;
+  border-left: 1px solid #efefef;
+}
+
+.ms-cartActiveBrief .navi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ms-cartActiveBrief .item .txt {
+  width: 375rpx;
+}
+
+.ms-cartActiveBrief .btn {
+  width: 300rpx;
+  margin-left: 15rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ms-cartActiveBrief .btn .text {
+  font-size: 28rpx;
+  display: block;
+}
+
+.ms-cartActiveBrief .btn::before {
+  content: '';
+  display: block;
+  height: 60%;
+  border-left: 1px solid #efefef;
+  position: absolute;
+  top: 20%;
+  left: 0;
+}
+
+
+/* 购物车列表 */
+
+.ms-shoppingList {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ms-shoppingList .item {
+  height: 187.5rpx;
+  overflow: hidden;
+  background-color: #fff;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+  transform: translate3d(0, 0, 0);
+}
+
+.ms-shoppingList .item .line {
+  display: block;
+  position: absolute;
+  left: 90rpx;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px solid #f1f1f1;
+  z-index: 10;
+}
+
+.ms-shoppingList .item:last-child .line {
+  display: none;
+}
+
+.ms-shoppingList .item .content {
+  display: flex;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: #fff;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+  transition: -webkit-transform 0.2s cubic-bezier(0, 0, 0.25, 1);
+  transition: transform 0.2s cubic-bezier(0, 0, 0.25, 1);
+  transform: translate3d(0, 0, 0);
+}
+
+.ms-shoppingList .item .ms-jsRadio {
+  display: block;
+  height: 34rpx;
+  width: 34rpx;
+  margin: 0 20rpx 0 0rpx;
+}
+
+.ms-shoppingList .item .info {
+  flex: 1;
+  display: flex;
+  padding: 20rpx 0;
+}
+
+.ms-shoppingList .item .info .pic {
+  height: 160rpx;
+  width: 160rpx;
+  background: #F9FAFC;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.ms-shoppingList .item .info .pic .navigator {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.ms-shoppingList .item .info .pic .navigator .downTime {
+  position: absolute;
+  height: 36rpx;
+  background: #ff7a77;
+  color: #fff;
+  font-size: 20rpx;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  border-radius: 0 0 8rpx 8rpx;
+  align-items: center;
+}
+
+.ms-shoppingList .item .info .pic .navigator .downTime.end {
+  opacity: 0.5;
+  font-size: 22rpx;
+  background: #000;
+}
+
+.ms-shoppingList .item .info .pic .image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3D(-50%, -50%, 0);
+}
+
+.ms-shoppingList .item .info .desc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 18.75rpx;
+  position: relative;
+  justify-content: center;
+}
+
+.ms-shoppingList .item .info .desc .name,
+.ms-shoppingList .item .info .desc .brief {
+  font-size: 28rpx;
+  width: 375rpx;
+  line-height: 37.5rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ms-shoppingList .item .info .desc .name .navigator {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+}
+
+.ms-shoppingList .item .info .desc .brief {
+  color: #7f7f7f;
+  font-size: 24rpx;
+  margin: 7.5rpx 0 11.75rpx;
+  padding-left: 8rpx;
+}
+
+.ms-shoppingList .item .info .desc .descBottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+.ms-shoppingList .item .info .desc .price {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  padding-left: 10rpx;
+}
+
+.ms-shoppingList .item .info .desc .price .symbol {
+  font-size: 20rpx;
+  margin-right: 4rpx;
+}
+
+.ms-shoppingList .item .info .desc .count {
+  display: flex;
+  justify-content: center;
+  margin-right: 18.75rpx;
+  border: 1px solid #efefef;
+  border-radius: 100rpx;
+}
+
+.ms-shoppingList .item .info .desc .count .text {
+  width: 72rpx;
+  height: 54rpx;
+  background: 0 0;
+  line-height: 54rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.ms-shoppingList .item .info .desc .count .none {
+  color: rgba(0, 0, 0, 0.3);
+  border-color: #efefef;
+}
+
+.ms-shoppingList .item .info .desc .count .number {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-right: 0.8px solid #efefef;
+  border-left: 0.8px solid #efefef;
+  font-size: 28rpx;
+  width: 72rpx;
+  text-align: center;
+  border-radius: 0;
+  height: 54rpx;
+  padding: 0;
+  margin: 0;
+}
+
+.ms-shoppingList .item .info .desc .num {
+  position: absolute;
+  top: 13.5rpx;
+  right: 18.75rpx;
+  font-size: 28rpx;
+}
+
+
+/* 购物车已失效列表 */
+
+.ms-shoppingList .hd {
+  padding: 22.5rpx 18.5rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #efefef;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ms-shoppingList .hd .yellow {
+  color: #fea354;
+}
+
+.ms-shoppingList .item .txt-gray {
+  display: inline-block;
+  background-color: #BBBBBB;
+  color: #fff;
+  width: 60rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 22rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  border-radius: 4rpx;
+}
+
+
+/* 购物车操作 */
+
+.ms-shoppingBottom {
+  font-size: 24rpx;
+  background-color: #fff;
+}
+
+.ms-bottomHandle {
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 21;
+}
+
+.ms-shoppingBottom .content {
+  overflow: hidden;
+}
+
+.ms-bottomHandle .content {
+  display: flex;
+}
+
+.ms-middle .content {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ms-bottomHandle .content .end,
+.ms-bottomHandle .content .start {
+  padding: 0 18.75rpx;
+  font-size: 28rpx;
+}
+
+.ms-bottomHandle .content .money {
+  padding-right: 18.75rpx;
+}
+
+.ms-bottomHandle .content .view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.ms-bottomHandle .content .coupon{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+}
+.ms-bottomHandle .content .coupon>view{
+  display: flex;
+}
+.ms-bottomHandle .content .coupon .tip{
+  align-items: center;
+}
+.ms-bottomHandle .content .start {
+  justify-content: flex-start;
+}
+
+.ms-shoppingBottom .count {
+  color: #7f7f7f;
+}
+
+.ms-shoppingBottom .count .text {
+  color: #7f7f7f;
+}
+
+.ms-shoppingBottom .count .ms-jsAllChose {
+  padding: 7.5rpx;
+  width: 35rpx;
+  height: 35rpx;
+  display: block;
+  margin-right: 4rpx;
+  color: #333;
+}
+
+.ms-bottomHandle .content .end {
+  align-items: flex-end;
+}
+
+.ms-shoppingBottom .content .price-warp {
+  flex: 2;
+  flex-direction: column;
+  text-align: right;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.ms-shoppingBottom .price {
+  color: #E72722;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.ms-shoppingBottom .coupon {
+  font-size: 24rpx;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  padding-right: 18.75rpx;
+}
+
+.ms-shoppingBottom .coupon .image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 10rpx;
+}
+
+.ms-shoppingBottom .coupon .symbol {
+  margin: 6rpx 6rpx 0;
+}
+
+.ms-shoppingBottom .symbol {
+  font-size: 24rpx;
+  color: #E72722;
+  margin-right: 6rpx;
+  display: block;
+  font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+}
+
+.ms-shoppingBottom .symbol.gray6 {
+  color: #666;
+  font-size: 18rpx;
+}
+
+.ms-bottomHandle .content .red {
+  background-color: #E72722;
+  color: #fff;
+  border-top: 1px solid #E72722;
+}
+
+.ms-bottomHandle .content .label {
+  width: 100%;
+}
+
+.ms-bottomHandle .content .gray {
+  background-color: #bbb !important;
+  color: #fff;
+  border-top: 1px solid #bbb !important;
+}
+
+.ms-bottomHandle .content .btn {
+  display: flex;
+  justify-content: center;
+  align-items: centerp;
+  flex: 1;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: 0 0;
+  border: none;
+  font-size: 28rpx;
+  border-radius: 0;
+}
+
+.ms-bottomHandle .content .btn.red {
+  background-color: #E72722;
+  color: #fff;
+  border-top: 1px solid #E72722;
+}
+
+.ms-bottomHandle .content .label {
+  width: 100%;
+}
+
+
+/* list */
+
+.list {
+  padding-bottom: 100rpx;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  overflow: hidden;
+}
+
+.bg-main {
+  flex: 1;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+
+/* 滑块 */
+
+.ms-shoppingList .item.active .content {
+  transform: translate3d(-135rpx, 0, 0);
+}
+
+.ms-shoppingList .item .zIndexButton {
+  top: 1px;
+  bottom: 1px;
+}
+
+.ms-shoppingList .item .zIndexButton {
+  position: absolute;
+  right: 0;
+  width: 135rpx;
+  display: flex;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ms-shoppingList .item .zIndexButton .view {
+  height: 183.5rpx;
+  width: 135rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E72722;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.navigator {
+  width: 100% !important;
+}
+
+.bottomHei .item:last-child {
+  margin-bottom: 18.75rpx;
+}
+
+.redCu {
+  color: #E72722;
+  display: inline-block;
+  text-indent: -6rpx;
+}
+
+.car-button-tel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  font-size: 28rpx;
+  background: none;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border: none;
+}
+
+.car-button-tel .button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.ms-mask {
+  position: absolute;
+  background: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+
+
+/* 分单弹窗 */
+
+.partOrder {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 887;
+}
+
+.partOrder .content {
+  position: relative;
+  z-index: 889;
+  width: 70%;
+  height: auto;
+  background: #fff;
+  padding: 50rpx 0rpx 0;
+  margin-top: -120rpx;
+  box-sizing: border-box;
+  border-radius: 8rpx;
+}
+
+.partOrder .content .title {
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 40rpx;
+  margin-bottom: 20rpx;
+  font-weight: 600;
+}
+
+.partOrder .content .label {
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 78rpx;
+}
+
+.partOrder .content .label .text {
+  color: #7f7f7f;
+}
+
+.partOrder .content .radioItem {
+  display: none;
+}
+
+.partOrder .content .label .image {
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 10rpx;
+}
+
+.partOrder .content .label .labelItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partOrder .content .radio-group {
+  padding: 0 30rpx 30rpx;
+  max-height: 300rpx;
+  overflow: scroll;
+}
+
+.partOrder .content .btn-warp {
+  display: flex;
+  font-size: 30rpx;
+  border-top: 1px solid #efefef;
+}
+
+.partOrder .content .btn-warp .btn {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partOrder .content .btn-warp .btn.gary {
+  color: #7f7f7f;
+}
+
+.partOrder .content .btn-warp .btn.red {
+  color: #E72722;
+}
+
+.partOrder .content .btn-warp .btn:first-child {
+  border-right: 1px solid #efefef;
+}
+
+.coupon-list {
+  padding: 20rpx 40rpx;
+}
+
+.coupon-list .item {
+  display: flex;
+  font-size: 28rpx;
+  height: 50rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coupon-list .item .name {
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coupon-list .item.bold {
+  font-weight: 600;
+  font-size: 30rpx;
+  height: 70rpx;
+}
+
+.coupon-list .item.bold .price {
+  color: #E72722;
+}
+
+.coupon-list .item .symbol {
+  font-size: 24rpx;
+}
+
+.coupon-list .item.bold .symbol {
+  color: #E72722;
+}
+
+
+/*用户确认信息*/
+
+.modal-msg {
+  position: relative;
+  padding: 30rpx;
+}
+
+.msg-top {
+  position: absolute;
+  padding: 10rpx;
+  display: flex;
+  flex-flow: column;
+  top: 30rpx;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.msg-header-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.msg-top-name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.msg-infomation {
+  font-size: 28rpx;
+  margin: 30rpx 0;
+  margin-top: 130rpx;
+  text-align: center;
+}
+
+.msg-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row;
+  font-size: 28rpx;
+}
+
+.fail-btn {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 80rpx;
+  border: 1rpx solid #cc2821;
+  color: #cc2821;
+}
+
+.sure-btn {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 80rpx;
+  background: #cc2821;
+  color: #fff;
+}
+
+.text-bottom {
+  margin-bottom: 10rpx;
+}

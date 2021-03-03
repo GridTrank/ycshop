@@ -1,0 +1,74 @@
+.ms-order-button-warp {
+    background: #fff;
+    padding: 20rpx;
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.ms-order-button-warp .button {
+    border-color: #cbcbcb;
+    float: right;
+    font-size: 24rpx;
+    padding: 0rpx;
+    border-radius: 50rpx;
+    width: 162rpx;
+    height: 64rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.ms-order-button-warp .button .text {
+    margin-right: -2rpx;
+}
+
+.ms-order-button-warp .button.pay,
+.ms-order-button-warp .button.red {
+    background: #E72722;
+    border-color: #E72722;
+    color: #fff;
+}
+
+.ms-order-button-warp .button.pay {
+    width: 174rpx;
+}
+
+.ms-order-button-warp .button.red .text {
+    color: #fff;
+}
+
+.ms-order-button-warp .button.line {
+    border-color: #E72722;
+    color: #E72722;
+    background: #fff;
+}
+
+.ms-order-button-warp .button.line .text {
+    color: #E72722;
+}
+
+.ms-order-button-warp .button.pay .text {
+    display: inline-block;
+    color: #fff;
+}
+
+.ms-order-button-warp .button.pay .text.time {
+    margin-left: 4rpx;
+}
+
+.ms-order-button-warp .button:first-child {
+    margin-right: 0;
+}

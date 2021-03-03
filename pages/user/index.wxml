@@ -1,0 +1,263 @@
+<view class='ms-container-user'>
+	<!-- 推手用户 -->
+	<block wx:if="{{userInfo.is_zhuanke}}">
+		<view class="user-warp">
+			<view class="user-info">
+				<view class="user">
+					 <navigator hover-class="none"  url="/pages/account/index">
+						<image class="photo" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : 'http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png' }}" mode="widthFix"></image>
+					</navigator>
+					<view class="info" wx:if="{{userInfo.nickname}}">
+						 <navigator hover-class="none"  url="/pages/account/index" class="name">
+							{{userInfo.nickname}}
+							<image mode="widthFix" wx:if="{{userInfo.is_auth}}" src="../../images/icon/icon-authentication.png"></image>
+							<image mode="widthFix" wx:else src="../../images/icon/icon-no-authentication.png"></image>
+						</navigator>
+
+						<view class="invite">邀请码：{{person.invite_code}}
+							<view class="copy" bindtap="copy">复制</view>
+						</view>
+						<view>
+							 <navigator hover-class="none"  url='/pages/vip/index' class="vip" wx:if="{{person.lv_name}}">
+								<image mode='widthFix' src='{{person.member_lv_logo}}'></image>{{person.lv_name}}
+							</navigator>
+						</view>
+					</view>
+				</view>
+				<!-- <view class="ewm" bindtap="toggleShare">
+				<image src='../../images/icon/icon-ewm.png' mode="widthFix"></image>
+			</view> -->
+
+			</view>
+
+			<view class="money-warp">
+				<view>
+					<view class="name">余额（元）</view>
+					<view class="between">
+						<view class="money">{{person.account_balance}}</view>
+						<view class="withdraw" bindtap="withdraw" wx:if="{{userInfo.is_bind_mobile}}">提现</view>
+						 <navigator hover-class="none"  url="/pages/load/index" class="withdraw" wx:else>提现
+						</navigator>
+					</view>
+				</view>
+
+				<view class="date" bindtap="modalTip" data-type='withdrawTip'>
+					<view class="text">
+						每月<text>25-27</text>号支持提取余额中的已结算收益
+					</view>
+					<image class="arrow" mode="widthFix" src="https://miniso-images.oss-cn-shenzhen.aliyuncs.com/bsimg/ec/public/images/c0/17/c01789bb1f8d1ab26a3b9627478de328.png"></image>
+				</view>
+			</view>
+		</view>
+		<view class="income-now">
+			<view class="item" >
+				<view class="money">{{person.today_money > 0  ?  '¥'+person.today_money:'-'}}</view>
+				<view class="name" bindtap="modalTip" data-type="today_money">今日收益<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+			</view>
+			<view class="item" >
+				<view class="money">{{person.month_money > 0  ?  '¥'+person.month_money:'-'}}</view>
+				<view class="name" bindtap="modalTip" data-type="month_money">本月收益<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+			</view>
+			<view class="item">
+				<view class="money">{{person.prev_month_money > 0  ?  '¥'+person.prev_month_money:'-'}}</view>
+				<view class="name"  bindtap="modalTip" data-type="prev_month_money">上月收益<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+			</view>
+		</view>
+		<view class="income-warp">
+			<view class="item">
+				<view class="name"  bindtap="modalTip" data-type="brokerage_money">平台累计收入<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+				<view class="money">{{person.brokerage_money > 0  ?  '¥'+person.brokerage_money:'-'}}</view>
+			</view>
+			<view class="item" >
+				<view class="name" bindtap="modalTip" data-type="account_income">累计到账收入<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+				<view class="money">{{person.account_income > 0  ?  '¥'+person.account_income:'-'}}</view>
+			</view>
+			<view class="item"  >
+				<view class="name" bindtap="modalTip" data-type="settle_money">本月预估结算金额<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon'></image>
+				</view>
+				<view class="money">{{person.settle_money > 0  ?  '¥'+person.settle_money:'-'}}</view>
+			</view>
+			<view class="item"  >
+				<view class="name" bindtap="modalTip" data-type="next_settle_money">下月预估结算金额<image mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon'></image>
+				</view>
+				<view class="money">{{person.next_settle_money > 0  ?  '¥'+person.next_settle_money:'-'}}</view>
+			</view>
+		</view>
+
+		<view class="user-fans" bindtap="toFans">
+			<view class="fans-info" >
+				<view class="fans-my" catchtap="description"> 我的粉丝 <image mode="widthFix"   src='https://s1.miniso.cn/bsimg/ec/public/images/eb/60/eb60a82dcd4d7e6c8d6cce2930574ba3.png' class='icon' ></image>
+				</view>
+				<view class="fans-num">
+					<text class="potential-fans">潜在粉丝 <text class="fans-n"> {{ person.potential_fans_count || 0 }}</text>  </text>
+
+					<text class="faithful-fans">忠实粉丝 <text class="fans-n"> {{ person.loyal_fans_count || 0 }}</text>  </text>
+				</view>
+			</view>
+			<view class="fans-add" catchtap="inviteFriend">邀请好友</view>
+		</view>
+
+		<view class="order-list">
+			 <navigator hover-class="none"  url="/pages/income/index" class="item">
+				 <navigator hover-class="none"  url="/pages/load/index" class="load" wx:if="{{!userInfo.is_bind_mobile || !userInfo}}"></navigator>
+				<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/d2/2b/d22b14c41e7d38429bc16acfb52a9809.png'></image>
+				<view class='name'>收入明细</view>
+			</navigator>
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/withdrawRecord/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/75/ff/75fffa8b1b14d60a54d05dca4f3eab47.png'></image>
+				</view>
+				<view class='name'>提现记录</view>
+			</view>
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/account/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://miniso-images.oss-cn-shenzhen.aliyuncs.com/bsimg/ec/public/images/46/d0/46d060aeeb7ad386dabc51f8e79fb0fe.png'></image>
+				</view>
+				<view class='name'>账户信息</view>
+			</view>
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/userFans/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/2f/e3/2fe3ab27746616eec2a10340c4848ac8.png'></image>
+				</view>
+				<view class='name'>我的粉丝</view>
+			</view>
+			<view class="item">
+				<button class="load" open-type="feedback"></button>
+				<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/55/8a/558a12e04e3575bb36c903ca433f2fd2.png'></image>
+				<view class='name'>意见反馈</view>
+			</view>
+			 <navigator hover-class="none"  url='/pages/help/index?type=2' class="item">
+				<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/b7/c7/b7c781a95df9675ab54a9f19d3b1a083.png'></image>
+				<view class='name'>推手宝典</view>
+			</navigator>
+			 <navigator hover-class="none"  url='/pages/web/index' data-type="3" class="item">
+				<image class="icon" mode="widthFix" src='https://miniso-images.oss-cn-shenzhen.aliyuncs.com/bsimg/ec/public/images/ee/d0/eed080bf23bc8813c68bf52c75b64e94.png'></image>
+				<view class='name'>联系客服</view>
+			</navigator>
+		</view>
+		<view class="order-list">
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/order/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/e7/1d/e71d96297c983f5d2df068bf501c045e.png'></image>
+				</view>
+				<view class='name'>我的订单</view>
+			</view>
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/coupon/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/4d/1c/4d1c455107237c65571930383f3bc8df.png'></image>
+				</view>
+				<view class='name'>优惠券</view>
+			</view>
+			<view class="item">
+				 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/address/index'}}" open-type="navigate" class="load"></navigator>
+				<view class="image-box">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/fd/9f/fd9f66125b0e20fa83563453046b3ef7.png'></image>
+				</view>
+				<view class='name'>收货地址</view>
+			</view>
+			 <navigator hover-class="none"  url='/pages/help/index?type=1' class="item">
+				<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/40/66/4066c0e235e4e72ea1a946af692230eb.png'></image>
+				<view class='name'>帮助中心</view>
+			</navigator>
+
+		</view>
+	</block>
+	<!-- 普通用户 -->
+	<block wx:else>
+		<view class="common-user-warp user-warp">
+			<view class="user-info" wx:if="{{userInfo.is_bind_mobile}}">
+				<image class="photo" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : 'http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png' }}" mode="widthFix"></image>
+				<view class="name">
+					{{userInfo.nickname}}
+				</view>
+			</view>
+			 <navigator hover-class="none"  url="/pages/load/index" class="user-info" wx:else>
+				<image class="photo" src='http://m.miniso.cn/public/app/b2c/statics/sprites/default-avatar.png' mode="widthFix"></image>
+				<view class="name">点击登录</view>
+			</navigator>
+		</view>
+		<view class="common-order-warp">
+			 <navigator hover-class="none"  url="/pages/load/index" class="load" wx:if="{{!userInfo.is_bind_mobile || !userInfo}}"></navigator>
+			<view class="ms-cell border">
+				<view class="title">我的订单</view>
+				 <navigator hover-class="none"url="{{userInfo.is_bind_mobile?'/pages/order/index':'/pages/load/index'}}"   class="dec">
+					查看全部
+					<image class="arrow" mode="widthFix" src="../../images/icon/icon-arrow-right.png"></image>
+				</navigator>
+
+			</view>
+			<view class="order-list">
+				 <navigator hover-class="none"  url="/pages/load/index" wx:if="{{!userInfo.is_bind_mobile}}" open-type="navigate" class="load"></navigator>
+				 <navigator hover-class="none"  url="/pages/order/index?state=1" class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/81/c5/81c58c5172d609987c1ea21d13d884c0.png'></image>
+					<view class='name'>待付款</view>
+				</navigator>
+
+				 <navigator hover-class="none"  url="/pages/order/index?state=2" class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/52/67/5267815056f1d6ea32f7cf8095619886.png'></image>
+					<view class='name'>待发货</view>
+				</navigator>
+				 <navigator hover-class="none"  url="/pages/order/index?state=3" class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/c4/95/c4952c2f2e4b5e8bbc6e06b8035de0dc.png'></image>
+					<view class='name'>已发货</view>
+				</navigator>
+				 <navigator hover-class="none"  url="/pages/order/index?state=4" class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/7d/b1/7db1d5d2b8a08b869c4fbe7d2ac0cbed.png'></image>
+					<view class='name'>待评价</view>
+				</navigator>
+
+
+			</view>
+		</view>
+		 <navigator hover-class="none"url="/pages/interests/index?wx={{person.customer_weixin}}" wx:if="{{person.zhuanke_advert}}"   class="invite-warp">
+			<image src="{{person.zhuanke_advert}}" mode="widthFix"></image>
+		</navigator>
+		<view class="common-server-warp">
+			<view class="ms-cell border">
+				<view class="title">我的服务</view>
+			</view>
+			<view class="order-list">
+
+				<view class="item">
+					 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/coupon/index'}}" open-type="navigate" class="load"></navigator>
+					<view class="image-box">
+						<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/0d/d2/0dd29863e73fbeccc266a3a37d9dc7b9.png'></image>
+					</view>
+					<view class='name'>优惠券</view>
+				</view>
+				<view class="item">
+					 <navigator hover-class="none"  url="{{!userInfo.is_bind_mobile || !userInfo ? '/pages/load/index':'/pages/address/index'}}" open-type="navigate" class="load"></navigator>
+					<view class="image-box">
+						<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/2c/f1/2cf143ae1d3afeb170643fb8878beacc.png'></image>
+					</view>
+					<view class='name'>收货地址</view>
+				</view>
+				 <navigator hover-class="none"  url='/pages/help/index?type=1' class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/0e/3f/0e3f45c60ec28e78179a70bb1a8d954a.png'></image>
+					<view class='name'>帮助中心</view>
+				</navigator>
+				<view class="item">
+					<button class="load" open-type="feedback"></button>
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/5b/24/5b24b8689f6e51d45dbca2267afa5609.png'></image>
+					<view class='name'>意见反馈</view>
+				</view>
+				 <navigator hover-class="none"  url='/pages/web/index?type=1' data-type="3" class="item">
+					<image class="icon" mode="widthFix" src='https://s1.miniso.cn/bsimg/ec/public/images/dd/23/dd23d70e138c5e55d76844db6b2a5927.png'></image>
+					<view class='name'>联系客服</view>
+				</navigator>
+			</view>
+		</view>
+	</block>
+	<view class="version">Version {{version}}</view>
+	<canvas-share type="user" bindclose="toggleShare" detail="{{person}}" userInfo="{{userInfo}}" visible="{{visible}}" />
+</view>

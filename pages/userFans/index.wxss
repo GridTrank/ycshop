@@ -1,0 +1,199 @@
+.ms-userFans-container{
+    padding: 20rpx;
+}
+.fans-top{
+    background-color: #fff;
+    text-align: center;
+    border-radius: 20rpx;
+    height: 240rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.fans-tit{
+    display: flex;
+    justify-content: center;
+}
+.fans-p{
+    font-size: 32rpx;
+    color: #333;
+}
+.fans-tit .icon{
+    width: 44rpx;
+    height: 44rpx;
+}
+.fans-num{
+    color: #333333;
+    font-size: 106rpx;
+}
+.fans-wrap{
+    border-radius: 20rpx;
+    background-color: #fff;
+    margin-top: 20rpx;
+    padding: 20rpx ;
+    margin-bottom: 130rpx;
+}
+.fans-detail{
+    min-height:600rpx;
+}
+.fans-tab{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2rpx solid #F1F1F1;
+    padding:0 20rpx;
+    height: 55rpx;
+}
+.tab-name{
+    text-align: center;
+    color: #666;
+    font-size: 28rpx;
+    position: relative;
+}
+.tab-tip{
+    position: absolute;
+    right:-25rpx;
+    top:-8rpx;
+    background: #E72722;
+    height: 14rpx;
+    border-radius: 12rpx;
+    font-size: 18rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 14rpx;
+    padding: 4rpx 15rpx;
+}
+.activeTab{
+    color: #333;
+    font-size: 28rpx;
+    font-weight: bold;
+    position: relative;
+}
+.activeTab::after{
+    content: "";
+    width: 120rpx;
+    height: 4rpx;
+    background-color: #E72722;
+    position: absolute;
+    right: -6rpx;
+    bottom: 0rpx;
+}
+.fans-container{
+    padding:0 20rpx;
+   
+    overflow: hidden;
+}
+.fans-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:20rpx 0;
+    border-bottom: 2rpx solid #F1F1F1;
+    position: relative;
+}
+.fans-info{
+    display: flex;
+    align-items: center;
+}
+.fans-imgs{
+    position: relative;
+}
+.info-img{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+
+}
+.info-sex-img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 27rpx;
+    height: 28rpx;
+}
+.info-detail{
+    margin-left: 20rpx;
+    text-align: left;
+}
+.info-name{
+    font-size: 28rpx;
+    color: #333;
+}
+.info-date{
+    margin-top: 15rpx;
+    font-size: 20rpx;
+    color: #7F7F7F;
+}
+.fans-status{
+    text-align: right;
+}
+.status-code{
+    font-size: 24rpx;
+    color: #E72722;
+    position: absolute;
+    top: 20rpx;
+    right: 0;
+}
+.status-day{
+    position: absolute;
+    bottom: 20rpx;
+    right: 0;
+}
+.status-day .d1{
+    font-size: 20rpx;
+    color: #7F7F7F;
+}
+.status-day .d2{
+    font-size: 28rpx;
+    color: #E72722;
+}
+.status-day .d3{
+    font-size: 24rpx;
+    color: #333;
+}
+.no-more{
+    text-align: center;
+    color: #666;
+    font-size: 24rpx;
+    margin-top: 24rpx;
+}
+.show-more{
+    margin-top: 24rpx;
+    text-align: center;
+    color: #666;
+    font-size: 24rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.more-img{
+    width: 17rpx;
+    height: 8rpx;
+}
+
+
+.noFans{
+    height: 596rpx;
+    text-align: center;
+}
+.nofans-tit{
+    font-size: 24rpx;
+    color: #666;
+    margin-top: 32rpx;
+}
+.nofans-img{
+    margin: 120rpx auto;
+}
+
+.share-btn{
+    width: 710rpx;
+    height:92rpx;
+    margin: auto;
+    line-height: 92rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
+    background:linear-gradient(90deg,rgba(245,79,71,1) 0%,rgba(231,39,34,1) 100%);
+    border-radius:46px;
+    position: fixed;
+    bottom: 24rpx;
+}

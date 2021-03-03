@@ -1,0 +1,254 @@
+.ms-container-giftList {
+    overflow-y: hidden;
+}
+
+.ms-container {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.list {
+    height: calc( 100% - 300rpx);
+    overflow: auto;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    overflow: hidden;
+}
+
+.ms-container .topMain {
+    width: 100%;
+    border-bottom: 1px solid #efefef;
+}
+
+
+/* 赠品提示 */
+
+.ms-middle {
+    width: 100%;
+}
+
+.ms-tipDown .content {
+    padding: 18.75rpx;
+    font-size: 28rpx;
+    color: #e4a25f;
+    background-color: #ffe9c4;
+    height: 75rpx;
+    display: flex;
+    align-items: center;
+}
+
+.ms-tipDown .content text {
+    color: #e4a25f;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+/* 顶部信息 */
+
+.ms-middle {
+    width: 100%;
+}
+
+.ms-cartActiveBrief .content {
+    padding: 18.75rpx;
+    font-size: 28rpx;
+    color: #333333;
+    background-color: #fff;
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+}
+
+.ms-cartActiveBrief .content text {
+    color: #333333;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+/* 赠品列表 */
+
+.ms-shoppingList {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ms-shoppingList .item {
+    height: 187.5rpx;
+    overflow: hidden;
+    background-color: #FFF;
+    position: relative;
+    transition: all .2s cubic-bezier(0, 0, .25, 1);
+    transform: translate3d(0, 0, 0);
+}
+
+.ms-shoppingList .item .line {
+    display: block;
+    position: absolute;
+    left: 90rpx;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid #f1f1f1;
+    z-index: 10;
+}
+
+.ms-shoppingList .item:last-child .line {
+    display: none;
+}
+
+.ms-shoppingList .item .content {
+    display: flex;
+    padding-left: 18.75rpx;
+    box-sizing: border-box;
+    align-items: center;
+    background-color: #FFF;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+    transition: -webkit-transform .2s cubic-bezier(0, 0, .25, 1);
+    transition: transform .2s cubic-bezier(0, 0, .25, 1);
+    transform: translate3d(0, 0, 0);
+}
+
+.ms-shoppingList .item .ms-jsRadio {
+    display: block;
+    height: 35rpx;
+    width: 35rpx;
+    padding: 7.5rpx;
+    margin: 0 26.25rpx 0 7.5rpx;
+}
+
+.ms-shoppingList .item .ms-jsRadio.disabled {
+    opacity: 0.3;
+}
+
+.ms-shoppingList .item .info {
+    flex: 1;
+    display: flex;
+    padding: 20rpx 0;
+}
+
+.ms-shoppingList .item .info .pic {
+    height: 146rpx;
+    width: 146rpx;
+    background: #F4F4F4;
+    position: relative;
+    display: block;
+}
+
+.ms-shoppingList .item .info .pic image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3D(-50%, -50%, 0);
+}
+
+.ms-shoppingList .item .info .desc {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 18.75rpx;
+    position: relative;
+    justify-content: center;
+}
+
+.ms-shoppingList .item .info .desc .name,
+.ms-shoppingList .item .info .desc .brief {
+    font-size: 28rpx;
+    width: 375rpx;
+    line-height: 37.5rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ms-shoppingList .item .info .desc .brief {
+    color: #7f7f7f;
+    font-size: 24rpx;
+    margin: 7.5rpx 0 11.75rpx;
+}
+
+.ms-shoppingList .item .info .desc .descBottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+}
+
+.ms-shoppingList .item .info .desc .price {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+}
+
+.ms-shoppingList .item .info .desc .num {
+    position: absolute;
+    top: 13.5rpx;
+    right: 18.75rpx;
+    font-size: 28rpx;
+}
+
+
+/* 赠品已失效列表 */
+
+.ms-shoppingList .item .txt-gray {
+    display: inline-block;
+    background-color: #efefef;
+    color: #FFF;
+    width: 80rpx;
+    font-size: 22rpx;
+    text-align: center;
+    margin-right: 18.75rpx;
+}
+
+.ms-coupon-button {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #f4f4f4;
+    width: 100%;
+    height: 145rpx;
+    z-index: 100;
+}
+
+.ms-coupon-button .content {
+    padding: 30rpx;
+}
+
+.ms-middle .content {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ms-button.red-line {
+    background-color: #E72722;
+    color: #fff;
+    border: 1px solid #E72722!important;
+}
+
+.ms-button {
+    border: 1px solid #cbcbcb;
+    display: flex;
+    height: 90rpx;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 28rpx;
+    border-radius: 100rpx;
+}

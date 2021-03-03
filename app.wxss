@@ -1,0 +1,213 @@
+/**app.wxss**/
+page{
+  color: #333;
+  background-color: #f4f4f4;
+  font-family: PingFangSC-Regular,'Heiti SC';
+}
+
+image{
+  height: auto;
+  display: block;
+}
+.boldFamily {
+  font-family: PingFangSC-Medium,Microsoft YaHei Semibold,'Heiti SC Medium';
+}
+.numFamily {
+  font-family: "Helvetica Neue",helvetica, Arial,PingFangSC-Regular,"Heiti SC";
+}
+.red{
+  color: #D9232E;
+}
+.ms-footer {
+  height: 100rpx;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  background: #f4f4f4;
+}
+.no-record{
+  padding-top: 32%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.no-record image{
+  width: 400rpx;
+  margin-bottom: 40rpx;
+}
+.no-record text{
+  color: #7F7F7F;
+  line-height: 40rpx;
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+}
+.ms-cell{
+  background: #fff;
+  height: 98rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+
+}
+.ms-cell.border{
+  border-bottom:1px solid #F1F1F1;
+}
+.ms-cell .icon {
+  width: 30rpx;
+  margin-right: 10rpx;
+  height: 30rpx;
+}
+.ms-cell .arrow {
+  width: 40rpx;
+}
+.ms-cell .title{
+  display: flex;
+  font-size: 28rpx;
+  align-items: center;
+  flex: 2;
+}
+.ms-cell .dec {
+  display: flex;
+  font-size: 24rpx;
+  color: #666;
+  align-items: center;
+}
+.ms-mask {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: 0.6;
+  z-index: 10;
+  background: rgb(0, 0, 0);
+  top: 0;
+  left: 0;
+}
+
+.view-swiper {
+  height: 438rpx;
+  width: 100%;
+}
+.view-swiper .wx-swiper-dot{
+  width:40rpx;
+  display: inline-flex;
+  height: 6rpx;
+  margin:0;
+  justify-content:space-between;
+}
+.view-swiper .wx-swiper-dots {
+  background: rgba(238,238,238,1);
+  border-radius: 40rpx;
+}
+.view-swiper .wx-swiper-dot::before{
+  content: '';
+  flex-grow: 1; 
+  background: rgba(238,238,238,1);
+  border-radius: 40rpx;
+
+}
+.view-swiper .wx-swiper-dot-active::before{
+ background:rgba(217,35,46,1);   
+   border-radius: 40rpx;
+}
+
+.ms-icon {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 26rpx;
+  width: 26rpx;
+}
+
+.checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  border-color: #979797;
+}
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #e23232;
+  border-color: #e23232;
+}
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.ms-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.ms-container.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.pointer{ pointer-events: none;}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  display: none;
+}
+
+/* tab */
+
+.ms-tabItem {
+  background: #ffffff;
+  display: flex;
+  border-bottom: 1px solid #efefef;
+  height: 75rpx;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.ms-tabItem .tab-handle {
+  height: 74rpx;
+  line-height: 74rpx;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 28rpx;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.ms-tabItem .tab-handle text {
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.ms-tabItem .tab-handle.active text {
+  color: #E72722;
+  border-bottom: 4rpx solid #E72722;
+}
+.c3{
+  color: #333 !important; 
+}
+.c6{
+  color: #666 !important;
+}

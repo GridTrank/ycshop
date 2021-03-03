@@ -1,0 +1,14 @@
+<view class="ms-header {{isHeader?'':'none'}} {{fixed ? 'fixed' :''}} {{page}}" style="padding-top:{{globalSystemInfo.statusBarHeight || 20}}px">
+	 <navigator hover-class="none"open-type="navigateBack"   wx:if="{{!isHome}}" class="icon">
+		<image mode="widthFix" class="image" src="{{page == 'index' ? 'https://s1.miniso.cn/bsimg/ec/public/images/c2/f9/c2f9aa58b1674091277ac49a3cefbf93.png' : 'https://s1.miniso.cn/bsimg/ec/public/images/04/7b/047bfcc48b7fe1213278a43f2c042a61.png'}}"></image>
+	</navigator>
+	 <navigator hover-class="none"open-type="switchTab" wx:else url="/pages/index/index" class="icon">
+		<image mode="widthFix" class="image" src="{{page == 'index' ? 'https://s1.miniso.cn/bsimg/ec/public/images/d6/03/d60378bad522ba17779b8c6f2712b935.png':'https://s1.miniso.cn/bsimg/ec/public/images/a3/44/a3449337dab603d5c5710460d95cfce5.png'}}"></image>
+	</navigator>
+	<view class="title" wx:if="{{type == 'common'}}">{{title}}</view>
+	<view class="title" style="height:{{globalSystemInfo.capsulePosition.height || 32}}px" wx:elif="{{type == 'custom'}}">
+		<code>
+			<slot></slot>
+		</code>
+	</view>
+</view>

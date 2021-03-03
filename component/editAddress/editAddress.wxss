@@ -1,0 +1,183 @@
+.ms-container-editAddress {
+    position: fixed;
+    background-color: #F4F4F4;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 886;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+
+.ms-container-editAddress.show {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.ms-container-editAddress .formWarp {
+    padding-left: 20rpx;
+    background: #fff;
+    font-size: 28rpx;
+}
+
+.ms-container-editAddress .formWarp input {
+    height: 100rpx;
+    border-bottom: 1px solid #efefef;
+}
+
+.ms-container-editAddress .formWarp input[disabled] {
+    color: #333;
+    opacity: 1;
+}
+
+.ms-container-editAddress .formWarp input:last-child {
+    border: none;
+}
+
+.ms-container-editAddress .def_addr {
+    display: flex;
+    font-size: 28rpx;
+    justify-content: space-between;
+    padding: 40rpx 30rpx;
+}
+
+.ms-container-editAddress .checkboxWarp {
+    color: #999;
+    width: 100%;
+    display: inline-block;
+}
+
+.ms-container-editAddress .importAddress .ms-icon {
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.ms-container-editAddress .importAddress {
+    color: #1aad19;
+}
+
+.ms-container-editAddress .btn-warp {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+}
+
+.ms-container-editAddress .btn-warp .item {
+    flex: 1;
+    height: 100rpx;
+    border: none;
+    display: flex;
+    border-radius: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 0;
+    background: #fff;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.ms-container-editAddress .btn-warp .save {
+    background: #D9232F;
+    color: #fff;
+}
+
+.ms-container-editAddress .btn-warp .save[disabled] {
+    opacity: 0.5;
+}
+
+
+/**数据 item 遍历**/
+
+.ms-mask {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    opacity: 0.6;
+    z-index: 888;
+    background: rgb(0, 0, 0);
+    top: 0;
+    left: 0;
+}
+
+.ms-addressSelect {
+    height: 50%;
+    position: fixed;
+    background-color: #fff;
+    bottom: 0;
+    width: 100%;
+    z-index: 889;
+    transition: all 0.5s ease;
+    transform: translate3d(0, 100%, 0);
+}
+
+.ms-addressSelect.show {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.ms-addressSelect .scrollWarp {
+    height: calc(100% - 76rpx);
+    font-size: 28rpx;
+    line-height: 60rpx;
+}
+
+.ms-addressSelect .scrollWarp .warp {
+    padding: 10rpx 0 0 40rpx;
+}
+
+.ms-addressSelect .selectedAddress {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #efefef;
+    flex-wrap: nowrap;
+}
+
+.ms-addressSelect .selectedAddress button {
+    margin: 0;
+    background: transparent;
+    border: none;
+    line-height: 75rpx;
+    flex-shrink: 0;
+}
+
+.ms-addressSelect .selectedAddress button::after {
+    border: none;
+}
+
+.ms-addressSelect .scrollWarp .active {
+    color: #E72722;
+}
+
+.ms-addressSelect .ms-tabItem {
+    display: flex;
+    border: none;
+    flex: 2;
+    padding-left: 20rpx;
+}
+
+.ms-addressSelect .ms-tabItem .tab-handle {
+    line-height: 75rpx;
+    font-size: 28rpx;
+    height: 75rpx;
+    max-width: 180rpx;
+    margin-right: 20rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    border-bottom: 4rpx solid #fff;
+    display: inline-block;
+    flex: none;
+}
+
+.ms-addressSelect .ms-tabItem .tab-handle.active {
+    border-color: #E72722;
+    color: #E72722;
+}

@@ -1,0 +1,322 @@
+<!-- pages/default/index.wxml -->
+<requestPage id="requestPage" bindrefresh='onShow'>
+	<view class="ms-container ms-container-index fixed">
+		<!-- 头部开始 -->
+		<wxs module="nav">
+			var isNumber = function(n) {
+				var l = n.split('/');
+				return l.length > 2;
+			}
+			var replace = function(key) {
+				var opt = {
+					"/special/get_list": "/special/index",
+					"/new/index": "/new/index"
+				}
+				return opt[key]
+			}
+
+
+			var half = function(array, type) {
+				var length = array.length;
+				var ceil = Math.ceil(array.length / 2)
+				var newArray = type ? array.slice(ceil, length) : array.slice(0, ceil);
+				return newArray;
+			}
+			module.exports = {
+				isNumber: isNumber,
+				replace: replace,
+				half: half
+			}
+		</wxs>
+		<view class="ms-header">
+			<view class="ms-gotoSearchPage" style="padding-top:{{globalSystemInfo.capsulePosition.top || 28}}px;width:calc( 100% - {{globalSystemInfo.capsulePosition.width  + 20 || 107 }}px) ">
+				<image src="../../images/icon/icon-logo.png" class="logo"></image>
+				<view bindtap="gotoSearch" style="height:{{globalSystemInfo.capsulePosition.height || 35}}px; ">
+					<image src="https://s1.miniso.cn/bsimg/ec/public/images/92/6a/926a21a953c86f0f7152d94fde4ef165.png"></image>
+					<label>{{searchLabel}}</label>
+				</view>
+			</view>
+			<view class="ms-navFilter" wx:if="{{navList.length}}">
+				<scroll-view class="scroll-view_navFilter" scroll-into-view="nav{{cur}}" scroll-x="true">
+					<block wx:for="{{navList}}" wx:for-index="i" wx:key="unique">
+
+						<label class="item {{i == cur ? 'cur' : ''}}" id="nav{{i}}" bindtap="selectTag" data-link="{{item.link}}" data-cur="{{i}}">{{item.title}}</label>
+
+					</block>
+				</scroll-view>
+			</view>
+		</view>
+		<!-- 头部结束 -->
+		<!-- 首页内容 开始 -->
+		<view class="ms-indexDataContent" wx:if="{{'/index/index' == block}}">
+			<scroll-view scroll-y style="height: 100%;" bindscroll='scroll' class="scroll-view" scroll-top="{{scrollTop}}">
+				<block class="" wx:for="{{indexList}}" wx:key="index">
+					<block wx:if="{{item.type == 'banner'}}">
+						<!-- banner轮播图 -->
+						<view wx:if="{{item.show_type == 1}}" class="index-banner-swiper">
+							<MySwiper page='index' swiper="{{swiper}}" main_slide="{{item.items}}"></MySwiper>
+							<view class="ms-swiperNav ">
+								<view wx:for="{{swiper.swiperNav}}" wx:key="unique" class="item">
+									<image src="{{item.icon}}"></image>
+									{{item.name}}
+								</view>
+							</view>
+						</view>
+						<!-- 单图 -->
+						<view wx:if="{{item.show_type == 2}}">
+							<image src="{{item.setting.imgUrl}}" class="banner-img" mode='widthFix'></image>
+						</view>
+					</block>
+					<block wx:if="{{item.type == 'brand'}}">
+						<!-- 品牌甄选 -->
+						<view class="ms-indexFloor custom-swiper-dot" wx:if="{{item.show_type == '1'}}">
+							 <navigator hover-class="none"url='{{item.brand_link}}' class="ms-boxHd">
+								<view class="name">
+									<view class="line"></view>
+									<image src="https://s1.miniso.cn/bsimg/ec/public/images/aa/b3/aab33e8873e9fd9f276f4b5f298d4cb7.png" mode="widthFix"></image>
+								</view>
+
+								<text class='dec'>精选好货</text>
+							</navigator>
+
+							<brand brand="{{item.items.brand}}"></brand>
+						</view>
+
+					</block>
+					<block wx:if="{{item.type == 'goods'}}">
+						<!-- 通用双栏 -->
+						<view class="indexListProduct" wx:if="{{item.show_type == '0'}}">
+							<product bind:standardData="standardData" page="index" product="{{item.item}}" userInfo="{{userInfo}}"></product>
+						</view>
+
+						<!-- 双排带标题 (activity_goods)-->
+						<view class="ms-indexFloor indexCustomList {{item.settings.title_img ? 'title' :''}}" wx:if="{{item.show_type == 4}}" style="background:#{{item.settings.background_color}}">
+							 <navigator hover-class="none"wx:if="{{item.settings.title_img}}" open-type="{{item.settings.is_nav == '1' ? 'switchTab' :'navigate'}}" url="{{item.settings.wxapp_url}}" class="title_img">
+								<image mode="widthFix" src="{{item.settings.title_img}}"></image>
+							</navigator>
+							<block wx:if="{{item.settings.slide_type == 2}}">
+								<!-- 滚动 -->
+								<scroll-view bindscroll="scrollCustom" data-id='{{item.widgets_id}}' scroll-x="true" class="scroll-veiwItem customIItem" scroll-with-animation="true">
+									<!-- 一行 -->
+									<product bind:standardData="standardData" page='active' show_type="4" wx:if="{{item.settings.goods_limit_type == 1}}" product="{{item.item}}" type='slide' userInfo="{{userInfo}}"></product>
+									<!-- 两行 -->
+									<block wx:else>
+										<product bind:standardData="standardData" page='active' show_type="4" product="{{nav.half(item.item,0)}}" type='slide' userInfo="{{userInfo}}"></product>
+										<product bind:standardData="standardData" page='active' show_type="4" product="{{nav.half(item.item,1)}}" type='slide' userInfo="{{userInfo}}"></product>
+									</block>
+
+								</scroll-view>
+								<view class="scroll-bar" wx:if="{{item.item.length > 6 }}">
+									<view class="bar" style="left:{{scrollPosition[item.widgets_id] || 0}}rpx"></view>
+								</view>
+							</block>
+							<view class=" ms-hot" wx:else>
+								<!-- 翻页 -->
+								<swiper duration="{{400}}" class="view-swiper customIItem {{item.settings.goods_limit_type == 1? 'online' :'double'}}" indicator-dots="true">
+
+									<swiper-item wx:for="{{item.item}}" class='swiper-item' wx:if="{{i%(3*item.settings.goods_limit_type) == 0}}" wx:for-index="i" wx:for-item="list" wx:key="unique">
+										<product product="{{item.item}}" page='active' show_type="4" bind:standardData="standardData" settings="{{item.settings}}" userInfo="{{userInfo}}" type='swiper' num="{{3*item.settings.goods_limit_type-1}}" group="{{i}}"></product>
+									</swiper-item>
+								</swiper>
+							</view>
+						</view>
+						<!-- 组合商品 (combine_goods)-->
+						<anomaly wx:if="{{item.show_type == 5}}" anomaly="{{item}}" type='viewGroup' userInfo="{{userInfo}}"></anomaly>
+
+						<!-- 精选商品 (channel_pro_pics)-->
+						<view class="active-product" wx:if="{{item.show_type == 6}}">
+							<view class="sm-title">{{item.setting.title}}</view>
+							<anomaly anomaly="{{item.items}}" type='{{item.show_type}}' userInfo="{{userInfo}}"></anomaly>
+						</view>
+						<!-- 自定义上传图片 (activity_custom_goods)-->
+						<anomaly wx:if="{{item.show_type == 7}}" anomaly="{{item}}" type='userDefined' userInfo="{{userInfo}}"></anomaly>
+						<!-- 全功能不规则自定义挂件 {irregular_goods_second、irregular_goods}-->
+						<anomaly wx:if="{{item.show_type == '8'}}" anomaly="{{item}}" userInfo="{{userInfo}}"></anomaly>
+						<!-- 人气推荐 (ndex_hot_goods)-->
+						<view class="ms-indexFloor ms-hot" id="hot" wx:if="{{item.show_type == '9'}}">
+							<view class="ms-boxHd">
+								<view class="name">
+									<view class="line"></view>
+									<image src="https://s1.miniso.cn/bsimg/ec/public/images/64/32/64323fddbc1c3ec2c4fee4465dff946c.png" mode="widthFix"></image>
+								</view>
+								<view class="dec">热销口碑榜</view>
+							</view>
+
+							<swiper class="view-swiper" indicator-dots="true">
+								<swiper-item wx:for="{{item.item}}" class='swiper-item' wx:if="{{i%3 == 0}}" wx:for-index="i" wx:for-item="list" wx:key="unique">
+									<product product="{{item.item}}" page="index" bind:standardData="standardData" settings="{{item.settings}}" userInfo="{{userInfo}}" type='swiper' group="{{i}}"></product>
+
+								</swiper-item>
+							</swiper>
+						</view>
+						<!-- 猜你喜欢(index_guess_ulike) 以及默认商品列表(common_goods) -->
+						<view class="product-warp " wx:if="{{item.show_type == '10'}}">
+							<view class="like-title">
+								<text class="center">猜你喜欢</text>
+							</view>
+							<view class="list">
+								<product bind:standardData="standardData" page="index" num='0' product="{{item.item}}" type="like" userInfo="{{userInfo}}"></product>
+
+								<product bind:standardData="standardData" page="index" num='1' product="{{item.item}}" type="like" userInfo="{{userInfo}}"></product>
+							</view>
+						</view>
+						<!-- 推荐关注 (index_recommend_goods)-->
+						<view class="ms-indexFloor" wx:if="{{item.show_type == '11'}}">
+							<view class="ms-boxHd">
+								<view class="name">
+									<view class="line"></view>
+									推荐关注
+								</view>
+							</view>
+							<product bind:standardData="standardData" page="index" product="{{[newData.index_recommend_goods]}}" type='leftRow' userInfo="{{userInfo}}"></product>
+							<product bind:standardData="standardData" page="index" product="{{newData.viewItem}}" userInfo="{{userInfo}}"></product>
+						</view>
+						<!-- 新品 (index_new_goods)-->
+						<view class="ms-indexFloor " id="new" wx:if="{{item.show_type == '12'}}">
+							<view class="ms-boxHd" bindtap="watckAll">
+								<view class="name">
+									<view class="line"></view>
+									<image src="https://s1.miniso.cn/bsimg/ec/public/images/0e/73/0e734d272d0c0c06c28e5185d32b9c04.png" mode="widthFix"></image>
+								</view>
+								<view class="dec">每周上新
+									<image src="../../images/icon/icon-btn-right.png" mode='widthFix' class="ms-icon" />
+								</view>
+							</view>
+							<scroll-view scroll-x="true" class="scroll-veiwItem" scroll-with-animation="true">
+								<product bind:standardData="standardData" page="index" show_type="12" product="{{item.item}}" type='slide' bind:watckAll="watckAll" userInfo="{{userInfo}}"></product>
+							</scroll-view>
+						</view>
+						<!-- 限时特卖 (index_special)-->
+						<view class="ms-indexFloor" id="special" wx:if="{{item.show_type == '14'}}">
+							<specialIndex special="{{item}}" bind:moreSpecial="getData" userInfo="{{userInfo}}"></specialIndex>
+						</view>
+
+						<!-- activity_goods_second -->
+						<block wx:if="{{item.show_type == 15}}">
+							<!-- 单排图左-->
+							<view class="ms-indexFloor indexRow " wx:if="{{item.line_up == 1}}">
+								<product bind:standardData="standardData" page="index" product="{{item.item}}" show_type="{{item.show_type}}" type='activityLeftRow' settings="{{item.settings}}" userInfo="{{userInfo}}"></product>
+							</view>
+
+							<!-- 单排图右-->
+							<view class="ms-indexFloor indexRow " wx:if="{{item.line_up == 2}}">
+								<product bind:standardData="standardData" page="index" product="{{item.item}}" show_type="{{item.show_type}}" type='rightRow' settings="{{item.settings}}" userInfo="{{userInfo}}"></product>
+							</view>
+							<!-- 单混排-->
+							<view class="ms-indexFloor indexRow " wx:if="{{item.line_up == 3}}">
+								<product bind:standardData="standardData" page="index" product="{{item.item}}" show_type="{{item.show_type}}" type='mixture' settings="{{item.settings}}" userInfo="{{userInfo}}"></product>
+							</view>
+							<!-- 双排 （带加入购物车）-->
+							<view class="ms-indexFloor indexRow indexListProduct" wx:if="{{item.line_up == 4}}">
+								<product bind:standardData="standardData" page="index" type='activityList' product="{{item.item}}" settings="{{item.settings}}" show_type="{{item.show_type}}" userInfo="{{userInfo}}"></product>
+							</view>
+							<!--  一排三个 （带加入购物车）-->
+							<view class="ms-indexFloor indexRow indexThreeList" wx:if="{{item.line_up == 5}}">
+								<product bind:standardData="standardData" page="index" type='threeList' product="{{item.item}}" settings="{{item.settings}}" show_type="{{item.show_type}}" userInfo="{{userInfo}}"></product>
+							</view>
+						</block>
+					</block>
+					<!-- 优惠劵 -->
+					<view class="warp" wx:elif="{{item.type == 'coupon'}}">
+						<view class="scrollView" id="{{'floor'+item.widgets_id}}"></view>
+
+						<activityCoupon coupon="{{item.item}}" settings="{{item.settings}}" userInfo="{{userInfo}}" show_type="{{item.show_type}}"></activityCoupon>
+
+					</view>
+
+				</block>
+				<view class="bottom-line">
+					<text>我是有底线的</text>
+				</view>
+			</scroll-view>
+
+		</view>
+		<!-- 首页内容 结束 -->
+		<!-- 新品内容 开始 -->
+		<view class="ms-indexDataContent" wx:if="{{'/new/index' == block}}">
+			<scroll-view scroll-y style="height: 100%;" bindscroll='scroll' scroll-top="{{scrollTop}}" scroll-with-animation="true">
+				<!-- 幻灯开始 -->
+				<MySwiper swiper="{{swiper}}" main_slide="{{newData.main_slide}}"></MySwiper>
+				<!-- 幻灯结束 -->
+				<!-- item 遍历 开始 -->
+
+				<view class="ms-new-title">
+					<text>推荐关注</text>
+				</view>
+				<product bind:standardData="standardData" product="{{[newData.index_recommend_goods]}}" wx:if="{{newData.index_recommend_goods}}" page="index" type='leftRow' userInfo="{{userInfo}}"></product>
+				<product bind:standardData="standardData" product="{{newData.viewItem}}" page="index" userInfo="{{userInfo}}"></product>
+
+				<view class="bottom-line">
+					<text>我是有底线的</text>
+				</view>
+				<!-- item 遍历 结束 -->
+			</scroll-view>
+		</view>
+		<!-- 新品内容 结束 -->
+		<!-- 分类内容 开始 -->
+		<view class="ms-indexDataContent" wx:if="{{'/category/channel' == block}}">
+			<scroll-view scroll-y bindscroll='scroll' style="height: 100%;" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+				<!-- 幻灯开始 -->
+				<MySwiper swiper="{{swiper}}" main_slide="{{catData.main_slide}}"></MySwiper>
+				<!-- 幻灯结束 -->
+				<!-- item 遍历 开始 -->
+				<block wx:for="{{catData.viewItem}}" wx:key="unique">
+
+					<view class="ms-channel-title">
+						<text class="name">{{item.cat_name}}</text>
+						<text class="dec">{{item.cat_summary}}</text>
+					</view>
+					<product product="{{item.items}}" bind:standardData="standardData" page="index" userInfo="{{userInfo}}"></product>
+
+
+				</block>
+				<view class="bottom-line">
+					<text>我是有底线的</text>
+				</view>
+				<!-- item 遍历 结束 -->
+			</scroll-view>
+		</view>
+		<!-- 分类内容 结束 -->
+		<!-- 限时特卖 开始 -->
+		<view class="ms-indexDataContent" wx:if="{{'/special/get_list' == block}}">
+			<scroll-view scroll-y style="height: 100%;" bindscroll='scroll' scroll-top="{{scrollTop}}">
+				<viewSpecial>
+				</viewSpecial>
+			</scroll-view>
+		</view>
+
+		<!-- 限时特卖 结束 -->
+		<view class="goTop" bindtap="goTop" wx:if="{{isTop}}">
+			<image mode="widthFix" src='../../images/icon/icon-top.png' class="top"></image>
+		</view>
+		<block wx:for="{{indexList}}" wx:key="index">
+			<!-- 右下角悬浮入口 -->
+			 <navigator hover-class="none"wx:if="{{item.type == 'tag'}}" url="{{item.setting.xcx_link}}" class="goActive">
+				<image src='{{item.setting.float_btn_img}}' mode='widthFix'></image>
+			</navigator>
+
+			<!-- 新人弹窗 -->
+			<view class="ms-newPopup" hidden="{{!isLoadNewPopup}}" wx:if="{{item.type == 'pop_coupon' && isNew}}">
+
+				<view class="ms-mask" bindtap='closePopup'>
+				</view>
+				<view class="content">
+					<view class="close" bindtap='closePopup'>
+						<image src="../../images/icon/icon-close-white.png" mode='widthFix'></image>
+					</view>
+					 <navigator hover-class="none"  url="/pages/load/index" class="getNewCoupon" wx:if="{{!userInfo.is_bind_mobile}}">
+					</navigator>
+					<image bindtap='getNewCoupon' bindload="newPopup" src="{{item.index_popimg || 'https://s1.miniso.cn/bsimg/ec/public/images/48/8c/488c3745ea28421d69903b9d4bc94c1c.png'}}" class="pic" mode='widthFix'></image>
+				</view>
+
+			</view>
+		</block>
+
+		<tip page="home"></tip>
+		<goodStandard bind:updataGoodStandard="updataGoodStandard" page="index" id="goodStandard" detail="{{productInfo}}" userInfo="{{userInfo}}"></goodStandard>
+
+	</view>
+
+
+
+</requestPage>

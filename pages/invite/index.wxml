@@ -1,0 +1,178 @@
+<!-- 助力详情 -->
+<wxs module="invite">
+	var number = function(val) {
+		return Number(val)
+	}
+
+
+	module.exports = {
+		number: number,
+	}
+</wxs>
+<requestPage id="requestPage" bindrefresh='getData' bindinitUserInfo="initUserInfo">
+	<view class="ms-container ms-container-invite">
+		<!-- banner -->
+		<view class="swiper-warp">
+			<MySwiper swiper="{{swiper}}" main_slide="{{main_slide}}"></MySwiper>
+			<view class="rule" bindtap='rulePopup'>详细规则</view>
+		</view>
+		<!-- 活动信息 -->
+		<view class="activity_info">
+			<view class="info">
+				<view class="title">
+					{{detail.activity_name}}
+				</view>
+				<view class="remark">
+					{{detail.remark}}
+				</view>
+				<view class="price" wx:if="{{detail.product_id != 0}}">
+					商品原价：¥{{detail.price}}
+				</view>
+			</view>
+			<view class="detail">
+				 <navigator hover-class="none"wx:if="{{detail.product_id != 0}}" url="/pages/detail/index?id={{detail.product_id}}">查看商品详情</navigator>
+				 <navigator hover-class="none"wx:elif="{{detail.widget_activity_id}}" url="/pages/activity/index?id={{detail.widget_activity_id}}">查看活动详情</navigator>
+			</view>
+		</view>
+		<!-- 活动规则 -->
+		<view class="paly">
+			<image src="https://s1.miniso.cn/bsimg/ec/public/images/06/5a/065a45e7b6c2b689cf4e317b5dfe2319.jpg?x-oss-process=style/high" mode="widthFix"></image>
+		</view>
+		<!-- 倒计时 -->
+		<view class="countDown">
+			<view class="line">
+				<view class="timeDown">
+					剩余
+					<text class="time" wx:if="{{timeArr.dd != 0 && timeArr.dd}}">{{timeArr.dd}} </text>
+					<text wx:if="{{timeArr.dd != 0 && timeArr.dd}}">天</text>
+					<text class="time">{{timeArr.hh}} </text>
+					<text>:</text>
+					<text class="time">{{timeArr.mm}} </text>
+					<text>:</text>
+					<text class="time">{{timeArr.ss}} </text> 结束
+				</view>
+			</view>
+			<view class="progressBar">
+				<block wx:if="{{ detail.invite_status == 2 }}">
+					<view class="title" wx:if="{{speed.assistance_rate == 100 }}">助力成功，获得
+						<text>{{speed.cpns_name}}</text> 优惠劵</view>
+					<view class="title" wx:else>还差
+						<text>{{speed.assistance_next_num}}位 </text>好友助力，即可获得
+						<text>{{speed.cpns_name}}</text> 优惠劵</view>
+				</block>
+				<block wx:else>
+					<view class="title" wx:if="{{speed.cpns_current_name != '' }}">助力成功，获得
+						<text>{{speed.cpns_current_name}}</text> 优惠劵</view>
+					<view class="title" wx:else>还差一点就成功了，继续加油吧</view>
+				</block>
+
+
+				<view class="helpProgress">
+					<view class="bar" style="width:{{speed.assistanceRate}}%;"></view>
+
+					<view class="item {{(invite.number(speed.assistance_num) >= invite.number(item.assistance_num)  ? 'active' : '') }}" wx:for="{{speed.items}}" wx:key="index" style="left:{{100/(speed.items.length)*(index+1)}}%; width:{{100/(speed.items.length)}}%;">
+						<view class="circle"></view>
+						<text class="coupon">{{item.rule_name}}</text>
+						<text class="num">{{ item.assistance_num}}人</text>
+					</view>
+				</view>
+			</view>
+			<view class="btn">
+				<!-- 发起者按钮 -->
+				<block wx:if="{{detail.role == 1}}">
+					<block wx:if="{{ detail.invite_status == 2}}">
+						<!-- 活动未结束 -->
+						<button open-type="share" class="gradient button">邀请好友助力</button>
+						<button class="lineRed button" bindtap='getCoupon'>立即领取</button>
+					</block>
+					<!-- 活动结束 -->
+					<block wx:else>
+						 <navigator hover-class="none"class="gradient button" url='/pages/index/index' wx:if="{{detail.gotype.type == 0}}" open-type="switchTab">去商场转转</navigator>
+						 <navigator hover-class="none"class="gradient button" url='{{detail.gotype.golink}}' wx:else open-type="{{detail.gotype.is_nav == 1 ? 'switchTab' : 'navigate'}}">{{detail.gotype.gotitle}}</navigator>
+					</block>
+				</block>
+
+				<!-- 助力者按钮 -->
+				<block wx:else>
+					<block wx:if="{{detail.invite_status == 2}}">
+
+						 <navigator hover-class="none"  url="/pages/load/index" class="gradient button" wx:if="{{!userInfo && !isHelp}}">马上助力</navigator>
+						 <navigator hover-class="none"  url="/pages/load/index" class="gradient button" wx:if="{{!userInfo.is_bind_mobile && isHelp}}">发起助力优惠</navigator>
+						<button wx:else class="gradient button" bindtap='inviteStart'>发起助力优惠</button>
+					</block>
+					<block wx:else>
+						<!-- 不是进行中助力 -->
+						 <navigator hover-class="none"  url="/pages/load/index" class="gradient button" wx:if="{{!userInfo.is_bind_mobile}}">发起助力优惠</navigator>
+						<button wx:else class="gradient button" bindtap='inviteStart'>发起助力优惠</button>
+					</block>
+
+
+					 <navigator hover-class="none"class="lineRed button" url='/pages/index/index' wx:if="{{detail.gotype.type == 0}}" open-type="switchTab">去商场转转</navigator>
+					 <navigator hover-class="none"class="lineRed button" url='{{detail.gotype.golink}}' wx:else open-type="{{detail.gotype.is_nav == 1 ? 'switchTab' : 'navigate'}}">{{detail.gotype.gotitle}}</navigator>
+				</block>
+
+			</view>
+			<view class="friendsHelp">
+				<view class="ms-lineHDMid lin">
+					<view class="title">好友助力榜</view>
+					<view class="dec">当前助力人数：
+						<text>{{speed.assistance_num}}</text>位好友</view>
+				</view>
+				<scroll-view scroll-y bindscrolltolower="getMoreFriends" lower-threshold="100" style='height:{{isMore ? "620rpx" : "auto"}}' wx:if="{{assistance_list.items.length}}">
+					<view class="list">
+						<view class="item" wx:for="{{assistance_list.items}}" wx:key="index" wx:if="{{isMore ? true : (index < 9 ? true: false)}}">
+							<image mode="widthFix" src="{{item.avatar}}"></image>
+							<text>{{item.nickname}}</text>
+						</view>
+						<view class="item" wx:if="{{isMore ? false : (assistance_list.count > 10 ? true : false)}}">
+							<view class="more" bindtap='getMore'>
+								<view>更多</view>
+								<view>﹀</view>
+							</view>
+						</view>
+
+					</view>
+				</scroll-view>
+				<view class="noHelp" wx:else>
+					您还没有好友助力~
+				</view>
+				<view class="hideMode" bindtap='getMore' wx:if="{{isMore}}">︿</view>
+			</view>
+
+		</view>
+		<!-- 大家在看推荐 -->
+		<view class="ms-recommend" wx:if="{{detail.index_guess_ulike.length}}">
+			<view class="ms-lineHDMid">
+				<text>猜你喜欢</text>
+			</view>
+			<product product="{{detail.index_guess_ulike}}" userInfo="{{userInfo}}"></product>
+		</view>
+	</view>
+	<!--  <navigator hover-class="none"class="goIndex" url='/pages/index/index' open-type="switchTab"></navigator> -->
+	<!-- 返回首页 -->
+	<view class="both">
+		<view class="gd-index">
+			 <navigator hover-class="none"  class="gd-index" url="/pages/load/index" class="gradient button" wx:if="{{!userInfo.is_bind_mobile }}">我的助力</navigator>
+			 <navigator hover-class="none"wx:else class="gd-index" url='/pages/myPower/index'>
+				<view>我的助力</view>
+			</navigator>
+		</view>
+
+		<view class="line"></view>
+		 <navigator hover-class="none"class="gd-index fix" url="/pages/index/index" open-type="switchTab">
+			<view>返回首页</view>
+		</navigator>
+	</view>
+
+</requestPage>
+<!-- 弹窗组件 -->
+<popup popup-set="{{popupSet}}" bindtoggleShow="toggleShow" bindcancleCallback="cancleCallback" bindenterCallback="enterCallback">
+	<view class="rulePopup">
+		<view class="title">
+			/ 活动规则 /
+		</view>
+		<view class='warp'>
+			<view class="p" wx:for="{{detail.rule_remark}}" wx:key="index">{{item}}</view>
+		</view>
+	</view>
+</popup>

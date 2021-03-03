@@ -1,0 +1,225 @@
+page {
+    height: 100%;
+    background: #F4F4F4;
+    overflow-x: hidden;
+}
+
+.userInfo {
+    padding: 75rpx 45rpx;
+    background: #1E1E1E;
+    display: flex;
+    color: #fff;
+}
+
+.userInfo .pic {
+    width: 144rpx;
+    height: 144rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 30rpx;
+}
+
+.userInfo .pic image {
+    width: 100%;
+}
+
+.userInfo .info {
+    color: #FFF;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.userInfo .info .name {
+    color: #fff;
+    font-size: 34rpx;
+}
+
+.userInfo .vip image {
+    vertical-align: middle;
+}
+
+.userInfo .vip text {
+    margin-left: 10rpx;
+    color: #c7a582;
+    font-size: 28rpx;
+}
+
+.common-warp {
+    background: #fff;
+    margin-bottom: 20rpx;
+}
+
+.common-cell {
+    display: flex;
+    font-size: 28rpx;
+    padding: 23rpx 20rpx 23rpx 0;
+    margin-left: 20rpx;
+    justify-content: space-between;
+    border-bottom: 1px solid #EFEFEF;
+    background: #fff;
+}
+
+.common-cell:last-child {
+    border: none;
+}
+
+.common-nav {
+    display: flex;
+    background: #fff;
+    font-size: 24rpx;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.common-nav .item {
+    padding: 30rpx 20rpx;
+}
+
+.common-nav .item image {
+    display: block;
+    margin: 0 auto 10rpx;
+    width: 42rpx;
+    height: 42rpx;
+}
+
+.ms-evaluateItem {
+    background: #fff;
+    padding-bottom: 20rpx;
+    padding-left: 30rpx;
+}
+
+.ms-evaluateItem .shopInfo {
+    display: flex;
+    width: 100%;
+    padding: 20rpx 30rpx 20rpx 0;
+    font-size: 32rpx;
+    border-bottom: 1px solid #ededed;
+    box-sizing: border-box;
+}
+.ms-evaluateItem .shopInfo .image {
+    width: 200rpx;
+    border-radius: 8rpx;
+    margin-right: 10rpx;
+}
+.ms-evaluateItem .shopInfo .info {
+    flex: 2;
+}
+
+.ms-evaluateItem .shopInfo .info .dec {
+    color: #7f7f7f;
+    font-size: 28rpx;
+}
+
+.ms-evaluateItem .shopInfo .info .star-warp {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    margin-top: 26rpx;
+}
+
+.ms-evaluateItem .shopInfo .info .star-warp image {
+    background: transparent;
+    width: 40rpx;
+    height: auto;
+    margin: 0 16rpx 0 0!important;
+}
+
+.ms-evaluateItem .evaluate-info {
+    position: relative;
+    font-size: 28rpx;
+    padding: 20rpx 30rpx 20rpx 0;
+}
+
+.ms-evaluateItem .evaluate-info .comment {
+    padding: 20rpx;
+    font-size: 28rpx;
+    word-wrap: break-word;
+}
+
+.ms-evaluateItem .evaluate-info textarea {
+    width: 100%;
+    border: 1px solid #ededed;
+    padding: 20rpx;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    background: #f4f4f4;
+}
+
+.ms-evaluateItem .evaluate-info text {
+    color: #999;
+    position: absolute;
+    bottom: 35rpx;
+    right: 40rpx;
+}
+
+.ms-evaluateItem .btn-warp {
+    text-align: right;
+    padding-right: 30rpx;
+    margin-top: 20rpx;
+}
+
+.ms-evaluateItem .btn-warp .btn {
+    background: #E72722;
+    color: #fff;
+    border-color: #E72722;
+    padding: 5rpx 50rpx;
+    border-radius: 50rpx;
+}
+
+.ms-evaluateItem .btn-warp .btn[disabled] {
+    opacity: 0.5;
+}
+
+.addImgBox {
+    display: flex;
+    flex-direction: row;
+    padding: 0 30rpx 20rpx 0rpx;
+}
+
+.addImgBox.line {
+    border-bottom: 1px solid #ededed;
+}
+
+.imgBox {
+    width: 164rpx;
+    height: 164rpx;
+    margin-right: 20rpx;
+    position: relative;
+}
+
+.imgBox:nth-child(4n) {
+    margin: 0;
+}
+
+.imgBox image {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.addBox {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.addBox image {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.closePic {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50rpx;
+    height: 50rpx;
+}

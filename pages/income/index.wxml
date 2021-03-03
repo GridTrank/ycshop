@@ -1,0 +1,37 @@
+
+<view class="ms-container ms-container-order">
+
+	<header type="custom">
+		<view class="ms-typeTab">
+			<view class="item {{index+1 == type ? 'active' : ''}}" bindtap="selectType" data-type="{{index+1}}" wx:for="{{incomeTab}}" wx:key="index">{{item}}</view>
+		</view>
+	</header>
+
+	<view class="ms-tab">
+		<view bindtap="selectTab" data-index="{{index}}" class='item {{selected == index ? "active":""}}' wx:for="{{orderTab}}" wx:key="index">
+			<view class="text">{{item.name}}
+				<text class="badge" wx:if="{{orderCount[type].count[item.id]}}">{{orderCount[type].count[item.id] > 99 ? '···':orderCount[type].count[item.id]}}</text>
+			</view>
+		</view>
+	</view>
+	
+	<view class="ms-wrap">
+		<view class="subscription" wx:if="{{subscribeStatus==0}}">
+			<view class="text">不想错过佣金收入？点击订阅佣金消息</view>
+			<view class="btn" bindtap="subscription">订阅</view>
+		</view>
+
+		<scroll-view class="orderScroll" scroll-y lower-threshold="100" bindscrolltolower="getData" refresher-enabled="true" bindrefresherrefresh='pullDownUpdata' refresher-triggered="{{triggered}}">
+			<view wx:if="{{orderData[type][selected].length > 0}}">
+				<orderList orderList="{{orderData[type][selected]}}"></orderList>
+				<view class="ms-footer">
+					— 我是有底线的 —
+				</view>
+			</view>
+			<view class="no-record" wx:else>
+				<image src='http://s2.hgcang.com/bsimg/ec/public/images/1c/bf/1cbff52c71cff6a72aa90f61ce45c85f.png' mode="widthFix"></image>
+				<text>还没有订单哦~</text>
+			</view>
+		</scroll-view>
+	</view>
+</view>

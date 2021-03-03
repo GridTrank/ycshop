@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "component": true, 
+  "usingComponents": {
+    "orderList": "/component/orderList/index",
+    "noData": "/component/noData/noData"
+  } 
+}

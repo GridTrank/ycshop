@@ -1,0 +1,112 @@
+    <view class="ms-indexDataContent ms-container-buying">
+    	<scroll-view scroll-y enable-flex style="height: 100%;background-color: #f4f4f4;" bindscroll="scroll">
+    		 <navigator hover-class="none"  url="{{special.curItem.special_advert_url}}" class="ms-banner" wx:if="{{special.items.length>0}}">
+    			<image class="image" src="{{special.curItem.special_image}}" mode="widthFix" bindload="imageLoad" />
+    		</navigator>
+    		<!-- 滚动选择 开始 -->
+    		<wxs module="foo">
+    			var formatDate = function(time) {
+    				var now = getDate(time * 1000);
+    				var d = now.getDate(),
+    					h = now.getHours(),
+    					m = now.getMinutes(),
+    					s = now.getSeconds();
+    				if (now.toDateString() === getDate().toDateString()) {
+    					return (h < 10 ? '0' + h : h) + ":" + (m < 10 ? '0' + m : m);
+    				} else {
+    					return (d < 10 ? '0' + d : d) + '日' + (h < 10 ? '0' + h : h) + ":" + (m < 10 ? '0' + m : m);
+    				}
+    			}
+
+    			module.exports = {
+    				formatDate: formatDate
+    			}
+    		</wxs>
+    		<view class="ms-isFixed" wx:if="{{special.items.length>0}}">
+
+    			<view class="{{special.fixed}}" style="top:calc({{globalSystemInfo.capsulePosition.top+globalSystemInfo.capsulePosition.height || 63}}px + {{globalSystemInfo.ios ? 96 : 98}}rpx);">
+    				<scroll-view scroll-x class="buyNav" scroll-left="{{special.scrollLeft}}" bindscroll="scroll">
+    					<block wx:for="{{special.items}}" wx:for-index="i" wx:key="unique">
+    						<view class="item con {{i == special.cur ? 'cur': ''}}" bindtap="getSpecialData" data-index="{{i}}" style="width: {{special.width}}px;">
+    							<view class="item">
+    								<text class="date text">{{foo.formatDate(item.begin_time)}}</text>
+    								<text class="state text">{{special.specialStatus[item.special_status]}}</text>
+    							</view>
+    						</view>
+    					</block>
+    				</scroll-view>
+    			</view>
+    		</view>
+    		<!-- 滚动选择 结束 -->
+    		<!-- 倒计时 开始 -->
+    		<view class="ms-buyStatus" wx:if="{{special.items.length>0}}">
+    			<!-- <view>{{buyStatus || cur}}</view> -->
+    			<view class="item" wx:if="{{special.curItem.special_status == 1}}">限时限量 先到先得</view>
+    			<view class="item" wx:if="{{special.curItem.special_status == 2}}">{{special.buyStatus}}</view>
+    			<view class="item" wx:if="{{special.curItem.special_status == 3}}">设置提醒 好物不错过</view>
+    		</view>
+    		<!-- 倒计时 结束 -->
+    		<!-- 循环列表 开始 -->
+    		<view class="ms-buyListItem">
+    			<block wx:for="{{special.curItem.special_goods}}" wx:key="unique">
+    				<view class="item productBI {{special.curItem.special_status != 3 ? 'buy' : 'notice'}} {{item.special_store == 0 ? 'over' : ''}}" data-pid="{{item.product_id}}" data-gid="{{item.goods_id}}" data-name="{{item.goods_name}}" data-kid="{{item.cat_id}}" data-kname="{{item.cat_name }}" data-pkid="{{item.parent_id}}">
+    					 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}" class="pic">
+    						<image class="image" src="{{item.goods_img}}" mode="widthFix"></image>
+    						<image src="https://s1.miniso.cn/bsimg/ec/public/images/3d/81/3d8192c03aeb8537d7fe2804ee56c87e.png" class="icon image"></image>
+    					</navigator>
+    					<view class="info view">
+    						 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}" class="title navigator">
+    							{{item.goods_name}}
+    						</navigator>
+    						<text class="brief text">{{item.goods_brief}}</text>
+    						<view class="price view">
+    							<view class="view">
+    								限时价：
+    								<text class="text">¥{{item.special_price}}</text>
+    							</view>
+    							<view class="del view">原价：¥{{item.goods_price}}</view>
+    						</view>
+    						<view class="bottom view">
+    							<view class="progress" wx:if="{{special.curItem.special_status != 3}}">
+    								<view class="view" style="width: {{item.remain_percent}}%;"></view>
+    								<text class="text">仅剩{{item.special_store}}</text>
+    							</view>
+    							<view class="view" wx:if="{{special.curItem.special_status == 3}}">
+    								限量{{item.special_store}}件
+    							</view>
+    							<label class="notice label" bindtap="showModal" wx:if="{{special.curItem.remind}}" data-type="1" data-id="{{item.product_id}}">
+    								开抢提醒
+    							</label>
+    							<label class="over label">
+    								 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}">去看看</navigator>
+    							</label>
+    							<label class="buy label">
+    								 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}">马上抢</navigator>
+    							</label>
+    						</view>
+    					</view>
+    				</view>
+    			</block>
+    		</view>
+    		<!-- 循环列表 结束 -->
+    	</scroll-view>
+    	<!-- 开抢提醒弹窗 开始 -->
+    	<view class="ms-Modal {{special.isShow ? 'cur' : ''}}" wx:if="{{special.isModal}}">
+    		<view class="ms-ModalBody">
+    			<view class="content">
+    				<view class="info">
+    					<text class="hd text">设置开抢通知</text>
+    					<text class="txt text">请留下您的手机号码，商品开抢前优品会第一时间通知您！</text>
+    					<view class="tel">
+    						<input class="input" type="number" bindinput="listenInput" value="{{special.tel}}" focus="true" />
+    					</view>
+    				</view>
+    				<view class="button">
+    					<label class="label" bindtap="showModal" data-type="2">取消</label>
+    					<label class="red label" bindtap="noticeSMS">确定</label>
+    				</view>
+    			</view>
+    		</view>
+    	</view>
+    	<!-- 开抢提醒弹窗 结束 -->
+    </view>

@@ -1,0 +1,9 @@
+<view class="ms-coupon-none ms-middle">
+	<view class="content">
+		<view class="info">
+			<image src="{{noData.url}}" mode="widthFix" class="image" />
+			<text class="text">{{noData.text}}</text>
+			<view class="addAddress" wx:if="{{page == 'address'}}" bindtap="addAddress">添加地址</view>
+		</view>
+	</view>
+</view>

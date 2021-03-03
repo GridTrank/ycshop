@@ -1,0 +1,150 @@
+<view class="ms-goodStandard-warp">
+	<view class="ms-mask" wx:if="{{open}}" bindtap="toggleSelect"></view>
+
+	<view class="ms-goodStandard {{open? 'show' : ''}} {{page}}">
+		<view class="warp">
+			<view class="closeSelect" bindtap="toggleSelect">
+				<image src="../../images/icon/icon-close-gray.png" class="ms-icon" />
+			</view>
+			<view class="product-show">
+				<view class="pic-warp">
+					<image src="{{defaultPic || productDetail.banner[0].imgUrl || productDetail.image_default}}" class="pic" />
+				</view>
+				<view class="info">
+					<view class="name">{{productDetail.product_name}}</view>
+					<view class="type">
+						<block wx:if="{{selectedLength > 0 }}">已选择：
+							<block wx:for="{{selected}}" wx:key="i">{{item.spec_value}}
+								<text class="text">、</text>
+							</block>
+						</block>
+						<block wx:else>请选择商品规格
+						</block>
+
+					</view>
+					<view class="price">价格：
+						<text class="symbol">¥</text>
+						<!-- 工会价 -->
+						<block wx:if="{{standard.umin_price}}">
+							<block wx:if="{{!selectedProduct.goods.mprice}}">
+								{{standard.umin_price}}
+							</block>
+							<block wx:else>{{selectedProduct.goods.mprice}}</block>
+						</block>
+						<block wx:else>
+							<block wx:if="{{!selectedProduct.goods.product_id}}">
+								<block wx:if="{{standard.min_price == standard.max_price}}">
+									{{standard.min_price}}
+								</block>
+								<block wx:else>{{standard.min_price}}~{{standard.max_price}}</block>
+							</block>
+							<block wx:else> {{selectedProduct.goods.price}}</block>
+						</block>
+					</view>
+
+				</view>
+			</view>
+
+			<view class="product-type">
+				<!-- 预售提示 -->
+				<view class="product-presell" wx:if="{{selectedProduct.goods.product_id  ? selectedProduct.goods.is_prepare  : standard.prepare_list}}">
+					<view class="h3">预售商品说明</view>
+					<view class="p" wx:for="{{standard.prepare_list.description}}" wx:key="index">{{item}}</view>
+
+				</view>
+				<view class="item" wx:for="{{standard.spec}}" wx:key="index">
+					<view class="title">{{item.spec_name}}</view>
+					<view class="select_type">
+						<button size="mini" class="standard {{filtrate[spec.private_spec_value_id] == '0' ? 'disabled' : ''}} {{spec.private_spec_value_id == selected[item.spec_id].private_spec_value_id  ? 'select': ''}}" wx:for="{{item.info}}" bindtap="selectStandard" wx:for-index="i" wx:key="i" wx:for-item="spec" data-index="{{index}}" data-minindex="{{i}}" data-vid="{{spec.private_spec_value_id}}" data-cid="{{item.spec_id}}">{{spec.spec_value}}</button>
+					</view>
+
+				</view>
+				<view class="item" wx:if="{{page != 'detail'}}">
+					<view class="title">数量</view>
+					<view class="select_num">
+						<button class="button" bindtap="editNum" disabled="{{selectedProduct.num <= 1}}" data-type="minus">-</button>
+						<input class="input" bindinput="editNum" bindblur="blurNum" type="number" data-type="edit" value="{{selectedProduct.num}}" />
+						<button bindtap="editNum" class="add button" disabled="{{selectedProduct.num >= selectedProduct.goods.stock || selectedProduct.num == 99}}" data-type="add">+</button>
+					</view>
+				</view>
+			</view>
+			<form report-submit='true' >
+				<view class="btn-warp">
+
+					<block wx:if="{{page == 'detail'}}">
+						 <navigator hover-class="none"open-type="switchTab" url="/pages/index/index" class="item icon">
+							<image src="https://s1.miniso.cn/bsimg/ec/public/images/6b/c9/6bc9c7f0e432d3c518cb18aea395aef8.png" class="ms-icon cart" />
+						</navigator>
+						<view class="item icon" bindtap="toafterSale">
+							<image src="https://s1.miniso.cn/bsimg/ec/public/images/97/81/978147eb76271debea1cbe3782400b77.png" class="ms-icon" />
+						</view>
+
+						 <navigator hover-class="none"url="/pages/cart/index" open-type="switchTab" class="item icon">
+							<image src="https://s1.miniso.cn/bsimg/ec/public/images/04/ad/04ad44bbf8764cc03a30b9167b2e049d.png" class="ms-icon cart" />
+							<text class="cart_num" wx:if="{{productDetail.cart_num}}">{{productDetail.cart_num > 99 ? "99+" : productDetail.cart_num}}</text>
+						</navigator>
+					</block>
+
+					<view class="btn-box" wx:if="{{selectedProduct.goods.marketable}}">
+
+
+						<block wx:if="{{productDetail.is_marketable || page!='detail'}}">
+							<block wx:if="{{((productDetail.is_in_stock || productDetail.all_store )&& ( !selectedProduct.state || selectedProduct.goods.stock > 0)) }}">
+								<block wx:if="{{userInfo.is_zhuanke}}">
+									<!-- 推手按钮权限最大 -->
+									<button class="goBuy button show" bindtap="goCart" data-id="{{standard.goods_id}}" data-type="cart">
+										<text>{{page == 'detail'?'自购省':'加入购物车'}}</text>
+									</button>
+									<button class="goCart button none" bindtap="togglePopup" data-type='share'>
+										<text>分享赚</text>
+									</button>
+								</block>
+								<block wx:elif="{{ selectedProduct.goods.product_id  ?  (selectedProduct.goods.is_prepare ? standard.prepare_list.prepare_status == 1 : true) : (standard.prepare_list ? standard.prepare_list.prepare_status == 1 : true)}}">
+									 <navigator hover-class="none"  url="/pages/load/index" class="goBuy button none" wx:if="{{!userInfo.is_bind_mobile}}">{{selectedProduct.goods.product_id ? (selectedProduct.goods.is_prepare ? '全款预定' :'立即购买'):(standard.prepare_list ? '全款预定' :'立即购买')}}
+									</navigator>
+									<button class="goBuy button none" wx:else bindtap="goCart" data-id="{{standard.goods_id}}" data-type="buy">{{selectedProduct.goods.product_id ? (selectedProduct.goods.is_prepare ? '全款预定' :'立即购买'):(standard.prepare_list ? '全款预定' :'立即购买')}}</button>
+									<button class="goCart button show" bindtap="goCart" data-id="{{standard.goods_id}}" data-type="cart">加入购物车</button>
+								</block>
+								<block wx:elif="{{standard.prepare_list.prepare_status !=1 && (selectedProduct.goods.product_id  ? selectedProduct.goods.is_prepare  : standard.prepare_list )}}">
+									<!-- 非下架非售完情况下 -->
+									<!-- 预售按钮 -->
+									<block wx:if="{{standard.prepare_list.prepare_status == 0}}">
+										<!-- 未开始 -->
+										<button class="btn red button" bindtap='saleRemind' wx:if="{{standard.prepare_list.remind && !standard.prepare_list.is_remind}}">
+											开售提醒
+										</button>
+										<button class="btn line red button" bindtap='presellNotStart' wx:else>
+											预售未开始
+										</button>
+									</block>
+									<block wx:if="{{standard.prepare_list.prepare_status == 2}}">
+										<!-- 未开始 -->
+										<button class="btn line button">
+											预售结束
+										</button>
+									</block>
+									<block wx:if="{{standard.prepare_list.prepare_status == 3}}">
+										<!-- 未开始 -->
+										<button class="btn line button">
+											商品已售完
+										</button>
+									</block>
+								</block>
+							</block>
+							<block wx:else>
+								<button class="btn gray button" disabled="true">商品已售完</button>
+							</block>
+						</block>
+						<block wx:else>
+							<button class="btn gray button" disabled="true">商品已下架</button>
+						</block>
+					</view>
+					<view class="btn-box" wx:else>
+						<button class="btn gray button" disabled="true">商品已下架</button>
+					</view>
+				</view>
+			</form>
+		</view>
+
+	</view>
+</view>

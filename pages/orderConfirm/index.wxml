@@ -1,0 +1,156 @@
+<!--  orderConfirm wxml -->
+<requestPage id="requestPage" bindrefresh='getData'>
+	<view class="ms-container ms-container-orderConfirm" wx:if="{{isOk}}">
+  <editAddress id="editAddress" address="{{address}}" bind:updataData="getData" page="order"></editAddress>
+		<view class="ms-orderConfirmTop">
+			<view class="address-topBg"></view>
+			<addressList id="addressList" is_fastbuy="{{is_fastbuy}}" addressList="{{[address]}}" bind:updataData="getData" page="order"></addressList>
+			<view wx:if="{{!address.addr_id}}" class="noAddress" bindtap="addAddress">
+				<text>点击添加收货地址</text>
+				<image src="../../images/icon/icon-btn-right.png"></image>
+			</view>
+		</view>
+		<!-- 产品数据 开始 -->
+		<view class="ms-indexFloor ms-orderProduct" wx:if="{{gift_list.length}}">
+			<view class="line" wx:for="{{gift_list}}" wx:key="i">
+				<view class="item">
+					<view class="pic">
+						<image src="{{item.goods_img}}" mode="widthFix" />
+					</view>
+					<view class="info">
+						<text class="title indent"><text>【赠品】</text>{{item.goods_name}}</text>
+						<text class="brief">{{item.goods_spec}}</text>
+						<text class="price"><text class="symbol">¥</text>{{item.goods_price}}</text>
+						<text class="number">x{{item.goods_number}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 产品数据 结束 -->
+		<!-- 产品数据 开始 -->
+		<view class="ms-indexFloor ms-orderProduct" wx:if="{{abgoods_list.length}}">
+			<view class="line" wx:for="{{abgoods_list}}" wx:key="i">
+				<view class="item">
+					<view class="pic">
+						<image src="{{item.goods_img}}" mode="widthFix" />
+					</view>
+					<view class="info">
+						<text class="title indent"><text>【换购】</text>{{item.goods_name}}</text>
+						<text class="brief">{{item.goods_spec}}</text>
+						<text class="price"><text class="symbol">¥</text>{{item.goods_price}}</text>
+						<text class="number">x{{item.goods_number}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 产品数据 结束 -->
+		<!-- 产品数据 开始 -->
+		<view class="ms-indexFloor ms-orderProduct">
+			<view class="line" wx:for="{{goods_list}}" wx:key="i">
+				 <navigator hover-class="none"class="item" url="../detail/index?id={{item.product_id}}">
+					<view class="pic">
+						<image src="{{item.goods_img}}" mode="widthFix" />
+					</view>
+					<view class="info">
+						<text class="title"><text class='tag' wx:if="{{prepare_list}}">预售</text>{{item.goods_name}}</text>
+						<text class="brief">{{item.goods_spec}}</text>
+						<text class="price"><text class="symbol">¥</text>{{item.goods_price}}</text>
+						<text class="number">x{{item.goods_number}}</text>
+					</view>
+				</navigator>
+			</view>
+		</view>
+		<!-- 产品数据 结束 -->
+		<view class="ms-indexFloor presell" wx:if="{{prepare_list}}">
+			<view class="ms-inputGroup none line right">
+				<label>发货时间</label>
+				<view class="text">
+					{{prepare_list.delivery_time}}
+				</view>
+			</view>
+		</view>
+
+		<view class="ms-indexFloor" style='margin-top: 20rpx;'>
+			 <navigator hover-class="none"url="/pages/resCoupon/index?memc_code={{select_cpns.memc_code}}&address_id={{address.addr_id}}&is_fastbuy={{is_fastbuy}}" class="{{support_coupon ?'pointer' :''}}">
+				<view class="ms-inputGroup">
+					<label>优惠券:</label>
+					<view>
+						<text class="name">{{support_coupon ?'当前订单促销不支持优惠券': (select_cpns.cpns_name == undefined ? '未选择' : select_cpns.cpns_name)}}</text>
+						<text wx:if="{{!support_coupon}}">{{cpn_number}}张</text>
+					</view>
+					<image src="/images/icon/icon-btn-right.png" wx:if="{{!support_coupon}}"/>
+				</view>
+			</navigator>
+		</view>
+
+		<!-- 价格计算 开始 -->
+		<view class="ms-indexFloor info" style='margin-top: 20rpx;'>
+			<view class="ms-inputGroup none line right">
+				<label>商品合计:</label>
+				<view>
+					<text><text class="symbol">¥</text>{{goods_total}}</text>
+				</view>
+			</view>
+			<view class="ms-inputGroup none line right">
+				<label>运费:</label>
+				<view>
+					<view class="freight" wx:if="{{fee_content}}" bindtap="freightInfo">
+						<text class="title" wx:if="{{fee_title}}">{{fee_title}}</text>
+						<text class="icon"></text>
+					</view>
+					<text><text class="symbol">¥</text>{{freight_fee}}</text>
+				</view>
+			</view>
+			<view class="ms-inputGroup none right">
+				<label>活动优惠:</label>
+				<view>
+					<label>优惠金额</label>
+					<text>-<text class="symbol">¥</text>{{favourable_total}}</text>
+				</view>
+			</view>
+		</view>
+		<!-- 价格计算 结束 -->
+
+		<!-- 协议 开始 -->
+		<view class="ms-shoppingAggrement">
+			<view class="content">
+				<label bindtap="changeCheckBox">
+					<image src="{{checked?'../../images/icon/icon-around-active.png':'../../images/icon/icon-around.png'}}" /> 我已经同意
+				</label>
+				 <navigator hover-class="none"url="/pages/web/index?type=2&id=22&page_mark=service&title=服务协议">《名创优品服务协议》</navigator>
+			</view>
+		</view>
+		<!-- 协议 结束 -->
+
+		<!-- 支付按钮 开始 -->
+		<form report-submit='true' class="ms-orderConfirmButton">
+			<view class="tip" wx:if="{{isTip && address.area}}">送至：{{address.area}}{{address.addr}}</view>
+			<view class="content {{checked?'check':''}}">
+				<view class="price">
+					应付：
+					<text><text class="symbol">¥</text>{{order_total}}</text>
+				</view>
+				<button bindtap="createOrder">去付款</button>
+			</view>
+		</form>
+		<!-- 支付按钮 结束 -->
+
+		<!-- 开抢提醒弹窗 开始 -->
+		<view class="ms-Modal {{isShow ? 'cur' : ''}}" wx:if="{{isModal}}">
+			<view class="ms-ModalBody">
+				<view class="content">
+					<view class="info">
+						<text class="hd">提示</text>
+						<text class="txt" style="text-align: center;font-size: 32rpx;">订单已提交，请勿重复提交订单</text>
+					</view>
+					<view class="button">
+						<label class="red" bindtap="showModal" data-type="2">确定</label>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 开抢提醒弹窗 结束 -->
+
+
+	</view>
+</requestPage>

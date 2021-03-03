@@ -1,0 +1,43 @@
+<view class='ms-container-vip'>
+	<view class="vip-cart">
+		<view class="cart {{'v'+lv.member_lv_id}}">
+			<view class="dec">当前等级</view>
+			<view class="name">{{lv.lv_name}}</view>
+			<view class="target">{{lv.lv_prompt}}</view>
+		</view>
+	</view>
+	<view class="schedule-warp" wx:if="{{lv.speed}}">
+		<view class="title">升级任务</view>
+		<view class="name">{{lv.speed.upgrade}}</view>
+		<view class="schedule">
+			<view class="line" style="width:{{lv.speed.radio*100}}%"></view>
+		</view>
+		<view class="finish">
+			<view>
+				完成度 {{lv.speed.current_money }}/{{lv.speed.target_money}}
+			</view>
+			<view>(剩余{{lv.speed.surplus_date}}天)</view>
+		</view>
+	</view>
+	<view class="schedule-warp" wx:if="{{lv.downgrade_speed}}">
+		<view class="title">保级任务</view>
+		<view class="name">{{lv.downgrade_speed.upgrade}}</view>
+		<view class="schedule">
+			<view class="line" style="width:{{lv.downgrade_speed.radio*100}}%"></view>
+		</view>
+		<view class="finish">
+			<view>
+				完成度 {{lv.downgrade_speed.current_money }}/{{lv.downgrade_speed.target_money}}
+			</view>
+			<view>(剩余{{lv.downgrade_speed.surplus_date}}天)</view>
+		</view>
+	</view>
+	<view class="grade-info">
+		<view class="ms-cell">
+			<view class="bold">等级说明</view>
+		</view>
+		<view class="p" wx:for="{{lv.lv_desc}}" wx:key="index">
+			{{item}}
+		</view>
+	</view>
+</view>

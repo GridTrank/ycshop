@@ -1,0 +1,435 @@
+.ms-container {
+    overflow-x: hidden;
+}
+
+.first {
+    padding-top: 80rpx;
+}
+
+.ms-coupon-header {
+    background-color: #fff;
+    position: relative;
+    z-index: 100;
+}
+
+.banner-img .img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ms-row {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.ms-coupon-header .content {
+    display: flex;
+    align-items: center;
+    padding: 22.5rpx 30rpx;
+    box-sizing: border-box;
+}
+
+.ms-coupon-header .content view {
+    flex: 1;
+    margin-right: 30rpx;
+    border: 1px solid #efefef;
+    border-radius: 7.5rpx;
+    overflow: hidden;
+}
+
+.ms-coupon-header .content view input {
+    height: 67.5rpx;
+    box-sizing: border-box;
+    padding: 9.375rpx 15rpx;
+    width: 100%;
+    font-size: 28rpx;
+    background-color: #fff;
+    border: none;
+}
+
+.ms-coupon-header .content view .phcolor {
+    color: #b2b2b2;
+}
+
+.ms-coupon-header .content button {
+    height: 67.5rpx;
+    width: 150rpx;
+    border-color: #efefef;
+    font-size: 28rpx;
+    color: #fff;
+    background-color: #efefef;
+    border-radius: 7.5rpx;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ms-coupon-header .content button::after {
+    border: none;
+}
+
+.ms-coupon-header .content button.cur {
+    background-color: #E72722;
+    border-color: #E72722;
+}
+
+.active-product {
+    background: #fff;
+    width: 100%;
+    text-align: center;
+}
+
+.active-product image {
+    width: 100%;
+}
+
+.sm-title {
+    line-height: 80rpx;
+    position: relative;
+    font-size: 28rpx;
+    text-align: center;
+    height: 80rpx;
+    display: inline-block;
+}
+
+.sm-title::after,
+.sm-title::before {
+    position: absolute;
+    top: 40rpx;
+    content: "";
+    width: 100rpx;
+    height: 1px;
+    background: #cea47d;
+}
+
+.sm-title::after {
+    left: -120rpx;
+}
+
+.sm-title::before {
+    right: -120rpx;
+}
+
+
+
+.sm-bottomNav {
+    padding-bottom: 100rpx;
+}
+
+.activity-menu {
+    bottom: 0;
+    height: 100rpx;
+    width: 100%;
+    z-index: 119;
+    background: #fff;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-menu>view {
+    display: flex;
+    flex: 1;
+    font-weight: 600;
+    height: 100%;
+    font-size: 32rpx;
+    align-items: center;
+    justify-content: center;
+}
+
+.whiteDay image {
+    width: 100%;
+    display: block;
+}
+
+.whiteDay .one-right {
+    display: flex;
+}
+
+.whiteDay .one-right .item {
+    width: 50%;
+}
+
+.whiteDay .three {
+    position: relative;
+}
+
+.whiteDay .three navigator {
+    position: absolute;
+    width: 33.33%;
+    height: 100%;
+}
+
+.whiteDay .three .on-left {
+    left: 0;
+}
+
+.whiteDay .three .on-center {
+    left: 33.33%;
+}
+
+.whiteDay .three .on-right {
+    left: 66.66%;
+}
+
+
+/*用户确认信息*/
+
+.modal-msg {
+    position: relative;
+    padding: 30rpx;
+}
+
+.msg-top {
+    position: absolute;
+    padding: 10rpx;
+    display: flex;
+    flex-flow: column;
+    top: 30rpx;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.msg-header-img {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+}
+
+.msg-top-name {
+    font-size: 36rpx;
+    font-weight: 600;
+}
+
+.msg-infomation {
+    font-size: 28rpx;
+    margin: 30rpx 0;
+    margin-top: 130rpx;
+    text-align: center;
+}
+
+.msg-btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: row;
+    font-size: 28rpx;
+}
+
+.fail-btn {
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 80rpx;
+    border: 1rpx solid #cc2821;
+    color: #cc2821;
+}
+
+.sure-btn {
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 80rpx;
+    background: #cc2821;
+    color: #fff;
+}
+
+.text-bottom {
+    margin-bottom: 10rpx;
+}
+
+.activity-nav {
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    width: 100%;
+    white-space: nowrap;
+    top: 0;
+    height: 80rpx;
+    z-index: 100;
+}
+
+.activity-nav .nav-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+}
+
+.activity-nav.flex {
+    display: flex;
+}
+
+.activity-nav.long {}
+
+.activity-nav.long .nav-item {
+    display: inline-block;
+    text-align: center;
+    line-height: 80rpx;
+    padding: 0 20rpx;
+    min-width: 25%;
+    box-sizing: border-box;
+    font-size: 28rpx;
+}
+
+.warp {
+    position: relative;
+}
+
+.scrollView {
+    position: absolute;
+    height: 80rpx;
+    top: -208rpx;
+    width: 100%;
+    z-index: -1;
+}
+
+.invite-warp {
+    position: relative;
+}
+
+.ms-viewGroup image {
+    width: 100%;
+}
+
+.ms-viewGroup .incident {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    opacity: 0;
+}
+
+.ms-viewGroup .incident.left {
+    width: 50%;
+}
+
+.ms-viewGroup .incident.right {
+    width: 50%;
+    left: 50%;
+}
+
+.assistance-warp {
+    position: relative;
+    width: 100%;
+}
+.ms-rule-btn {
+    position: absolute;
+    width: 140rpx;
+    right: 0;
+    top: 30rpx;
+    z-index: 2;
+}
+.assistance-warp image{
+    width: 100%;
+    display: block;
+}
+
+.title_img image{
+    width: 100%;
+    display: block;
+}
+
+.customList {
+    padding: 20rpx;
+}
+
+.customList .ms-viewBox {
+    background: #fff!important;
+}
+
+.customList .scroll-veiwItem {
+    padding: 0 22rpx;
+    width: 100% ;
+    
+    box-sizing: border-box;
+}
+
+.customList .slide .ms-viewItem {
+    width: 260rpx;
+    border-radius: 0;
+    padding-bottom: 20rpx;
+    
+}
+
+.customList .customIItem{
+    border-radius: 8rpx;
+    overflow: hidden;
+    background: #fff;
+}
+
+.customList.title .customIItem {
+    border-radius: 0 0 8rpx 8rpx;
+
+}
+.customList.title .title_img {
+    border-radius: 8rpx 8rpx 0rpx 0rpx;
+    overflow: hidden;
+
+}
+.scroll-bar{
+    position: absolute;
+    left: 50%;
+    bottom: 20rpx;
+    z-index: 10;
+    margin-left: -43rpx;
+    width: 86rpx;
+    height: 6rpx;
+    border-radius: 100rpx;
+    background: #eee;
+    position: relative;
+}
+.scroll-bar .bar {
+    position: absolute;
+    left: 0;
+    width: 32rpx;
+    top: 0;
+    background: #E72722;
+    height: 6rpx;
+    border-radius: 100rpx;
+}
+
+.ms-hot .view-swiper .wx-swiper-dot {
+    width: 12rpx;
+    display: inline-flex;
+    height: 6rpx;
+    justify-content: space-between;
+    margin-right: 6rpx;
+}
+
+.ms-hot .view-swiper .wx-swiper-dot-active {
+    width: 24rpx;
+}
+
+.ms-hot .view-swiper .wx-swiper-dot::before {
+    content: '';
+    flex-grow: 1;
+    background: rgba(238, 238, 238, 1);
+    border-radius: 40rpx;
+}
+
+.ms-hot .view-swiper .wx-swiper-dot-active::before {
+    background: rgba(217, 35, 46, 1);
+    border-radius: 40rpx;
+    width: 24rpx;
+}
+
+
+.customList .view-swiper {
+    height: 400rpx;
+    padding-top: 20rpx;
+}
+.customList .view-swiper .ms-viewBox{
+    padding: 0 16rpx;
+}
+.customList .view-swiper.double {
+    height: 790rpx;
+}

@@ -1,0 +1,20 @@
+<!-- index.wxml -->
+<requestPage id="requestPage" bindrefresh='getData'>
+	<view class="ms-container ms-container-address">
+		<view class="scrollWarp" >
+			<scroll-view class="addressScroll" scroll-y lower-threshold="100" bindscrolltolower="getAddressData">
+				<view class="address-topBg"></view>
+				<addressList  id="addressList" addressList="{{addressData.receiver}}" is_fastbuy="{{is_fastbuy}}" bind:updataData="getData" bind:toggleEdit="toggleEdit" page="{{page || 'address'}}"></addressList>
+				
+			</scroll-view>
+			<view class="add-address">
+				<view bindtap="addAddress">+ 新增地址</view>
+			</view>
+		</view>
+		<view class="no-record" wx:if="{{addressData.receiver.length <= 0}}">
+			<noData noData="{{notFound}}" bind:addAddress="addAddress" page="address"></noData>
+		</view>
+	<editAddress id="editAddress" address="{{address}}" bind:updataData="getData" page="{{page || 'address'}}"></editAddress>
+	</view>
+	
+</requestPage>

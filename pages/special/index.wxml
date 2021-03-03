@@ -1,0 +1,110 @@
+<!--Buying.wxml-->
+<view class="ms-container ms-container-buying" wx:if="{{items.length>0}}">
+
+  <scroll-view scroll-y style="height: {{windowHeight}}px;background-color: #f4f4f4;" bindscroll="scroll">
+
+    <view class="ms-banner">
+      <image src="https://s1.miniso.cn/bsimg/ec/public/images/db/42/db42e1519e81fc5bfe4e020fc79c2ec6.jpg?x-oss-process=style/high" mode="widthFix" bindload="imageLoad"/>
+    </view>
+
+    <!-- 滚动选择 开始 -->
+    <wxs module="foo">
+    var formatDate = function(time) {    
+      var now = getDate(time*1000);
+      var d = now.getDate(), 
+        h = now.getHours(),     
+        m = now.getMinutes(),
+        s = now.getSeconds();    
+        if (now.toDateString() === getDate().toDateString()) 
+        return (h<10?'0'+h:h) +":"+(m<10?'0'+m:m); 
+        return (d<10?'0'+d:d) + '日' + (h<10?'0'+h:h) +":"+(m<10?'0'+m:m);
+    }
+
+    module.exports = {
+        formatDate: formatDate
+    }
+    </wxs>
+    <view class="ms-isFixed" wx:if="{{items.length>0}}">
+      <view class="{{fixed}}">
+        <scroll-view scroll-x class="buyNav" scroll-left="{{scrollLeft}}" scroll-with-animation="true">
+          <block wx:for="{{items}}" wx:for-index="i" wx:key="unique">
+            <view class="item {{i == cur ? 'cur': ''}}" bindtap="getData" data-index="{{i}}" style="width: {{width}}px;">
+              <view>
+                <text class="date">{{foo.formatDate(item.begin_time)}}</text>
+                <text class="state">{{specialStatus[item.special_status]}}</text>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <!-- 滚动选择 结束 -->
+
+    <!-- 倒计时 开始 -->
+    <view class="ms-buyStatus">
+      <!-- <view>{{buyStatus || cur}}</view> -->
+      <view wx:if="{{curItem.special_status == 1}}">限时限量  先到先得</view>
+      <view wx:if="{{curItem.special_status == 2}}">{{buyStatus}}</view>
+      <view wx:if="{{curItem.special_status == 3}}">设置提醒 好物不错过</view>
+    </view>
+    <!-- 倒计时 结束 -->
+
+    <!-- 循环列表 开始 -->
+    <view class="ms-buyListItem">
+
+      <block wx:for="{{curItem.special_goods}}" wx:key="unique">
+        <view class="item {{curItem.special_status != 3 ? 'buy' : 'notice'}} {{item.special_store == 0 ? 'over' : ''}}">
+           <navigator hover-class="none"url="../detail/index?id={{item.product_id}}" class="pic">
+            <image src="{{item.goods_img}}" mode="widthFix"></image>
+            <image src="https://s1.miniso.cn/bsimg/ec/public/images/3d/81/3d8192c03aeb8537d7fe2804ee56c87e.png" class="icon" ></image>
+          </navigator>
+          <view  class="info">
+             <navigator hover-class="none"url="../detail/index?id={{item.product_id}}" class="title">{{item.goods_name}}</navigator>
+            <text class="brief">{{item.goods_brief}}</text>
+            <view class="price">
+              <view>限时价：<text>¥{{item.special_price}}</text></view>
+              <view class="del">原价：¥{{item.goods_price}}</view>
+            </view>
+
+            <view class="bottom">
+              <view class="progress" wx:if="{{curItem.special_status != 3}}">
+                <view style="width: {{item.remain_percent}}%;"></view>
+                <text>仅剩{{item.special_store}}</text>
+              </view>
+              <view class="text" wx:if="{{curItem.special_status == 3}}">限量{{item.special_store}}件</view>
+              <label class="notice" bindtap="showModal" data-type="1" data-id="{{item.product_id}}">开抢提醒</label>
+              <label class="over"> <navigator hover-class="none"url="../detail/index?id={{item.product_id}}">去看看</navigator></label>
+              <label class="buy"> <navigator hover-class="none"url="../detail/index?id={{item.product_id}}">马上抢</navigator></label>
+            </view>
+
+          </view>
+        </view>
+      </block>
+
+    </view>
+    <!-- 循环列表 结束 -->
+
+  </scroll-view>
+
+  <!-- 开抢提醒弹窗 开始 -->
+  <view class="ms-Modal {{isShow ? 'cur' : ''}}" wx:if="{{isModal}}">
+    <view class="ms-ModalBody">
+      <view class="content">
+        <view class="info">
+          <text class="hd">设置开抢通知</text>
+          <text class="txt">请留下您的手机号码，商品开抢前优品会第一时间通知您！</text>
+          <view class="tel">
+            <input type="number" bindinput="listenInput" value="{{tel}}" focus="true" />
+          </view>
+        </view>
+        <view class="button">
+          <label bindtap="showModal" data-type="2">取消</label>
+          <label class="red" bindtap="noticeSMS">确定</label>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 开抢提醒弹窗 结束 -->
+
+
+</view>
