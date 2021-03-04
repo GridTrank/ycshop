@@ -185,7 +185,6 @@ Page({
         })
       }
 
-
     })
 
   },
@@ -205,8 +204,6 @@ Page({
     })
   },
   getUserInfo(e) {
-   
-    var type = e.currentTarget.dataset.type;
     if (e.detail.errMsg != 'getUserInfo:ok') return;
     this.data.userDetail = e.detail;
     this.setData({
@@ -215,20 +212,14 @@ Page({
     console.log('用户信息', e.detail)
     this.login().then((code) => {
       http.request({
-        url: '/passport/get_weixin_openid',
-        isLogin: true,
-        isCode: true,
+        url: '/mpuser/get_openid',
         data: {
           app: "zhuanke",
-          appid: 'wx6a73741a2ac1122e',
+          appid: 'wx8aaa7733adaf6b38',
           code: this.data.code,
-          unionid_encryptedData: e.detail.encryptedData,
-          unionid_iv: e.detail.iv,
-          zk_ref: getApp().globalData.zk_ref || '',
-          invite_code: this.data.inviteCode,
         },
         success: (res) => {
-          console.log('用户信息',res)
+          console.log('用户信息123131',res)
           wx.setStorageSync("token", res.data.token);
           this.data.userInfo = Object.assign({}, res.data.result, e.detail.userInfo);
 
@@ -268,7 +259,7 @@ Page({
       isLogin: true,
       data: {
         app: 'zhuanke',
-        appid: 'wx6a73741a2ac1122e',
+        appid: 'wx8aaa7733adaf6b38',
         zk_ref: getApp().globalData.zk_ref || '',
         openid: this.data.userInfo.openid,
         unionid_encryptedData: this.data.userDetail.encryptedData,

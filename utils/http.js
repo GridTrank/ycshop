@@ -24,13 +24,14 @@ const routerData = () => {
 }
 
 function request(obj) {
-  if (wx.getStorageSync("token")) {
-    ajax(obj)
-  } else {
-    token().then(() => {
-      ajax(obj)
-    })
-  }
+  // if (wx.getStorageSync("token")) {
+  //   ajax(obj)
+  // } else {
+  //   token().then(() => {
+  //     ajax(obj)
+  //   })
+  // }
+  ajax(obj)
 
 }
 
@@ -55,29 +56,15 @@ function token() {
 // storage 本地缓存的接口  默认10min
 function ajax(obj) {
   var data = JSON.parse(JSON.stringify(obj));
-  if (obj.data == undefined) obj.data = {};
-  obj.data.version = config.version;
-  obj.data.source = Sign.source + (obj.data.source ? '-' + obj.data.source : (!getApp().globalData.source ? '' : ('-' + getApp().globalData.source)));
+  
+  obj.data.sign = obj.data.sign ? obj.data.sign : signature.getSign(obj.data, Sign.secret);
   // 防重复
   if (requestUrl.indexOf(obj.url) != -1) return;
   // 过滤不需要防重复接口
   if (!obj.noRequest) {
     requestUrl.push(obj.url);
   }
-  // cdn缓存
-  if (obj.cdn) {
-    if (obj.data) {
-      var string = ''
-      for (var key in obj.data) {
-        string += ('/' + key + '/' + obj.data[key]);
-      }
-      obj.url += string;
-    }
-  }
-  obj.data.zk_ref=getApp().globalData.zk_ref
-  obj.data.identity = Sign.identity;
-  obj.data.token = wx.getStorageSync('token');
-  obj.data.sign = obj.data.sign ? obj.data.sign : signature.getSign(obj.data, Sign.secret);
+
   if (obj.storage) {
     var res = getCache(JSON.parse(JSON.stringify(obj)));
     if (res) {
@@ -109,7 +96,7 @@ function ajax(obj) {
       }
 
       if (res.data.code == 200) {
-        obj.success && obj.success(res.data.result);
+        obj.success && obj.success(res.data);
         if (obj.storage) {
           //缓存接口缓存数据
           // obj.data.url = obj.url;
@@ -120,10 +107,7 @@ function ajax(obj) {
           });
         }
       }else {
-        wx.showToast({
-          title: res.data.msg,
-          icon: "none"
-        })
+
       }
     },
     fail: (res) => {

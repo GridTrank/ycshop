@@ -34,17 +34,7 @@ App({
     this.getZkref(this.globalData.zk_ref)
   },
   getZkref(id){
-      wx.request({
-        url:Domain + '/store/storeList',
-        method:'POST',
-       
-        success: (res)=> {
-          console.log(res)
-        },
-        fail: (err)=> {
-          
-        }
-      })
+
   },
   //获取胶囊信息
   getSystemInfo() {

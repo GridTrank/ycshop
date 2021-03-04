@@ -13,7 +13,7 @@ const config = {
     },
     "phoneService": '4009965022',                  // 客服电话
     "wxConfig": {
-      "appid": "wx2a212470bade49bf",               // appID
+      "appid": "wx8aaa7733adaf6b38",               // appID
     }
   },
 
@@ -21,7 +21,7 @@ const config = {
     "env": env,
     // 域名配置
     // "Domain": 'http://t-youxuan.miniso.cn/openapi',
-    "Domain": 'http://127.0.0.1:3000',
+    "Domain": 'http://127.0.0.1:3002',
     //系统配置
     "sign": {
       "identity": '28Vebp',
@@ -30,7 +30,7 @@ const config = {
     },
     "phoneService": '4009965022',                  // 客服电话
     "wxConfig": {
-      "appid": "wx2a212470bade49bf",               // appID
+      "appid": "wx8aaa7733adaf6b38",               // appID
     }
   },
 
@@ -46,7 +46,7 @@ const config = {
     },
     "phoneService": '4009965022',                  // 客服电话
     "wxConfig": {
-      "appid": "wx2a212470bade49bf",               // appID
+      "appid": "wx8aaa7733adaf6b38",               // appID
     }
   }
 }

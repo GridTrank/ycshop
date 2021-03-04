@@ -3,7 +3,7 @@ const config = require('../../utils/config.js')
 Page({
   data: {
     visible: false,
-    userInfo: wx.getStorageSync('userInfo') || {},
+    userInfo:wx.getStorageSync('userInfo') || {},
     person: {
       account_balance: 0,
       brokerage_money: 0,
@@ -19,23 +19,35 @@ Page({
     version: config.version
   },
   onShow() {
-    if (wx.getStorageSync('userInfo').is_zhuanke != this.data.userInfo.is_zhuanke ||( wx.getStorageSync('userInfo').is_bind_mobile && !this.data.person.account )) {
-      this.getData()
-    }
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo') || {}
-    })
-    if (this.data.userInfo.isWithdraw) {
-      this.data.userInfo.isWithdraw = false;
-      wx.setStorageSync('userInfo', this.data.userInfo)
-      this.getData()
-    }
+  
   },
   onHide() {
 
   },
   onLoad(option) {
+    console.log(this.data.userInfo)
+  },
+  getPhoneNumber(e){ 
+    console.log(e)
+  },
+  getUserInfo(e){
     
+    this.setData({
+      userInfo:e.detail.userInfo
+    })
+    wx.setStorageSync('userInfo',e.detail.userInfo)
+  },
+  wxLogin() {
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success: res => {
+          resolve(res.code)
+        },
+        fail: res => {
+          reject(res)
+        }
+      })
+    })
   },
   //邀请好友
   inviteFriend(){
