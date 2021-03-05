@@ -5,33 +5,17 @@ const Domain = config.Domain;
 App({
   onLaunch (options) {
     console.log('onLaunch:',options);
-    if (options.scene) {
-      var scene = decodeURIComponent(options.query.scene)//参数二维码传递过来的参数
-      let arr = scene.split("&");
-      for (let i of arr) {
-        options[i.split("=")[0]] = i.split("=")[1];
-      }
-      if ((options.query.zk_ref || options.query.zk || options.zk_ref || options.zk) ){
-        this.globalData.zk_ref = options.zk_ref || options.zk;
-      }
-      
-      (options.source != null || options.src != null) ? this.globalData.source = options.source || options.src : '';
-    }
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || [];
-    logs.unshift(Date.now());
-    wx.setStorageSync('logs', logs);
-    this.getSystemInfo();
-    console.log('onLaunch:globalData=',this.globalData);
+    /**
+     * 有post_share_key：商家身份
+     * 
+     */
+    let query=options.query
+    wx.setStorageSync('options', query)
+    
 
   },
   onShow(options){
-    console.log('onShow:',options);
-    // 全局来源记录
-    (options.query.source != null || options.query.src != null) ? this.globalData.source = options.query.source || options.query.src : '';
-    (options.query.zk_ref != null || options.query.zk != null) ? this.globalData.zk_ref = options.query.zk_ref || options.query.zk : '';
-    console.log('onShow:globalData=',this.globalData);
-    this.getZkref(this.globalData.zk_ref)
+    
   },
   getZkref(id){
 

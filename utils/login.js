@@ -1,5 +1,5 @@
-const http = require('../../utils/http.js')
-const config = require('../../utils/config.js')
+const http = require('./http.js')
+const config = require('./config.js')
 
 
 function wxLogin(){
@@ -14,52 +14,88 @@ function wxLogin(){
         })
     })
 }
-function login(e) {
-    return new Promise((resolve, reject) => {
-      if (new Date().getTime() - this.data.codeTime > 300000 && this.data.code) {
-        wx.checkSession({
-          success: () => {
-            console.log('session_key 有效')
-            resolve(code)
-          },
-          fail: () => {
-            console.log('session_key 无效')
-            wxLogin().then((code) => {
-              resolve(code)
-            })
-          }
-        })
-      } else {
-        wxLogin().then((code) => {
-          resolve(this.data.code)
-        })
-      }
 
-    })
-}
 function getOpenid(){
+  return new Promise((resolve,reject)=>{
     wxLogin().then((code) => {
-        http.request({
-          url: '/mpuser/get_openid',
-          data: {
-            appid: 'wx8aaa7733adaf6b38',
-            code: code,
-          },
-          success: (res) => {
-            console.log('用户信息123131',res)
-            this.data.userInfo = Object.assign({}, res.data.result, e.detail.userInfo);
-            if (this.data.userInfo.is_bind_mobile) {
-              // 已注册
-              wx.setStorageSync("userInfo", this.data.userInfo)
-              this.back();
-            }
-            this.setData({
-              userInfo: this.data.userInfo
-            })
-          },
-          complete: (res) => {
-            this.data.code = '';
-          }
-        })
+      http.request({
+        url: '/mpuser/getOpenid',
+        data: {
+          appid : "wx8aaa7733adaf6b38",
+          secret : "c1c9ba1c953c95001b355efa7cd52210",
+          code:code,
+        },
+        success: (res) => {
+            wx.setStorageSync('sessionKey', res.data.sessionKey)
+            resolve(res.data)
+        },
+        fail:()=>{
+          reject('')
+        }
+
+      })
     })
+  })
+  
+}
+ 
+function shopLogin(e){
+  return new Promise((resolve,reject)=>{
+    getOpenid().then((res)=>{
+      wx.setStorageSync('openId',res.openid)
+      http.request({
+        url: '/mpuser/shopLogin',
+        data: {
+          openId : res.openid,
+          userInfo:e.detail.userInfo,
+        },
+        success: (res) => {
+
+          resolve(res.data)
+        },
+        complete: (res) => {
+          
+        }
+      })
+  
+    })
+  })
+ 
+}
+
+function shopRegister(e){
+  if(!wx.getStorageSync('openId')){
+    wx.showToast({
+      title: '请先登录',
+    })
+    return
+  }
+  return new Promise((resolve,reject)=>{
+    let data={
+      open_id:wx.getStorageSync('openId'),
+      sessionKey:wx.getStorageSync('sessionKey'),
+    }
+
+    let userInfo=wx.getStorageSync('userInfo')
+    let options=wx.getStorageSync('options')
+
+    // 通过商家分享的链接进来注册
+    if(options.post_share_key && !userInfo.get_share_key){
+      data.get_share_key=options.post_share_key
+      data.store_id=options.store_id
+    }
+    http.request({
+      url:'/mpuser/shopRegister',
+      data:data,
+      success:function(res){
+        console.log(res)
+      }
+    })
+  })
+}
+
+
+module.exports = {
+  shopLogin: shopLogin,
+  shopRegister: shopRegister
 }

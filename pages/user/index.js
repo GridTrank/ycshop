@@ -1,5 +1,6 @@
 const http = require('../../utils/http.js')
 const config = require('../../utils/config.js')
+const login = require('../../utils/login.js')
 Page({
   data: {
     visible: false,
@@ -25,18 +26,33 @@ Page({
 
   },
   onLoad(option) {
-    console.log(this.data.userInfo)
+    this.setData({
+      userInfo:wx.getStorageSync('userInfo')
+    })
   },
   getPhoneNumber(e){ 
     console.log(e)
   },
   getUserInfo(e){
-    
-    this.setData({
-      userInfo:e.detail.userInfo
+    console.log(e)
+    login.shopLogin(e).then(res=>{
+      wx.setStorageSync('userInfo', res.userInfo)
+      console.log(res)
+
+      // 已注册的普通用户通过商家分享进来，新增接口修改用户信息
+
+      this.setData({
+        userInfo:res.userInfo
+      })
     })
-    wx.setStorageSync('userInfo',e.detail.userInfo)
+    
   },
+  register(){
+    login.shopRegister().then(res=>{
+      console.log(1111,res)
+    })
+  },
+
   wxLogin() {
     return new Promise((resolve, reject) => {
       wx.login({

@@ -22,10 +22,10 @@
 			</view>
 		</view>
 		<view class="common-order-warp">
-			 <view bindtap="showUserInfoPopup" wx:if="{{!information.mobile}}"  class="load"></view>
+			 <!-- <view wx:if="{{!information.mobile}}"  class="load"></view> -->
 			<view class="ms-cell border">
-				<view class="title">我的订单</view>
-				 <navigator hover-class="none" url="/shop/orderList/index"   class="dec">
+				<view class="title"  bindtap="register">我的订单</view>
+				<navigator hover-class="none" url=""   class="dec">
 					查看全部
 					<image class="arrow" mode="widthFix" src="https://s1.miniso.cn/bsimg/ec/public/images/d6/57/d65782b0b9116ee86208d675b8d6fc43.png"></image>
 				</navigator>

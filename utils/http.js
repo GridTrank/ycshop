@@ -40,8 +40,7 @@ function request(obj) {
 function token() {
   return new Promise(function (resolve, reject) {
     ajax({
-      url: '/index/token',
-      isCode: true,
+      url: '/mpuser/getToken',
       success: function (res) {
         wx.setStorageSync('token', res.data.token);
       },
