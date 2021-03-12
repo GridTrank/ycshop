@@ -12,7 +12,6 @@ App({
     let query=options.query
     wx.setStorageSync('options', query)
     
-
   },
   onShow(options){
     

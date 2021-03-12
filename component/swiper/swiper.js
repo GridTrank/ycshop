@@ -4,32 +4,14 @@ Component({
       type: Object
     },
     main_slide: {
-      type: Object
+      type: Array
     },
     page: {
       type: String,
       value: 'common'
     }
   },
-  observers: {
-    'main_slide': function (main_slide) {
-      this.data.dataList = main_slide;
-      this.data.dataList.forEach((elememt, index) => {
-        if (elememt.to_time) {
-          var nowTime = Date.parse(new Date()) / 1000;
-          if (elememt.to_time > nowTime) {
-            this.bannerTimeDown(index);
-          } else {
-            this.data.dataList.splice(index, 1);
-          }
-        }
-      })
-
-      this.setData({
-        dataList: this.data.dataList,
-      })
-    }
-  },
+  
   data: {
     imgheight: null,
     swiperUpdata: false,

@@ -297,6 +297,12 @@
           "pathName": "shop/groupDetail/index",
           "query": "id=9",
           "scene": null
+        },
+        {
+          "name": "pages/detail/index",
+          "pathName": "pages/detail/index",
+          "query": "id=48",
+          "scene": null
         }
       ]
     }

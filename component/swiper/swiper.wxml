@@ -1,40 +1,18 @@
   <view class="{{page}}">
 
-  	<swiper wx:if="{{!swiperUpdata}}" class="ms-swiper" style="height:{{imgheight}}" bindchange="changeCurrent" indicator-dots="{{dataList.length > 1 ? swiper.indicatorDots : false}}" indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#E72722" circular="circular" autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
+  	<swiper indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#E72722" circular="circular" autoplay="true" indicator-dots="true">
 		
-  		<block wx:for="{{dataList}}" wx:key="unique">
+  		<block wx:for="{{main_slide}}" wx:key="unique">
   			<swiper-item class='swiper-item'>
   				<view class="pic-warp" bindtap="previewImage" data-index="{{index}}" id="banner-swiper">
-  					<!-- 小程序 -->
-  					<block wx:if="{{item.type == 'out'}}">
-  						 <navigator hover-class="none"class="slide-image"   open-type="navigate" path="{{item.linkUrl}}" target="miniProgram" app-id="{{item.app_id}}" version="trial" wx:if="{{item.app_id}}">
-  							<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
-  						</navigator>
-  						 <navigator hover-class="none"url="{{item.linkUrl}}"   wx:else open-type="{{item.is_nav ?'switchTab' :'navigate'}}">
-  							<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
-  						</navigator>
-  					</block>
-  					<!-- url类型 -->
-  					 <navigator hover-class="none"url="/pages/web/index?url={{item.linkUrl}}"   wx:elif="{{item.type == 'url'}}">
-  						<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
-  					</navigator>
   					<!-- 产品类型 -->
-  					 <navigator hover-class="none"url="/pages/detail/index?id={{item.id}}"   wx:elif="{{item.type == 'product'}}">
+  					<navigator hover-class="none"url="/pages/detail/index?id={{item.pid}}"   >
   						<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
   					</navigator>
-  					<!-- 活动类型 -->
-  					 <navigator hover-class="none"url="/pages/activity/index?id={{item.id}}"   wx:elif="{{item.type == 'activity'}}">
-  						<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
-  					</navigator>
-  					<!-- 直播类型 -->
-  					 <navigator hover-class="none"url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?home_page=pages/index/index&room_id={{item.id ||item.other_params.roomid}}"   wx:elif="{{item.type == 'telecast'}}">
-  						<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}" bindload="loadImg" mode="widthFix" />
-  					</navigator>
-  					<image src="{{item.imgUrl}}" data-src="{{item.imgUrl}}" wx:else class="slide-image" bindload="loadImg" mode="widthFix" />
   				</view>
   			</swiper-item>
   		</block>
   	</swiper>
 
-  	<view class="swiper-dot" wx:if="{{page=='detail'}}">{{current+1}}/{{dataList.length}}</view>
+  	<!-- <view class="swiper-dot" wx:if="{{page=='detail'}}">{{current+1}}/{{main_slide.length}}</view> -->
   </view>

@@ -24,15 +24,13 @@ const routerData = () => {
 }
 
 function request(obj) {
-  // if (wx.getStorageSync("token")) {
-  //   ajax(obj)
-  // } else {
-  //   token().then(() => {
-  //     ajax(obj)
-  //   })
-  // }
-  ajax(obj)
-
+  if (wx.getStorageSync("token")) {
+    ajax(obj)
+  } else {
+    token().then(() => {
+      ajax(obj)
+    })
+  }
 }
 
 
@@ -55,8 +53,8 @@ function token() {
 // storage 本地缓存的接口  默认10min
 function ajax(obj) {
   var data = JSON.parse(JSON.stringify(obj));
-  
-  obj.data.sign = obj.data.sign ? obj.data.sign : signature.getSign(obj.data, Sign.secret);
+  obj.data=obj.data || {}
+  obj.data.sign = (obj.data && obj.data.sign) ? obj.data.sign : signature.getSign(obj.data, Sign.secret);
   // 防重复
   if (requestUrl.indexOf(obj.url) != -1) return;
   // 过滤不需要防重复接口
@@ -80,17 +78,14 @@ function ajax(obj) {
     data: obj.data || {},
     method: obj.method || 'POST',
     header:{
-      version : config.version
+      version : config.version,
+      Authorization:`Bearer ${wx.getStorageSync('token')}`
     },
     success: (res) => {
       if (res.data.code == 100001) {
         wx.navigateTo({
           url: '/pages/load/index',
         })
-        return;
-      }
-      if (obj.isCode) {
-        obj.success && obj.success(res);
         return;
       }
 
@@ -105,8 +100,17 @@ function ajax(obj) {
             result: res,
           });
         }
-      }else {
-
+      }else if (res.data.code == 100002) {
+        wx.showToast({
+          title: '登录过期，请重新登录',
+          icon: 'none',
+          success: (res) => {
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+          },
+          
+        })
       }
     },
     fail: (res) => {

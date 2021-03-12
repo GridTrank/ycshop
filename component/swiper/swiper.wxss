@@ -52,7 +52,7 @@
     overflow: hidden;
 }
 
-.index::after {
+/* .index::after {
     content: "";
     position: absolute;
     z-index: 0;
@@ -62,4 +62,4 @@
     height: 230rpx;
     background: #D52A26;
     border-radius: 80% / 60%;
-}
+} */

@@ -47,7 +47,7 @@ function shopLogin(e){
         url: '/mpuser/shopLogin',
         data: {
           openId : res.openid,
-          userInfo:e.detail.userInfo,
+          // userInfo:e.detail.userInfo,
         },
         success: (res) => {
 

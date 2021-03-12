@@ -22,6 +22,7 @@ const config = {
     // 域名配置
     // "Domain": 'http://t-youxuan.miniso.cn/openapi',
     "Domain": 'http://127.0.0.1:3002',
+    // "Domain": 'http://47.112.113.38:3002',
     //系统配置
     "sign": {
       "identity": '28Vebp',
