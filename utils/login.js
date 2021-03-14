@@ -47,10 +47,8 @@ function shopLogin(e){
         url: '/mpuser/shopLogin',
         data: {
           openId : res.openid,
-          // userInfo:e.detail.userInfo,
         },
         success: (res) => {
-
           resolve(res.data)
         },
         complete: (res) => {
@@ -75,10 +73,8 @@ function shopRegister(e){
       open_id:wx.getStorageSync('openId'),
       sessionKey:wx.getStorageSync('sessionKey'),
     }
-
     let userInfo=wx.getStorageSync('userInfo')
     let options=wx.getStorageSync('options')
-
     // 通过商家分享的链接进来注册
     if(options.post_share_key && !userInfo.get_share_key){
       data.get_share_key=options.post_share_key

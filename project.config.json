@@ -6,30 +6,22 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": false,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": true,
     "newFeature": true,
-    "coverView": true,
     "nodeModules": false,
     "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
     "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
@@ -37,7 +29,8 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useApiHostProcess": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.10.4",
@@ -61,243 +54,6 @@
     },
     "miniprogram": {
       "list": [
-        {
-          "id": -1,
-          "name": "pages/search/index",
-          "pathName": "pages/search/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/order/index",
-          "pathName": "pages/order/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 2,
-          "name": "pages/orderDetail/index",
-          "pathName": "pages/orderDetail/index",
-          "query": "id=200311202646407",
-          "scene": null
-        },
-        {
-          "name": "pages/user/index",
-          "pathName": "pages/user/index",
-          "query": "post_share_key=1111",
-          "scene": null
-        },
-        {
-          "id": 4,
-          "name": "pages/detail/index",
-          "pathName": "pages/detail/index",
-          "query": "id=6192",
-          "scene": null
-        },
-        {
-          "id": 5,
-          "name": "pages/load/index",
-          "pathName": "pages/load/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/copywriting/index",
-          "pathName": "pages/copywriting/index",
-          "query": "type=1",
-          "scene": null
-        },
-        {
-          "id": 7,
-          "name": "pages/help/index",
-          "pathName": "pages/help/index",
-          "query": "type=2",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/web/index",
-          "pathName": "pages/web/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 9,
-          "name": "pages/activity/index",
-          "pathName": "pages/activity/index",
-          "query": "id=20171219",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/load/index",
-          "pathName": "pages/load/index",
-          "query": "roomId=5",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/load/index",
-          "pathName": "pages/load/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/account/index",
-          "pathName": "pages/account/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/user/index",
-          "pathName": "pages/user/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/withdraw/index",
-          "pathName": "pages/withdraw/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/withdrawRecord/index",
-          "pathName": "pages/withdrawRecord/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/withdrawDetail/index",
-          "pathName": "pages/withdrawDetail/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 17,
-          "name": "pages/detail/index",
-          "pathName": "pages/detail/index",
-          "query": "id=6484",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/cart/index",
-          "pathName": "pages/cart/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/coupon/index",
-          "pathName": "pages/coupon/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/cumulativeOrder/index",
-          "pathName": "pages/cumulativeOrder/index",
-          "query": "id=704&type=coupon",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/interests/index",
-          "pathName": "pages/interests/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/coupon/index",
-          "pathName": "pages/coupon/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "id=6461&source=saler&zk_ref=13113471",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/search/index",
-          "pathName": "pages/search/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 26,
-          "name": "pages/comment/index",
-          "pathName": "pages/comment/index",
-          "query": "id=35",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/income/index",
-          "pathName": "pages/income/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/material/index",
-          "pathName": "pages/material/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/welfare/index",
-          "pathName": "pages/welfare/index",
-          "query": "id=6484",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/userFans/index",
-          "pathName": "pages/userFans/index",
-          "query": "id=6484",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/inviteFriend/index",
-          "pathName": "pages/inviteFriend/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "shop/groupDetail/index",
-          "pathName": "shop/groupDetail/index",
-          "query": "id=9",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "shop/groupDetail/index",
-          "pathName": "shop/groupDetail/index",
-          "query": "id=9",
-          "scene": null
-        },
         {
           "name": "pages/detail/index",
           "pathName": "pages/detail/index",

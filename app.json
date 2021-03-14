@@ -11,9 +11,6 @@
     "pages/load/index",
     "pages/vip/index",
     "pages/account/index",
-    "pages/withdraw/index",
-    "pages/withdrawRecord/index",
-    "pages/withdrawDetail/index",
     "pages/web/index",
     "pages/buyGift/index",
     "pages/activity/index",
@@ -36,10 +33,7 @@
     "pages/comment/index",
     "pages/myPower/index",
     "pages/invite/index",
-    "pages/material/index",
-    "pages/welfare/index",
-    "pages/userFans/index",
-    "pages/inviteFriend/index"
+    "pages/material/index"
   ],
   "tabBar": {
     "color": "#333",

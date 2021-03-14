@@ -94,49 +94,18 @@ Page({
     })
     wx.showNavigationBarLoading();
     http.request({
-      url: '/cart/index',
-      data: {},
-      isLogin:true,
-      success: function (result) {
+      url: '/cart/list',
+      data: {
+        mid:wx.getStorageSync('userInfo').mid
+      },
+      success:  (res)=> {
         wx.hideLoading();
-
-        _.setData({
-          userInfo: wx.getStorageSync('userInfo'),
-          cart_list: result.cart_list,
-          unavailable: result.unavailable,
-          favourable_warn: result.favourable_warn,
-          cart_number: result.cart_number,
-          cart_total: result.cart_total,
-          discount_amount: result.discount_amount,
-          promotion_detail: result.promotion_detail,
-          subtotal: result.subtotal,
-          promo_info: result.promo_info,
-          is_all: result.is_all,
-          gift_list: result.gift_list,
-          abgoods_list: result.abgoods_list,
-          prepare_list: result.prepare_list || null
-        });
-        if (result.prepare_list) {
-          // 有预售订单
-          var prepare_list = result.prepare_list;
-          var time = 0;
-          for (var i = 0; i < prepare_list.length; i++) {
-            if (prepare_list[i].prepare_status == 1) {
-              // 进行中
-              time = (prepare_list[i].order_end_time - prepare_list[i].now_time);
-              clearTimeout(_.data.timer[prepare_list[i].prepare_id]);
-              _.timeDown({
-                time: time,
-                id: prepare_list[i].prepare_id
-              });
-            }
-          }
-
-
-
-        }
-
         wx.hideNavigationBarLoading();
+        if(res.code==200){
+          this.setData({
+            cart_list:res.data
+          })
+        }
       },
       fail: function () {
         wx.hideLoading();
@@ -145,87 +114,8 @@ Page({
     })
 
   },
-  // 分单
-  partOrder() {
-    // 普通商品
-    this.data.orderData = {
-      cart_list: {
-        num: 0,
-        items: []
-      },
-      prepare: {},
-    }
-    for (var i = 0; i < this.data.cart_list.length; i++) {
-      if (this.data.cart_list[i].goods_selected == '1') {
-        this.data.orderData.cart_list.num += Number(this.data.cart_list[i].goods_number)
-        this.data.orderData.cart_list.items.push(this.data.cart_list[i].obj_identity);
-      }
-    }
-    //预售商品
-    for (var i = 0; i < this.data.prepare_list.length; i++) {
-      for (var j = 0; j < this.data.prepare_list[i].items.length; j++) {
-        if (this.data.prepare_list[i].items[j].goods_selected == '1') {
-          if (!this.data.orderData.prepare.hasOwnProperty(i + 1)) {
-            this.data.orderData.prepare[i + 1] = {
-              items: [],
-              num: 0,
-            }
-          }
-          this.data.orderData.prepare[i + 1].num += Number(this.data.prepare_list[i].items[j].goods_number)
-          this.data.orderData.prepare[i + 1].items.push(this.data.prepare_list[i].items[j].obj_identity);
-        }
-      }
-    }
-    if ((this.data.orderData.cart_list.items.length && Object.keys(this.data.orderData.prepare).length) || Object.keys(this.data.orderData.prepare).length > 1) {
-      //需要分单
-      this.setData({
-        isPartOrder: true,
-        orderData: this.data.orderData,
-        partOrderVal: "",
-      })
-    } else {
-      this.subOrder();
-    }
 
-  },
-  // 分单单选框
-  radioChange(val) {
-    this.setData({
-      partOrderVal: val.detail.value
-    })
-  },
-  canclePartOrder() {
-    this.setData({
-      isPartOrder: !this.data.isPartOrder
-    })
-  },
-  enterPartOrder() {
-    if (this.data.partOrderVal == '') {
-      wx.showToast({
-        title: '请选择要分单的类型',
-        icon: 'none'
-      })
-      return;
-    }
-    var data = []
-
-    // 选择普通商品
-    for (var key in this.data.orderData.prepare) {
-      if (this.data.partOrderVal == 'cart_list') {
-        data = data.concat(this.data.orderData.prepare[key].items);
-      } else {
-        // 选择预售商品
-        if (key != this.data.partOrderVal) {
-          data = data.concat(this.data.orderData.prepare[key].items);
-        }
-      }
-    }
-    this.data.partOrderVal != 'cart_list' ? data = data.concat(this.data.orderData.cart_list.items) : '';
-    this.seletActive(data, () => {
-      this.subOrder();
-    });
-
-  },
+  
   subOrder() {
     var _ = this;
     http.request({
@@ -296,6 +186,10 @@ Page({
    */
   seletActive(e, cb) {
     let _ = this;
+    let cid=[]
+    cid.push(e.currentTarget.dataset.id)
+    let is_choice=e.currentTarget.dataset.is_choice
+    
     if (!(e instanceof Array)) {
       // 非分单选择
       var objIdentities = [],
@@ -303,32 +197,18 @@ Page({
         seta = e.currentTarget.dataset.seta,
         allsta = e.currentTarget.dataset.allsta,
         isall = e.currentTarget.dataset.isall;
-
       seta == 1 ? seta = 0 : seta = 1;
       allsta == 1 ? allsta = 0 : allsta = 1;
 
-      if (isall == 1) {
-        this.data.cart_list.map(item => {
-          objIdentities.push(item.obj_identity)
-        })
-        if (this.data.prepare_list) {
-          this.data.prepare_list.map(item => {
-            item.items.map(i => {
-              objIdentities.push(i.obj_identity)
-            })
-
-          })
-        }
-
-      }
     }
     wx.showNavigationBarLoading()
+    return
     http.request({
       url: '/cart/choice',
        
       data: {
-        "obj_ident": (e instanceof Array) ? e : (!isall ? objIdentity : objIdentities),
-        "is_selected": (e instanceof Array) ? 0 : (!isall ? seta : allsta)
+        cid:cid,
+        is_choice: 2
       },
       success: function (result) {
 

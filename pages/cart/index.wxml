@@ -12,92 +12,6 @@
 			</view>
 			<!-- 顶部信息 结束 -->
 
-			<!-- 活动说明 开始 -->
-			<view class="ms-cartActiveBrief {{gift_list.length > 0 ? '' : 'bottomHei'}}" wx:if="{{favourable_warn.length > 0}}">
-
-				<view class="item" wx:for="{{favourable_warn}}" wx:key="i" wx:if="{{item.show_in_cart}}" wx:for-index="num" data-id='{{item.rule_id}}'>
-
-					 <navigator hover-class="none"url="{{ '/pages/cumulativeOrder/index?id='+item.rule_id }}"   class='navi'>
-						<text class="t">{{item.rule_tag}}</text>
-						<view class="b">
-							<text class='{{item.show_gift_btn >= 1 ? "txt" : ""}}'>{{item.rule_name}}</text>
-							<image class="image" src="../../images/icon/icon-btn-right.png" />
-						</view>
-					</navigator>
-
-					<view class="btn" wx:if="{{item.show_gift_btn == 1}}">
-						 <navigator hover-class="none"url="/pages/giftList/index?rule_id={{item.rule_id}}"   class='navi'>
-							<text class="text">查看赠品</text>
-						</navigator>
-					</view>
-
-					<view class="btn" wx:if="{{item.show_gift_btn == 2}}">
-						 <navigator hover-class="none"url="/pages/buyGift/index?rule_id={{item.rule_id}}&selectedNum={{abgoods_list.length}}&is_satisfy={{item.is_satisfy}}"   class='navi'>
-							<text class="text">{{abgoods_list.length && item.is_satisfy? '更换商品' : '查看商品'}}</text>
-						</navigator>
-					</view>
-
-				</view>
-			</view>
-			<!-- 活动说明 结束 -->
-
-			<!-- 购物车赠品列表 开始 -->
-
-			<view class='ms-shoppingList {{gift_list.length > 0 ? "bottomHei" : ""}}' wx:if="{{gift_list.length > 0}}">
-				<view class='item timeout}}' wx:for="{{gift_list}}" wx:for-index="num" wx:key="i">
-					<view class='content'>
-						<image class='ms-jsRadio image' src='../../images/icon/icon-around-active.png' />
-
-						<view class='info'>
-							<view class='pic'>
-								<image src='{{item.goods_img}}' class="image"></image>
-							</view>
-							<view class='desc'>
-								<view class='name'>
-									<view class='redCu'>【赠品】</view>{{item.goods_name}}
-								</view>
-								<view class='brief'>{{item.goods_spec}}</view>
-								<view class='descBottom'>
-									<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
-								</view>
-								<label class='num label'>x
-									<text>{{item.goods_number}}</text>
-								</label>
-							</view>
-						</view>
-					</view>
-					<!-- <view class='line'></view> -->
-				</view>
-			</view>
-			<!-- 购物车赠品列表 结束 -->
-			<!-- 购物车换购列表 开始 -->
-
-			<view class='ms-shoppingList {{abgoods_list.length > 0 ? "bottomHei" : ""}}' wx:if="{{abgoods_list.length > 0}}">
-				<view class='item timeout}}' wx:for="{{abgoods_list }}" wx:for-index="num" wx:key="i">
-					<view class='content'>
-						<view class='info'>
-							<view class='pic'>
-								<image src='{{item.goods_img}}' class="image"></image>
-							</view>
-							<view class='desc'>
-								<view class='name'>
-									<view class='redCu'>【换购】</view>
-									{{item.goods_name}}
-								</view>
-								<view class='brief'>{{item.goods_spec}}</view>
-								<view class='descBottom'>
-									<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
-								</view>
-								<label class='num label'>x
-									<text>{{item.goods_number}}</text>
-								</label>
-							</view>
-						</view>
-					</view>
-					<!-- <view class='line'></view> -->
-				</view>
-			</view>
-			<!-- 购物车换购列表 结束 -->
 			<!-- 购物车列表 开始 -->
 			<view class='list'>
 				<view class='ms-shoppingList bottomHei' wx:if="{{cart_list.length > 0}}">
@@ -105,28 +19,28 @@
 
 						<view class='content'>
 
-							<image class='ms-jsRadio' bindtap='seletActive' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' src='{{item.goods_selected == 1 ? "../../images/icon/icon-around-active.png" :"../../images/icon/icon-around.png"}}' />
+							<image class='ms-jsRadio' bindtap='seletActive' data-id='{{item.cid}}' data-seta='{{item.goods_selected}}' src='{{item.is_choice == 1 ? "../../images/icon/icon-around-active.png" :"../../images/icon/icon-around.png"}}' />
 
 							<view class='info'>
 
 								<view class='pic'>
-									 <navigator hover-class="none"url="/pages/detail/index?id={{item.product_id}}"   class="navigator">
-										<image src='{{item.goods_img}}' class="image"></image>
+									 <navigator hover-class="none"url="/pages/detail/index?id={{item.pid}}"   class="navigator">
+										<image src='{{item.info.detail_imgs}}' class="image"></image>
 									</navigator>
 								</view>
 
 								<view class='desc'>
 									<view class='name'>
 										 <navigator hover-class="none"class="navigator" url="/pages/detail/index?id={{item.product_id}}"  >
-											{{item.goods_name}}
+											{{item.info.product_name}}
 										</navigator>
 									</view>
-									<view class='brief'>{{item.goods_spec}}</view>
+									<view class='brief'>{{item.info.product_describe}}</view>
 									<view class='descBottom'>
-										<text class='price'><text class="symbol">¥</text>{{item.goods_price}}</text>
+										<text class='price'><text class="symbol">¥</text>{{item.info.product_price}}</text>
 										<view class='count'>
 											<text class='{{item.goods_number == 1 ? "none" : ""}} text' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>-</text>
-											<input class='number' type='number' bindblur='cout' value='{{item.goods_number}}' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}'></input>
+											<input class='number' type='number' bindblur='cout' value='{{item.product_num}}' data-num='{{item.goods_number}}' data-id='{{item.obj_identity}}' data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}'></input>
 											<text class='{{item.goods_number == item.goods_store || item.goods_number >= 99 ? "none" : ""}} text' data-add='add' data-num='{{item.goods_number}}' data-name="{{item.goods_name}}" data-price="{{item.goods_price}}" data-id='{{item.obj_identity}}' data-gid="{{item.goods_id}}"
                                                 data-seta='{{item.goods_selected}}' data-store='{{item.goods_store}}' bindtap='update'>+</text>
 										</view>

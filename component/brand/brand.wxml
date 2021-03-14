@@ -19,18 +19,9 @@
   			<view class='item' wx:for="{{brand}}" wx:for-item='list' wx:for-index="j" wx:key="j" wx:if="{{j-index <= 1 && j-index >= 0 }}">
   
   				<!-- 产品类型 -->
-  				 <navigator hover-class="none"class="navigator"   url="/pages/detail/index?id={{list.id}}" >
+  				 <navigator hover-class="none"class="navigator"   url="/pages/detail/index?id={{list.pid}}" >
   				</navigator>
-  			
-  				<view class='text'>
-  					<view class='name' wx:if="{{list.name}}">{{list.name}}</view>
-  					<view class='price' wx:if="{{list.min_price != '0'}}">
-  						<view class="money">{{list.min_price}}</view>元起
-  					</view>
-  					<view class='tag' wx:if="{{list.tag}}">
-  						<text class="item">{{list.tag}}</text>
-  					</view>
-  				</view>
+
   				<image class="pic" src='{{list.imgUrl}}' mode='widthFix'></image>
   			</view>
   		</block>

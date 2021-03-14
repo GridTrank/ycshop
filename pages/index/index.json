@@ -1,6 +1,5 @@
 {
-  "navigationBarTitleText": "名创优品",
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "商城",
   "usingComponents": {
     "requestPage": "/component/requestPage/index",
     "tip": "/component/tip/tip",

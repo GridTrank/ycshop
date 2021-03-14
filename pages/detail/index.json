@@ -1,5 +1,5 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "商品详情",
   "usingComponents": {
     "requestPage": "/component/requestPage/index",
     "tip": "/component/tip/tip",

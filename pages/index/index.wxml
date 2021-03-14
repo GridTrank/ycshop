@@ -1,60 +1,24 @@
 <!-- pages/default/index.wxml -->
 <requestPage id="requestPage" bindrefresh='onShow'>
 	<view class="ms-container ms-container-index fixed">
-		<!-- 头部开始 -->
-		<wxs module="nav">
-			var isNumber = function(n) {
-				var l = n.split('/');
-				return l.length > 2;
-			}
-			var replace = function(key) {
-				var opt = {
-					"/special/get_list": "/special/index",
-					"/new/index": "/new/index"
-				}
-				return opt[key]
-			}
-
-
-			var half = function(array, type) {
-				var length = array.length;
-				var ceil = Math.ceil(array.length / 2)
-				var newArray = type ? array.slice(ceil, length) : array.slice(0, ceil);
-				return newArray;
-			}
-			module.exports = {
-				isNumber: isNumber,
-				replace: replace,
-				half: half
-			}
-		</wxs>
-		<view class="ms-header">
-			<view class="ms-gotoSearchPage" style="padding-top:{{globalSystemInfo.capsulePosition.top || 28}}px;width:calc( 100% - {{globalSystemInfo.capsulePosition.width  + 20 || 107 }}px) ">
-				<image src="../../images/icon/icon-logo.png" class="logo"></image>
-				<view bindtap="gotoSearch" style="height:{{globalSystemInfo.capsulePosition.height || 35}}px; ">
-					<image src="https://s1.miniso.cn/bsimg/ec/public/images/92/6a/926a21a953c86f0f7152d94fde4ef165.png"></image>
-					<label>{{searchLabel}}</label>
-				</view>
-			</view>
-			<!-- <view class="ms-navFilter" wx:if="{{navList.length}}">
-				<scroll-view class="scroll-view_navFilter" scroll-into-view="nav{{cur}}" scroll-x="true">
-					<block wx:for="{{navList}}" wx:for-index="i" wx:key="unique">
-						<label class="item {{i == cur ? 'cur' : ''}}" id="nav{{i}}" bindtap="selectTag" data-link="{{item.link}}" data-cur="{{i}}">{{item.title}}</label>
-					</block>
-				</scroll-view>
-			</view> -->
-		</view>
 		<!-- 头部结束 -->
 		<!-- 首页内容 开始 -->
 		<view class="ms-indexDataContent">
 			<scroll-view scroll-y style="height: 100%;" bindscroll='scroll' class="scroll-view" scroll-top="{{scrollTop}}">
 				<block class="" wx:for="{{productList}}" wx:key="index">
-				
 					<block wx:if="{{item.type == 'banner'}}">
 						<!-- banner轮播图 -->
-
-							<MySwiper page='index' swiper="{{swiper}}" main_slide="{{item.items}}"></MySwiper>
-		
+							<swiper indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#E72722" circular="circular" autoplay="true" indicator-dots="true" >
+								<block wx:for="{{item.items}}" wx:key="unique">
+									<swiper-item class='swiper-item'>
+										<view class="pic-warp" data-index="{{index}}" id="banner-swiper">
+											<navigator hover-class="none" url="/pages/detail/index?id={{item.pid}}"   >
+												<image src="{{item.imgUrl}}" class="slide-image" data-src="{{item.imgUrl}}"  mode="widthFix" />
+											</navigator>
+										</view>
+									</swiper-item>
+								</block>
+							</swiper>
 					</block>
 					<block wx:if="{{item.type == 'brand'}}">
 						<!-- 品牌甄选 -->
@@ -83,7 +47,6 @@
 						
 					</block>
 
-
 				</block>
 				<view class="bottom-line">
 					<text>我是有底线的</text>
@@ -93,33 +56,6 @@
 		</view>
 		<!-- 首页内容 结束 -->
 
-		<!-- 分类内容 开始 -->
-		<view class="ms-indexDataContent" wx:if="{{'/category/channel' == block}}">
-			<scroll-view scroll-y bindscroll='scroll' style="height: 100%;" scroll-top="{{scrollTop}}" scroll-with-animation="true">
-				<!-- 幻灯开始 -->
-				<MySwiper swiper="{{swiper}}" main_slide="{{catData.main_slide}}"></MySwiper>
-				<!-- 幻灯结束 -->
-				<!-- item 遍历 开始 -->
-				<block wx:for="{{catData.viewItem}}" wx:key="unique">
-
-					<view class="ms-channel-title">
-						<text class="name">{{item.cat_name}}</text>
-						<text class="dec">{{item.cat_summary}}</text>
-					</view>
-					<product product="{{item.items}}" bind:standardData="standardData" page="index" userInfo="{{userInfo}}"></product>
-
-
-				</block>
-				<view class="bottom-line">
-					<text>我是有底线的</text>
-				</view>
-				<!-- item 遍历 结束 -->
-			</scroll-view>
-		</view>
-		<!-- 分类内容 结束 -->
-
-
-
 		<view class="goTop" bindtap="goTop" wx:if="{{isTop}}">
 			<image mode="widthFix" src='../../images/icon/icon-top.png' class="top"></image>
 		</view>
@@ -128,7 +64,6 @@
 		<!-- <goodStandard bind:updataGoodStandard="updataGoodStandard" page="index" id="goodStandard" detail="{{productInfo}}" userInfo="{{userInfo}}"></goodStandard> -->
 
 	</view>
-
-
+ 
 
 </requestPage>

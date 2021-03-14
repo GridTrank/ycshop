@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "邀请好友加入",
-  "usingComponents": {
-    "canvas-share": "/component/canvas-share/index"
-  }
-}

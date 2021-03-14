@@ -28,43 +28,31 @@
 		<view class='bg'>
 			<!-- 幻灯开始 -->
 			<view class="swiper-warp">
-				<MySwiper swiper="{{swiper}}" page="detail" main_slide="{{main_slide}}"></MySwiper>
+				<swiper indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#E72722" circular="circular" autoplay="true" indicator-dots="true" class="swiper">
+					<block wx:for="{{detail.banners}}" wx:key="index">
+						<swiper-item class="swiper-item">
+							<image src="{{item}}" mode="widthFix" />
+						</swiper-item>
+					</block>
+				</swiper>
 			</view>
 
-			<!-- 幻灯结束 -->
-
-		
-
-			<!-- 用户评论展示 -->
-
-
-			<!-- 大家在看推荐 -->
-
-			<!-- 商品参数详情 -->
-			<view class="ms-productDetail specList ms-indexFloor">
-				<view class="spec">
-					<view class="title boldFamily">商品参数</view>
-					<!-- 遍历 item 开始 -->
-					<block wx:for="{{detail.goods_params}}" wx:key="index">
-						<block wx:for="{{item}}" wx:key="i" wx:for-item="parame" wx:for-index="i">
-							<view class="con">
-								<text class="name">{{parame.params_name}}</text>
-								<text class="dec">{{parame.params_value}}</text>
-							</view>
-						</block>
-					</block>
+			<view class="detail-wrap">
+				<view class="price">
+					<text class="p-tit">销售价</text>
+					<text class="p-num">￥99</text>
 				</view>
-				<view class="pic-warp">
+				<view class="info-title twoHidden">{{detail.product_name}}</view>
+				<view class="info-spec">{{detail.product_describe}}</view>
+			</view>
 
-					<navigator hover-class="none" wx:if="{{detail.intro_top.linkUrl}}" open-type="{{detail.intro_top.is_nav ? 'switchTab' : 'navigate'}}" url="{{detail.intro_top.linkUrl}}">
-						<image src="{{detail.intro_top.imgUrl}}" mode="widthFix" />
-					</navigator>
-					<image src="{{detail.intro_top.imgUrl}}" mode="widthFix" wx:else />
+			
 
-					<block wx:for="{{detail.intro}}" wx:key="index">
-						<image src="{{item}}" mode="widthFix" />
-					</block>
-
+			<!-- 幻灯结束 -->
+			<view class="detail-pic">
+				<view class="detail-tit">商品详情</view>
+				<view class="pic-wrap">
+					<image wx:for="{{detail.detail_imgs}}" src="{{item}}" wx:key="index" mode="widthFix" />
 				</view>
 			</view>
 			<!-- 售后说明 -->
@@ -96,6 +84,7 @@
 			</view>
 
 			<view class="buy-btn">
+				<view class="add-cart buy" bindtap="addCart">立即购买</view>
 				<view class="add-cart" bindtap="addCart">加入购物车</view>
 			</view>
 

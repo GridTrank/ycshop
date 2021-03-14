@@ -2,8 +2,7 @@ const http = require('../../utils/http');
 const {
   getFormat
 } = require('../../utils/util.js');
-
-
+import {shopLogin} from '../../utils/login'
 Page({
   data: {
     main_slide:[],
@@ -56,6 +55,24 @@ Page({
     })
   },
   addCart(){
+    let mid=wx.getStorageSync('userInfo').mid
+    if(!mid){
+      wx.showToast({
+        title:'请先登录',
+        icon:'none',
+        duration:1500,
+        success:()=>{
+          setTimeout(()=>{
+            wx.switchTab({
+              url:'/pages/user/index'
+            })
+          },1500)
+          
+        }
+      })
+      
+      return
+    }
     http.request({
       url:'/cart/addCart',
       data:{
@@ -64,7 +81,17 @@ Page({
         product_num:1111
       },
       success:(res)=>{
-        console.log(res)
+        if(res.code==200){
+          wx.showToast({
+            title:'添加成功',
+            icon:'none'
+          })
+        }else{
+          wx.showToast({
+            title:'添加失败',
+            icon:'none'
+          })
+        }
       }
     })
   },
