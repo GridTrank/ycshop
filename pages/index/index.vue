@@ -1,6 +1,5 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
 			<text class="title">{{title}}</text>
 		</view>
@@ -8,6 +7,7 @@
 </template>
 
 <script>
+	import http from '@/config/request.js'
 	export default {
 		data() {
 			return {
@@ -15,7 +15,12 @@
 			}
 		},
 		onLoad() {
-
+			http.request({
+				url:'/home/homeList',
+				success:(res)=>{
+					console.log(res)
+				}
+			})
 		},
 		methods: {
 

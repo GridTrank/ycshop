@@ -135,23 +135,28 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      title: 'Hello' };
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-  },
-  onLoad: function onLoad() {
+
+
+
+
+
+
+
+var _request = _interopRequireDefault(__webpack_require__(/*! @/config/request.js */ 32));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { title: 'Hello' };}, onLoad: function onLoad() {_request.default.request({
+      url: '/home/homeList',
+      success: function success(res) {
+        console.log(res);
+      } });
 
   },
   methods: {} };exports.default = _default;
