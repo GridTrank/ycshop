@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "物流信息",
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index"
-  }
-}

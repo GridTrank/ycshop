@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index",
-    "addressList": "/component/addressList/addressList",
-    "editAddress": "/component/editAddress/editAddress"
-  }
-}

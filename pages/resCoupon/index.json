@@ -1,7 +1,0 @@
-{
-  "component": true, 
-  "navigationBarTitleText": "优惠券选择页",
-  "usingComponents": {
-    "coupon": "/component/coupon/coupon"
-  } 
-}

@@ -1,7 +1,0 @@
-{
-  "component": true, 
-  "addGlobalClass": true,
-  "usingComponents": {
-    "orderBtn": "/component/orderBtn/orderBtn"
-  } 
-}

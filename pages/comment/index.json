@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index",
-    "comment": "/component/comment/comment",
-    "noData": "/component/noData/noData"
-  }
-}

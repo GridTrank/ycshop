@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index",
-    "noData": "/component/noData/noData",
-    "addressList": "/component/addressList/addressList",
-    "editAddress": "/component/editAddress/editAddress"
-  }
-}

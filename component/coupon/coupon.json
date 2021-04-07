@@ -1,7 +1,0 @@
-{
-  "component": true, 
-  "usingComponents": {
-    "couponList": "/component/couponList/couponList",
-    "noData": "../noData/noData"
-  } 
-}

@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index",
-    "popup": "/component/popup/popup",
-    "MySwiper": "/component/swiper/swiper",
-    "product": "/component/product/product"
-  }
-}

@@ -1,5 +1,0 @@
-
-<view class="ms-addTip" wx:if="{{isTip}}" style="top:{{globalSystemInfo.capsulePosition.top + globalSystemInfo.capsulePosition.height +10 || 133}}px">
-  <text class="text"></text> 点击“添加我的小程序”
-  <image class="image" bindtap='closeTip' src='../../images/icon/icon-close-white.png' mode='widthFix'></image>
-</view>

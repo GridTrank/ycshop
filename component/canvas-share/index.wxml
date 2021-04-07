@@ -1,8 +1,0 @@
-<view class="share {{ visible && imageFile && type != 'user' ? 'show' : '' }}">
-  <canvas class="canvas-hide" canvas-id="share" style="width:{{canvasWidth}}px;height:{{canvasHeight}}px" />
-  <view class="content" wx:if='{{ visible && imageFile && type != "user"}}' style="transform:scale({{responsiveScale}});-webkit-transform:scale({{responsiveScale}});">
-    <image class="close" bindtap="handleClose" src='../../images/icon/icon-close-white.png' mode="widthFix"></image>
-    <image class="canvas" src="{{imageFile}}" style="width:{{canvasWidth/3*1.85}}rpx;height:{{canvasHeight/3*1.85}}rpx" />
-    <button class="save" style="width:{{canvasWidth/3*1.85}}rpx;" bindtap="save">保存到相册</button>
-  </view>
-</view>

@@ -1,4 +1,0 @@
-<!-- 已废弃 -->
-<view class="ms-container ms-container-detail">
-    <web-view class="ms-copyThat" src="{{srcArr[type]}}"></web-view>
-</view>

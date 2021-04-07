@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "搜索",
-  "usingComponents": {
-    "product": "/component/product/product",
-    "noData": "/component/noData/noData",
-    "goodStandard": "/component/goodStandard/goodStandard"
-  }
-}

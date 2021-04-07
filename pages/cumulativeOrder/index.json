@@ -1,9 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "requestPage": "/component/requestPage/index",
-    "product": "/component/product/product",
-    "goodStandard": "/component/goodStandard/goodStandard",
-    "header": "/component/header/header"
-  }
-}
