@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/cart/cart",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/goodDetail/goodDetail",
+    "pages/store/store"
   ],
   "subPackages": [],
   "window": {
@@ -16,6 +18,7 @@
     "selectedColor": "#f23030",
     "backgroundColor": "#fff",
     "borderStyle": "black",
+    "custom": true,
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -38,5 +41,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap7.json"
+  "sitemapLocation": "sitemap.json"
 }

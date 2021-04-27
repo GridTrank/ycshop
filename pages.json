@@ -15,10 +15,29 @@
 		{
 			"path": "pages/user/user",
 			"style": {
+				"navigationStyle":"custom",
 				"navigationBarTitleText": "个人中心"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/goodDetail/goodDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/store/store",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -30,26 +49,29 @@
 		"selectedColor": "#f23030",
 		"backgroundColor": "#fff",
 		"borderStyle": "black",
-	    "list" : [
-	        {
-	            "pagePath" : "pages/index/index",
-	            "iconPath" : "static/tabBar/tabBar_1.png",
-	            "selectedIconPath" : "static/tabBar/tabBar_cur_1.png",
-	            "text" : "首页"
-	        },
-	        
-	        {
-	            "pagePath" : "pages/cart/cart",
-	            "iconPath" : "static/tabBar/tabBar_3.png",
-	            "selectedIconPath" : "static/tabBar/tabBar_cur_3.png",
-	            "text" : "购物车"
-	        },
-	        {
-	            "pagePath" : "pages/user/user",
-	            "iconPath" : "static/tabBar/tabBar_4.png",
-	            "selectedIconPath" : "static/tabBar/tabBar_cur_4.png",
-	            "text" : "个人中心"
-	        }
-	    ]
+		"custom":true,
+		"list":[
+			{
+			    "pagePath" : "pages/index/index",
+			    "iconPath" : "static/tabBar/tabBar_1.png",
+			    "selectedIconPath" : "static/tabBar/tabBar_cur_1.png",
+			    "text" : "首页"
+			},
+			
+			{
+			    "pagePath" : "pages/cart/cart",
+			    "iconPath" : "static/tabBar/tabBar_3.png",
+			    "selectedIconPath" : "static/tabBar/tabBar_cur_3.png",
+			    "text" : "购物车"
+			},
+			{
+			    "pagePath" : "pages/user/user",
+			    "iconPath" : "static/tabBar/tabBar_4.png",
+			    "selectedIconPath" : "static/tabBar/tabBar_cur_4.png",
+			    "text" : "个人中心"
+			}
+		]
+		
+	    
 	}
 }

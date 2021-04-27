@@ -1,4 +1,10 @@
 {
   "navigationBarTitleText": "首页",
-  "usingComponents": {}
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar",
+    "banner": "/components/homePage/banner",
+    "recommend": "/components/homePage/recommend",
+    "picnav": "/components/homePage/picnav",
+    "guess": "/components/homePage/guess"
+  }
 }

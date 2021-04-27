@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "specifications": "/components/common/specifications",
+    "uni-popups": "/components/uni-popup/uni-popup"
+  },
+  "component": true
+}
