@@ -1,9 +1,9 @@
 <script>
 	import {getUserInfo} from '@/common/js/userInfo'
 	export default {
-		onLaunch: function() {
+		onLaunch: function(e) {
 			if(!uni.getStorageSync('token')){
-				getUserInfo()
+				getUserInfo(e.query)
 			}
 		},
 		onShow: function() {
@@ -16,6 +16,8 @@
 	}
 </script>
 
+<!-- 测试appid wx4f4bc4dec97d474b -->
+<!--  wx8aaa7733adaf6b38 -->
 <style>
 	@import "./common/css/iconfont.css";
 	@import "./common/css/common.css";

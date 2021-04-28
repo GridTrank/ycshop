@@ -37,6 +37,7 @@
 
 <script>
 	import http from '@/config/request.js'
+	import { mapState } from 'vuex'
 	export default{
 		props:{
 			data:Object
@@ -44,12 +45,16 @@
 		data(){
 			return{
 				goodsNum:1,
-				userInfo:uni.getStorageSync('userInfo')
 			}
+		},
+		computed:{
+			...mapState({
+				userInfo: state=>state.common.userInfo
+			})
 		},
 		components:{
 		},
-		created() {
+		mounted() {
 			
 		},
 		methods:{

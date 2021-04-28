@@ -1,10 +1,22 @@
 <template>
 	<view class="user-wrap">
 		<view class="user-info">
-			<view class="uset-info-wrap" @click="login">
+			<view class="user-info-wrap" v-if="userInfo.mobile" @click="login">
 				<image class="user-img" :src="userInfo.avatarUrl" ></image>
 				<view class="user-name">{{userInfo.nickName}}</view>
 			</view>
+			
+			<!-- <button class="user-info-wrap login-btn" plain="true" v-else  open-type="getPhoneNumber">
+				<image class="user-img" :src="userInfo.avatarUrl" ></image>
+				<view class="user-name">{{userInfo.nickName}}</view>
+			</button> -->
+			
+			<view class="user-info-wrap login-btn" plain="true" v-else  @click="register">
+				<image class="user-img" :src="userInfo.avatarUrl" ></image>
+				<view class="user-name">{{userInfo.nickName}}</view>
+			</view>
+			
+			
 		</view>
 		<view class="user-content">
 			<view class="card-wrap">
@@ -68,7 +80,7 @@
 
 <script>
 	import { mapState } from 'vuex'
-	import {getUserProfile} from '@/common/js/userInfo'
+	import {getUserProfile,userRegister} from '@/common/js/userInfo'
 	import tabbar from '@/components/tabbar/tabbar.vue'
 	export default {
 		data() {
@@ -98,11 +110,16 @@
 			login(e){
 				if(uni.getStorageSync('isLogin'))return
 				getUserProfile(e).then(userInfo=>{
-					// this.$store.dispatch('GetUserInfo',res.userInfo)
-					uni.setStorageSync('userInfo',userInfo)
 					this.userInfo=userInfo
 				})
-				
+			},
+			register(){
+				userRegister().then(userInfo=>{
+					this.userInfo=uni.getStorageSync('userInfo')
+				})
+			},
+			getphonenumber(e){
+				console.log(e)
 			}
 		}
 	}
@@ -116,7 +133,7 @@
 		height: 350upx;
 		background: linear-gradient(-88deg, rgba(255, 76, 48, 1), rgba(234, 10, 33, 1));
 		position: relative;
-		.uset-info-wrap{
+		.user-info-wrap{
 			position: absolute;
 			top: 120upx;
 			left: 90upx;
@@ -132,6 +149,10 @@
 				color: #FFFFFF;
 			}
 		}
+		
+	}
+	.login-btn{
+		border: none;
 	}
 	.user-content{
 		padding: 20upx;

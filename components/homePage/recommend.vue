@@ -1,7 +1,7 @@
 <template>
 	<view class="recommend">
 		<view class="bg-img">
-			<image class="img" src="http://t-dscmall.miniso.cn/storage/data/gallery_album/original_img/1617149339805768149.jpg" ></image>
+			<image class="img" src="http://t-dscmall.miniso.cn/storage/data/gallery_album/2/original_img/2_P_1617903630145.png" ></image>
 		</view>
 		<view class="scroll-view">
 			<scroll-view class="scroll-view-item" scroll-x="true" >

@@ -34,7 +34,7 @@
   background: linear-gradient(-88deg, #ff4c30, #ea0a21);
   position: relative;
 }
-.user-wrap .user-info .uset-info-wrap.data-v-80842834 {
+.user-wrap .user-info .user-info-wrap.data-v-80842834 {
   position: absolute;
   top: 120rpx;
   left: 90rpx;
@@ -45,14 +45,17 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.user-wrap .user-info .uset-info-wrap .user-img.data-v-80842834 {
+.user-wrap .user-info .user-info-wrap .user-img.data-v-80842834 {
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
 }
-.user-wrap .user-info .uset-info-wrap .user-name.data-v-80842834 {
+.user-wrap .user-info .user-info-wrap .user-name.data-v-80842834 {
   margin-left: 20rpx;
   color: #FFFFFF;
+}
+.user-wrap .login-btn.data-v-80842834 {
+  border: none;
 }
 .user-wrap .user-content.data-v-80842834 {
   padding: 20rpx;
